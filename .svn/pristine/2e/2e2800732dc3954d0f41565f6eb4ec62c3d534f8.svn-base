@@ -1,0 +1,335 @@
+package com.gov.nha.bis.server.controller;
+
+import java.io.IOException;
+import java.util.Base64;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.gov.nha.bis.server.requestResponse.DocumentMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ImplantIDMasterRequest;
+import com.gov.nha.bis.server.requestResponse.InvestigationMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PackageCategoryMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PackageMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PriceMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ProcedureLabelMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ProcedureMasterRequest;
+import com.gov.nha.bis.server.requestResponse.SpecialityMasterRequest;
+import com.gov.nha.bis.server.requestResponse.StratificationMasterRequest;
+import com.gov.nha.bis.server.requestResponse.VitalTestMasterRequest;
+import com.gov.nha.bis.server.rest.service.TmsMasterService;
+
+@CrossOrigin
+@Controller
+public class TmsMasterController {
+	
+	@Autowired
+	public TmsMasterService tmsMasterService;
+	
+	@GetMapping(value="/speciality")
+	public ModelAndView getSpacility(Model model) {
+		return new ModelAndView("spacility-master", "command", "");
+	}
+	
+	@GetMapping(value="/masterPackage")
+	public ModelAndView getPackage(Model model) {
+		return new ModelAndView("package-master", "command", "");
+	}
+	
+	@GetMapping(value="/packageCategory")
+	public ModelAndView packageCategory(Model model) {
+		return new ModelAndView("package-category-master", "command", "");
+	}
+	
+	@GetMapping(value="/price")
+	public ModelAndView getPrice(Model model) {
+		return new ModelAndView("price-master", "command", "");
+	}
+	
+	@GetMapping(value="/procedure")
+	public ModelAndView getProcedure(Model model) {
+		return new ModelAndView("procedure-master", "command", "");
+	}
+	
+	@GetMapping(value="/lavelMaster")
+	public ModelAndView getProcedureLavel(Model model) {
+		return new ModelAndView("procedure-level-master", "command", "");
+	}
+	
+	@GetMapping(value="/stratification")
+	public ModelAndView getStratification(Model model) {
+		return new ModelAndView("stratification-master", "command", "");
+	}
+	
+	@GetMapping(value="/implant")
+	public ModelAndView getImplant(Model model) {
+		return new ModelAndView("implant-master", "command", "");
+	}
+	
+	@GetMapping(value="/document")
+	public ModelAndView getDocumentMaster(Model model) {
+		return new ModelAndView("document-master", "command", "");
+	}
+	
+	@GetMapping(value="/scheme")
+	public ModelAndView getScheme(Model model) {
+		return new ModelAndView("scheme-master", "command", "");
+	}
+	
+	@GetMapping(value="/vitaltestmaster")
+	public ModelAndView getVItalTestMaster(Model model) {
+		return new ModelAndView("vitaltest-master", "command", "");
+	}
+	
+	@GetMapping(value="/investigation")
+	public ModelAndView getInvestigationMaster(Model model) {
+		return new ModelAndView("investigation-master", "command", "");
+	}
+	
+	@PostMapping(value="/saveInvestigationMasterData")
+	public @ResponseBody String saveInvestigationMasterData(HttpSession session,HttpServletRequest request,@ModelAttribute("investigationMasterRequest") InvestigationMasterRequest investigationMasterRequest) {
+		String response= null;
+		response= tmsMasterService.saveInvestigationMaster(investigationMasterRequest);
+		return response;			
+	}	
+	
+	@PostMapping(value="/saveVitalTestMasterData")
+	public @ResponseBody String saveVitalTestMasterData(HttpSession session,HttpServletRequest request,
+			@ModelAttribute("vitalTestMasterRequest") VitalTestMasterRequest vitalTestMasterRequest) throws IOException{
+		    String response= null; 
+			  response= tmsMasterService.saveVitalTestMasterData(vitalTestMasterRequest);
+			  return response;
+				
+	}	
+	
+	@PostMapping(value="/getVitalTestMasterData")
+	public @ResponseBody String getVitalTestMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getVitalTestMasterData();
+		return response;
+				
+	}	
+	
+	@PostMapping(value="/getDataInvestigationMaster")
+	public @ResponseBody String getInvestigationMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getInvestigationMasterData();
+		return response;				
+	}	
+
+	@PostMapping(value="/savePriceMasterData")
+	public @ResponseBody String savePriceMasterData(HttpSession session,HttpServletRequest request,@ModelAttribute("priceMasterRequest") PriceMasterRequest priceMasterRequest) {
+		String response= null;
+		response= tmsMasterService.savePriceMaster(priceMasterRequest);
+		return response;				
+	}	
+
+	@PostMapping(value="/getPriceMasterData")
+	public @ResponseBody String getPriceMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getPriceMasterData();
+		return response;			
+	}	
+	
+	@PostMapping(value="/saveSpecialityMasterData")
+	public @ResponseBody String saveSpecialityMasterData(HttpSession session,HttpServletRequest request,@ModelAttribute("specialityMasterRequest") SpecialityMasterRequest specialityMasterRequest) {
+		String response= null;
+		response= tmsMasterService.saveSpecialityMasterData(specialityMasterRequest);
+		return response;				
+	}	
+	
+	@PostMapping(value="/getSpecialityMasterData")
+	public @ResponseBody String getSpecialityMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getSpecialityMasterData();
+		return response;			
+	}	
+	
+	@PostMapping(value="/savePackageMasterData")
+	public @ResponseBody String savePackageMasterData(HttpSession session,HttpServletRequest request,@ModelAttribute("packageMasterRequest") PackageMasterRequest packageMasterRequest) {
+		String response= null;
+		response= tmsMasterService.savePackageMasterData(packageMasterRequest);
+		return response;			
+	}	
+	
+	@PostMapping(value="/getPackageMasterData")
+	public @ResponseBody String getPackageMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getPackageMasterData();
+		return response;				
+	}	
+
+	@PostMapping(value="/savePackageCategoryMasterData")
+	public @ResponseBody String savePackageCategoryMaster(HttpSession session,HttpServletRequest request,@ModelAttribute("packageCategoryMasterRequest") PackageCategoryMasterRequest packageCategoryMasterRequest) {
+		String response= null;
+		response= tmsMasterService.savePackageCategoryMaster(packageCategoryMasterRequest);
+		return response;			
+	}	
+	
+	@PostMapping(value="/getPackageCategoryMasterData")
+	public @ResponseBody String getPackageCategoryMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getPackageCategoryMasterData();
+		return response;			
+	}	
+	
+	@PostMapping(value="/saveProcedureMasterData")
+	public @ResponseBody String saveProcedureMasterData(HttpSession session,HttpServletRequest request,@ModelAttribute("procedureMasterRequest") ProcedureMasterRequest procedureMasterRequest) {
+		String response= null;
+		response= tmsMasterService.saveProcedureMasterData(procedureMasterRequest);
+		return response;				
+	}	
+	
+	@PostMapping(value="/getProcedureMasterData")
+	public @ResponseBody String getProcedureMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getProcedureMasterData();
+		return response;			
+	}
+	
+	@PostMapping(value="/getProcedureBySpecilityId")
+	public @ResponseBody String getProcedureBySpecilityId(@RequestParam String specilitycode) {
+		String response= null;
+		response= tmsMasterService.getProcedureBySpecilityId(specilitycode);
+		return response;			
+	}
+	
+	@PostMapping(value="/saveProcedureLabelMasterData")
+	public @ResponseBody String saveProcedureLabelMaster(HttpSession session,HttpServletRequest request,@ModelAttribute("procedureLabelMasterRequest") ProcedureLabelMasterRequest procedureLabelMasterRequest) {
+		String response= null;
+		response= tmsMasterService.saveProcedureLabelMaster(procedureLabelMasterRequest);
+		return response;			
+	}
+	
+	@PostMapping(value="/getProcedureLabelMasterData")
+	public @ResponseBody String getProcedureLabelMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getProcedureLabelMasterData();
+		return response;			
+	}	
+	
+	@PostMapping(value="/saveDocumentMasterData")
+	public @ResponseBody String saveDocumentMasterData(HttpSession session,HttpServletRequest request,@ModelAttribute("documentMasterRequest") DocumentMasterRequest documentMasterRequest) {
+		String response= null;
+		response= tmsMasterService.saveDocumentMaster(documentMasterRequest);
+		return response;			
+	}	
+	
+	@PostMapping(value="/getDocumentMasterData")
+	public @ResponseBody String getDocumentMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getDocumentMasterData();
+		return response;			
+	}	
+	
+	@PostMapping(value="/saveImplantIDMasterData")
+	public @ResponseBody String saveImplantIDMasterRequestData(HttpSession session,HttpServletRequest request,@ModelAttribute("implantIDMasterRequest") ImplantIDMasterRequest implantIDMasterRequest) {
+		String response= null;
+		response= tmsMasterService.saveImplantIDMasterRequestData(implantIDMasterRequest);
+		return response;			
+	}	
+	
+	@PostMapping(value="/getImplantIDMasterData")
+	public @ResponseBody String getImplantIDMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getImplantIDMasterData();
+		return response;			
+	}	
+	
+	@PostMapping(value="/saveStratificationMasterRequestData")
+	public @ResponseBody String saveStratificationMasterData(HttpSession session,HttpServletRequest request,@ModelAttribute("stratificationMasterRequest") StratificationMasterRequest stratificationMasterRequest) {
+		String response= null;
+		response= tmsMasterService.saveStratificationMasterData(stratificationMasterRequest);
+		return response;			
+	}	
+	
+	@PostMapping(value="/getStratificationMasterRequestData")
+	public @ResponseBody String getStratificationMasterRequestData(Model model) {
+		String response= null;
+		response= tmsMasterService.getStratificationMasterRequestData();
+		return response;			
+	}	
+	
+	@PostMapping(value="/getSchemeRequestData")
+	public @ResponseBody String getSchemeMasterRequestData(Model model) {
+		String response= null;
+		response= tmsMasterService.getSchemeRequestData();
+		return response;			
+	}	
+	
+	@PostMapping(value="/getIdMasterData")
+	public @ResponseBody String getIdMasterData(Model model) {
+		String response= null;
+		response= tmsMasterService.getIdMasterData();
+		return response;				
+	}	
+
+	@PostMapping(value="/getPackageMasterBySpecilityCode")
+	public @ResponseBody String getPackageMasterBySpecilityCode(@RequestParam String specilitycode) {
+		String response= null;
+		response= tmsMasterService.getPackageMasterBySpecilityCode(specilitycode);
+		return response;		
+	}
+	
+	@PostMapping(value="/getprocedureMasterBySpecilityCodeAndPackageCodeByState")
+	public @ResponseBody String getprocedureMasterBySpecilityCodeAndPackageCodeByState(@RequestParam String specilitycode,@RequestParam String packagecode,String statecode) {
+		String response= null;
+		response= tmsMasterService.getprocedureMasterBySpecilityCodeAndPackageCodeByState(specilitycode,packagecode,statecode);
+		return response;		
+	}
+	
+	@PostMapping(value="/getInvestigationMasterBydPackageAndProcedureCode")
+	public @ResponseBody String getInvestigationMasterBydPackageAndProcedureCode(@RequestParam String statecode,@RequestParam String procedurecode) {
+		String response= null;
+		response= tmsMasterService.getInvestigationMasterBydPackageAndProcedureCode(statecode,procedurecode);
+		return response;			
+	}
+	
+	@PostMapping(value="/getStratificationMasterDataPreAuth")
+	public @ResponseBody String getStratificationMasterDataPreAuth(@RequestParam String statecode) {
+		String response= null;
+		response= tmsMasterService.getStratificationMasterDataPreAuth(statecode);
+		return response;			
+	}
+	
+	@PostMapping(value="/getImplantMasterDataPreAuth")
+	public @ResponseBody String getImplantMasterDataPreAuthByState(@RequestParam String statecode) {
+		String response= null;
+		response= tmsMasterService.getImplantMasterDataPreAuthByState(statecode);
+		return response;			
+	}
+	
+//	@PostMapping(value="/getPreAuthDocumentMasterData")
+//	public @ResponseBody String getDocumentMasterPreautDocumentByState(@RequestParam String specilitycode,@RequestParam String packagecode,@RequestParam String procedurecode,@RequestParam String statecode) {
+//		String response= null;
+//		response= tmsMasterService.getDocumentPreAuthBySpecPackProcState(specilitycode,packagecode,procedurecode,statecode);
+//		return response;			
+//	}
+	
+	@PostMapping(value="/getStratificationDetailByStatificationCode")
+	public @ResponseBody String getStratificationDetailByStatificationCode(@RequestParam String stratificationcode) {
+		String response= null;
+		response= tmsMasterService.getStratificationDetailByStatificationCode(stratificationcode);
+		return response;			
+	}
+	
+	@PostMapping(value="/getImplantDetailByImplantCode")
+	public @ResponseBody String getImplantDetailByImplantId(@RequestParam String implantid) {
+		String response= null;
+		response= tmsMasterService.getImplantDetailByImplantId(implantid);
+		return response;			
+	}
+	
+}

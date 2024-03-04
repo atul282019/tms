@@ -1,0 +1,47 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class DocumentMasterRequest {
+
+	
+	 private String documentname;
+ 	
+	    private Integer procedureid;
+ 	
+	    private Integer schemeid;
+ 	
+	    private Integer statecode;
+
+
+		public String getDocumentname() {
+			return documentname;
+		}
+
+		public void setDocumentname(String documentname) {
+			this.documentname = documentname;
+		}
+
+		public Integer getProcedureid() {
+			return procedureid;
+		}
+
+		public void setProcedureid(Integer procedureid) {
+			this.procedureid = procedureid;
+		}
+
+		public Integer getSchemeid() {
+			return schemeid;
+		}
+
+		public void setSchemeid(Integer schemeid) {
+			this.schemeid = schemeid;
+		}
+
+		public Integer getStatecode() {
+			return statecode;
+		}
+
+		public void setStatecode(Integer statecode) {
+			this.statecode = statecode;
+		}
+
+}

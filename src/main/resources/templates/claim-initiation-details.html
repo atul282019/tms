@@ -1,0 +1,2544 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+ 
+<body class="home-bg hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+     <!-- Navbar -->
+   
+    <header th:insert="fragments/header.html :: header"> </header>
+   
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <a th:href="@{/registration}" class="brand-link">
+	        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+	  </a>
+
+      
+       <!-- Sidebar -->
+     
+      <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+     
+      <!-- /.sidebar -->
+    </aside>
+
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Claim Initiation</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item">Claim</li>
+                <li class="breadcrumb-item active">Claim Initiation</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat preauth-tabs">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Patient Details </h3>
+                  <div class="card-tools"><p class="mb-0"><b>Case No: </b>CASE/PS2/HOSP6P04621/S132857</p> </div>
+                </div>
+                <div class="card-body">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12 col-sm-4 col-md-2 col-lg-2">
+                      <img src="images/user-profile-l.jpg" class="img-thumbnail rounded mx-auto d-block" style="max-height: 120px;" alt="">
+                    </div>
+                    <div class="col-12 col-sm-8 col-md-10 col-lg-10">
+                      <div class="row">
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Name </span>
+                            <strong>Sheetal Singh</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Beneficiary Card ID. </span>
+                            <strong>P64UB8JH</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Registration No. </span>
+                            <strong>49061</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Case No. </span>
+                            <strong>CASE/PS2/HOSP6P04621/S132857</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Case Status</span>
+                            <strong>Discharge date updated by Medco</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>IP No.</span>
+                            <strong>NA</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>IP Registered Date</span>
+                            <strong>06/06/2020 </strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Actual Registration Date </span>
+                            <strong>06/06/2020 23:06:35</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Communication Contact No.</span>
+                            <strong>9703039999</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Hospital type</span>
+                            <strong>Private</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Gender</span>
+                            <strong>Female</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Family ID</span>
+                            <strong>6S062000100640000025510067</strong>
+                          </div>
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Is New Born Baby</h5>                            
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Case</span>
+                            <strong>Yes</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Age </span>
+                            <strong>38 years</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Aadhar Verified</span>
+                            <strong>No</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Authentication at Reg/Dis</span>
+                            <strong>No/NO</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Patient District</span>
+                            <strong>FARIDABAD</strong>
+                          </div>
+                          <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                            <span>Patient Scheme</span>
+                            <strong>AB-PMJAY(S) </strong>
+                          </div>
+                      </div> 
+                    </div>                                                   
+                  </div>
+                </div>
+              </div>
+
+              <div class="card direct-chat preauth-tabs" style="box-shadow: none;">
+                <div class="card-header py-0 px-0">
+                  <ul class="nav justify-content-between">
+                    <li class="active"><a href="#tab1" data-toggle="tab">Initial Assessment <br><span><i class="fa fa-check"></i></span></a></li>
+                    <li><a href="#tab2" data-toggle="tab">Past History <br><span>2</span></a></li>
+                    <li><a href="#tab3" data-toggle="tab">Daily Vital Chart <br><span>3</span></a></li>
+                    <li><a href="#tab4" data-toggle="tab">Preauthorization <br><span>4</span></a></li>
+                    <li><a href="#tab5" data-toggle="tab">Treatment/Discharge <br><span>5</span></a></li>
+                    <li><a href="#tab6" data-toggle="tab">Claims <br><span>6</span></a></li>
+                    <li><a href="#tab7" data-toggle="tab">Attachments <br><span>7</span></a></li>
+                    <li><a href="#tab8" data-toggle="tab">Case Sheet <br><span>8</span></a></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content pt-2 pb-1 px-2">
+                      <div class="tab-pane text-center py-0 mb-1 active" id="tab1">
+                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Medical Details</h5>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <strong>No Complaints Found</strong>                            
+                          </div>
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <span>History of Illness: </span>
+                          </div>
+
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>History of Past Illness</h5>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <strong>Not Applicable </strong>                            
+                          </div>
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Personal History</h5> 
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Appetite </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Diet </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Bowels </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Nutrition </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Known Allergies </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Family History</h5> 
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <strong>Not Applicable </strong>                            
+                          </div>
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>General Examination Findings</h5> 
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Height </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Weight </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>BMI </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Pallor </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3">
+                            <div class="general-finding-forms px-0">
+                              <div class="form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck13">
+                                <label class="form-check-label" for="exampleCheck13">Cyanosis <span>*</span></label>
+                              </div>
+                              <div class="form-group mb-0">
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="yes5">
+                                  <label class="form-check-label" for="yes5">Yes</label>
+                                </div>
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="no5">
+                                  <label class="form-check-label" for="no5">No</label>
+                                </div>                                                                                 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-3">
+                            <div class="general-finding-forms px-0">
+                              <div class="form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck13">
+                                <label class="form-check-label" for="exampleCheck13">Clubbing of Fingers/ Toes <span>*</span></label>
+                              </div>
+                              <div class="form-group mb-0">
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="yes5">
+                                  <label class="form-check-label" for="yes5">Yes</label>
+                                </div>
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="no5">
+                                  <label class="form-check-label" for="no5">No</label>
+                                </div>                                                                                 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-3">
+                            <div class="general-finding-forms px-0">
+                              <div class="form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck13">
+                                <label class="form-check-label" for="exampleCheck13">Lymphadenopathy <span>*</span></label>
+                              </div>
+                              <div class="form-group mb-0">
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="yes5">
+                                  <label class="form-check-label" for="yes5">Yes</label>
+                                </div>
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="no5">
+                                  <label class="form-check-label" for="no5">No</label>
+                                </div>                                                                                 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-3">
+                            <div class="general-finding-forms px-0">
+                              <div class="form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck13">
+                                <label class="form-check-label" for="exampleCheck13">Edeme Of Feet <span>*</span></label>
+                              </div>
+                              <div class="form-group mb-0">
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="yes5">
+                                  <label class="form-check-label" for="yes5">Yes</label>
+                                </div>
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="no5">
+                                  <label class="form-check-label" for="no5">No</label>
+                                </div>                                                                                 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-3">
+                            <div class="general-finding-forms px-0">
+                              <div class="form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck13">
+                                <label class="form-check-label" for="exampleCheck13">Malnutrition <span>*</span></label>
+                              </div>
+                              <div class="form-group mb-0">
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="yes5">
+                                  <label class="form-check-label" for="yes5">Yes</label>
+                                </div>
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="no5">
+                                  <label class="form-check-label" for="no5">No</label>
+                                </div>                                                                                 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-3">
+                            <div class="general-finding-forms px-0">
+                              <div class="form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck13">
+                                <label class="form-check-label" for="exampleCheck13">Dehydration <span>*</span></label>
+                              </div>
+                              <div class="form-group mb-0">
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="yes5">
+                                  <label class="form-check-label" for="yes5">Yes</label>
+                                </div>
+                                <div class="form-radio">
+                                  <input type="radio" name="radio7" id="no5">
+                                  <label class="form-check-label" for="no5">No</label>
+                                </div>                                                                                 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Temperature </span>
+                            <strong>33C</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Pulse Rate Per Minute </span>
+                            <strong>44</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Respiration Rate </span>
+                            <strong>NA</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>BP Lt. arm </span>
+                            <strong>120/90</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>BP Rt. arm </span>
+                            <strong>120/90</strong>                            
+                          </div>
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Doctor Details</h5>                        
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Medco Legal Case </span>
+                            <strong>No</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Patient Type </span>
+                            <strong>IP</strong>                            
+                          </div>
+
+
+                        </div>
+                        <a class="btn btn-primary custom-btn">Save</a>  
+                        <a class="btn btn-primary custom-btn btnNext">Next</a>                          
+                      </div>
+                      <div class="tab-pane text-center py-0 mb-1" id="tab2">                          
+                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">                          
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">Case ID</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">From Date</label>
+                              <input type="date" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">To Range</label>
+                              <input type="date" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-12 text-center">
+                            <a class="btn btn-secondary custom-btn">Reset</a>
+                            <a class="btn btn-primary custom-btn">Search</a> 
+                          </div>
+
+
+                          <div class="col-12">
+                            <div class="table-responsive">
+                            <table id="example1" class="table table-striped customtable">
+                              <thead>
+                              <tr>
+                                <th style="width: 50px;">Sr.&nbsp;No.</th>
+                                <th>Case ID</th>
+                                <th>Patient Name</th>
+                                <th>Hospital Name</th>
+                                <th>Case Status</th> 
+                                <th>Registered Date</th>
+                                <th>Preauth Amount</th>
+                                <th>Claim Amount</th>
+                                <th>Procedure</th>
+                                <th>Admission Date</th>   
+                                <th>Preauth Initiation Date</th>                      
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td><a href="#">CASE/PS2/HOSP6P01882/S132939</a> </td>
+                                  <td>Akhil</td>
+                                  <td>Eye Q Vision Pvt Ltd</td>
+                                  <td>PPD Approved</td> 
+                                  <td>08/07/2020<br>00:00:00 AM</td>
+                                  <td>10000</td>
+                                  <td>0.0</td>
+                                  <td>Dacryocystectomy with implants(S300008)</td>
+                                  <td>2020-07-08<br>00:00:00.0</td>
+                                  <td>2020-07-08<br>19:04:40.0</td> 
+                                </tr>     
+                                <tr>
+                                  <td>1</td>
+                                  <td><a href="#">CASE/PS2/HOSP6P01882/S132939</a> </td>
+                                  <td>Akhil</td>
+                                  <td>Eye Q Vision Pvt Ltd</td>
+                                  <td>PPD Approved</td> 
+                                  <td>08/07/2020<br>00:00:00 AM</td>
+                                  <td>10000</td>
+                                  <td>0.0</td>
+                                  <td>Dacryocystectomy with implants(S300008)</td>
+                                  <td>2020-07-08<br>00:00:00.0</td>
+                                  <td>2020-07-08<br>19:04:40.0</td> 
+                                </tr>     
+                                <tr>
+                                  <td>1</td>
+                                  <td><a href="#">CASE/PS2/HOSP6P01882/S132939</a> </td>
+                                  <td>Akhil</td>
+                                  <td>Eye Q Vision Pvt Ltd</td>
+                                  <td>PPD Approved</td> 
+                                  <td>08/07/2020<br>00:00:00 AM</td>
+                                  <td>10000</td>
+                                  <td>0.0</td>
+                                  <td>Dacryocystectomy with implants(S300008)</td>
+                                  <td>2020-07-08<br>00:00:00.0</td>
+                                  <td>2020-07-08<br>19:04:40.0</td> 
+                                </tr>     
+                                <tr>
+                                  <td>1</td>
+                                  <td><a href="#">CASE/PS2/HOSP6P01882/S132939</a> </td>
+                                  <td>Akhil</td>
+                                  <td>Eye Q Vision Pvt Ltd</td>
+                                  <td>PPD Approved</td> 
+                                  <td>08/07/2020<br>00:00:00 AM</td>
+                                  <td>10000</td>
+                                  <td>0.0</td>
+                                  <td>Dacryocystectomy with implants(S300008)</td>
+                                  <td>2020-07-08<br>00:00:00.0</td>
+                                  <td>2020-07-08<br>19:04:40.0</td> 
+                                </tr>     
+                                <tr>
+                                  <td>1</td>
+                                  <td><a href="#">CASE/PS2/HOSP6P01882/S132939</a> </td>
+                                  <td>Akhil</td>
+                                  <td>Eye Q Vision Pvt Ltd</td>
+                                  <td>PPD Approved</td> 
+                                  <td>08/07/2020<br>00:00:00 AM</td>
+                                  <td>10000</td>
+                                  <td>0.0</td>
+                                  <td>Dacryocystectomy with implants(S300008)</td>
+                                  <td>2020-07-08<br>00:00:00.0</td>
+                                  <td>2020-07-08<br>19:04:40.0</td> 
+                                </tr>     
+                                <tr>
+                                  <td>1</td>
+                                  <td><a href="#">CASE/PS2/HOSP6P01882/S132939</a> </td>
+                                  <td>Akhil</td>
+                                  <td>Eye Q Vision Pvt Ltd</td>
+                                  <td>PPD Approved</td> 
+                                  <td>08/07/2020<br>00:00:00 AM</td>
+                                  <td>10000</td>
+                                  <td>0.0</td>
+                                  <td>Dacryocystectomy with implants(S300008)</td>
+                                  <td>2020-07-08<br>00:00:00.0</td>
+                                  <td>2020-07-08<br>19:04:40.0</td> 
+                                </tr>               
+                                <tr>
+                                  <td>1</td>
+                                  <td><a href="#">CASE/PS2/HOSP6P01882/S132939</a> </td>
+                                  <td>Akhil</td>
+                                  <td>Eye Q Vision Pvt Ltd</td>
+                                  <td>PPD Approved</td> 
+                                  <td>08/07/2020<br>00:00:00 AM</td>
+                                  <td>10000</td>
+                                  <td>0.0</td>
+                                  <td>Dacryocystectomy with implants(S300008)</td>
+                                  <td>2020-07-08<br>00:00:00.0</td>
+                                  <td>2020-07-08<br>19:04:40.0</td> 
+                                </tr>     
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+                        </div>
+
+                          <a class="btn btn-primary custom-btn">Save</a>
+                          <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                          <a class="btn btn-primary custom-btn btnNext">Next</a>                          
+                      </div>
+                      <div class="tab-pane text-center py-0 mb-1" id="tab3"> 
+                        <div class="personalhistory-wrap preauth-in-wrap">
+                          <div class="row pb-1 px-2 preauth-in-wrap">
+                            <div class="col-12 col-md-12">
+                              <div class="card card-info direct-chat preauth-tabs mb-2">  
+                                <div class="card-header py-0 px-3 bg-lightblue">
+                                  <h5 class="card-title mt-1">Pre Vital Chart </h5>
+                                </div>
+                                <div class="card-body">                                
+                                    <div class="col-12">                                        
+                                      <div class="table-responsive">
+                                        <table id="prevital" class="table table-striped customtable">
+                                          <thead>
+                                          <tr>
+                                            <th>Clinical&nbsp;ID</th>
+                                            <th>Date</th>
+                                            <th>BP</th>                      
+                                            <th>Pulse</th>                      
+                                            <th>Temperature</th>                      
+                                            <th>Respiratory Rate	</th>                      
+                                            <th>Heart Sounds	</th>                      
+                                            <th>Lungs</th>                      
+                                            <th>Fluid Input	</th>                      
+                                            <th>Fluid Output	</th>                      
+                                            <th>Fluid Output	</th>                      
+                                            <th>Daily Progress Notes	</th>                      
+                                            <th>Doctor Name </th>                      
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <td>CC1491</td>
+                                              <td>09/05/2022	</td>
+                                              <td>50/33</td>
+                                              <td>40</td>
+                                              <td>36</td> 
+                                              <td>5</td>
+                                              <td>S1</td>
+                                              <td>Good</td>
+                                              <td>MP4</td>
+                                              <td>MP3</td>
+                                              <td>General Ward</td> 
+                                              <td>admin</td>
+                                              <td>admin</td>
+                                            </tr>    
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>                                  
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-12">
+                              <div class="card card-info direct-chat preauth-tabs mb-2">
+                                <div class="card-header py-0 px-3 bg-lightblue">
+                                  <h5 class="card-title mt-1">Plasma Blood Glucose Chart </h5>
+                                </div>
+                                <div class="card-body">                                
+                                    <div class="col-12">                                        
+                                      <div class="table-responsive">
+                                        <table id="plasmablood" class="table table-striped customtable">
+                                          <thead>
+                                          <tr>
+                                            <th>Clinical&nbsp;ID</th>
+                                            <th>Date</th>
+                                            <th>BBF(7:00 am)</th>                      
+                                            <th>BL(1:00 pm)	</th>                      
+                                            <th>BD(7:00 pm)	</th>                      
+                                            <th>Plasma Blood Glucose MN Rate </th>                      
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <td>CC1491</td>
+                                              <td>09/05/2022	</td>
+                                              <td>-NA-</td> 
+                                              <td>-NA-</td>
+                                              <td>-NA-</td>
+                                              <td>-NA-</td>
+                                            </tr>    
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>                                  
+                                </div>
+                              </div>
+                            </div>
+  
+                            <div class="col-12 col-md-12">
+                              <div class="card card-info direct-chat preauth-tabs mb-2">
+                                <div class="card-header py-0 px-3 bg-lightblue">
+                                  <h5 class="card-title mt-1">Insulin Dosage Chart </h5>
+                                </div>
+                                <div class="card-body">                                
+                                    <div class="col-12">
+                                      <div class="table-responsive">
+                                        <table id="insulindosage" class="table table-striped customtable">
+                                          <thead>
+                                          <tr>
+                                            <th>Clinical&nbsp;ID</th>
+                                            <th>Date</th>
+                                            <th>BBF(7:00 am)</th>                      
+                                            <th>SR(1:00 pm)	</th>                      
+                                            <th>BD(7:00 pm)	</th>                      
+                                            <th>Insulin Dosage </th>                      
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <td>CC1491</td>
+                                              <td>09/05/2022	</td>
+                                              <td>-NA-</td> 
+                                              <td>-NA-</td>
+                                              <td>-NA-</td>
+                                              <td>-NA-</td>
+                                            </tr>    
+                                          </tbody>
+                                        </table>
+                                      </div>
+  
+                                    </div>                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+
+
+
+
+                          <div class="row pt-2 pb-1 px-2 preauth-in-wrap" style="min-height: 10px;">                          
+                            <div class="col-12 col-md-12 preauth-data text-left">                            
+                              <div class="form-check mb-2">
+                                <h5>
+                                  <input type="checkbox" class="form-check-input coupon_question" id="coupon_question" style="position: relative; top: -4px;">
+                                  <label class="form-check-label" for="coupon_question">Add Daily Vital Chart </label>
+                                </h5>
+                              </div>                        
+                            </div>
+
+                            <div class="col-12 col-md-12 answer">
+                              <div class="card direct-chat preauth-tabs" style="box-shadow: none;">
+                                <div class="card-header py-0 px-0">
+                                  <ul class="nav nav1 justify-content-between">
+                                    <li class="active"><a href="#tab01" data-toggle="tab" aria-expanded="true">Clinical Notes <br><span>1</span></a></li>
+                                    <li class=""><a href="#tab02" data-toggle="tab" aria-expanded="false">Plasma/Blood Glucose <br><span>2</span></a></li>
+                                    <li class=""><a href="#tab03" data-toggle="tab" aria-expanded="false">Insulin Dosage <br><span>3</span></a></li>
+                                    <li class=""><a href="#tab04" data-toggle="tab" aria-expanded="false">Medication Chart <br><span>4</span></a></li>
+                                  </ul>
+                                </div>
+                                <div class="card-body">
+                                  <div class="tab-content pt-2 pb-1 px-2">
+                                      <div class="tab-pane text-center py-0 mb-1 active" id="tab01">
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-1">
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Daily Vital Chart </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                <div class="row px-2">
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Date<span>*</span></label>
+                                                      <input type="date" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">BP<span>*</span></label>
+                                                      <div class="row" style="align-items: center; width: 80%; margin: 0 auto;">
+                                                        <div class="col-5">
+                                                          <select class="form-control form-control-sm">
+                                                            <option>50</option>
+                                                            <option>51</option>
+                                                            <option>52</option>
+                                                            <option>53</option>
+                                                            <option>54</option>
+                                                          </select>
+                                                        </div>
+                                                        <div class="col-2" style="top: 10px;">
+                                                          /
+                                                        </div>
+                                                        <div class="col-5">
+                                                          <select class="form-control form-control-sm">
+                                                            <option>33</option>
+                                                            <option>34</option>
+                                                            <option>35</option>
+                                                            <option>36</option>
+                                                            <option>37</option>
+                                                          </select>
+                                                        </div>
+                                                      </div>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Pulse Rate<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>40</option>
+                                                        <option>41</option>
+                                                        <option>42</option>                                                        
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Temperature<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>40</option>
+                                                        <option>41</option>
+                                                        <option>42</option>                                                        
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Ward Type<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>General</option>
+                                                        <option>ICU</option>
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Respiratory Rate<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>5</option>
+                                                        <option>6</option>                                                        
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Heart Sounds<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>S1</option>
+                                                        <option>S2</option>                                                        
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Lungs<span>*</span></label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Fluid Input<span>*</span></label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Fluid Output<span>*</span></label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Doctor Name<span>*</span></label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Daily Doctor Notes<span>*</span></label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div>                                                                                    
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <a class="btn btn-primary custom-btn btnNext1">Next</a>                          
+                                      </div>
+
+                                      <div class="tab-pane text-center py-0 mb-1" id="tab02">                          
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">                          
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-1">
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Plasma/Blood Glucose </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                <div class="row px-2">
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">BBF(7:00 am)</label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div>                                                   
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">BL(1:00 pm)</label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">BD(7:00 pm)</label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">MN</label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div>                                                                                    
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                
+                                          <a class="btn btn-secondary custom-btn btnPrevious1">Previous</a>
+                                          <a class="btn btn-primary custom-btn btnNext1">Next</a>                          
+                                      </div>
+
+                                      <div class="tab-pane text-center py-0 mb-1" id="tab03"> 
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">                          
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-1">
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Insulin Dosage </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                <div class="row px-2">
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">BBF(7:00 am)</label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div>                                                   
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">SR(1:00 pm)</label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">BD(7:00 pm)</label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Insulin Dosage</label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div>                                                                                    
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>                            
+                                       
+                                        <a class="btn btn-secondary custom-btn btnPrevious1">Previous</a>
+                                        <a class="btn btn-primary custom-btn btnNext1">Next</a>
+                
+                                      </div>
+
+                                      <div class="tab-pane text-center py-0 mb-1" id="tab04">      
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-1">
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Medication Chart </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                <div class="row px-2">                                                  
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Main Group Name<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Therapeutic Main Group Name<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>                                                       
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Pharmacological SubGrp Name<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>                                                      
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Chemical SubGroup Name<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>   
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Chemical Substance Name<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>                                                           
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Route Type<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>                                                          
+                                                      </select>
+                                                    </div>                
+                                                  </div>
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Route<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>                                                          
+                                                      </select>
+                                                    </div>                
+                                                  </div>
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Strength Type<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>                                                          
+                                                      </select>
+                                                    </div>                
+                                                  </div>
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Strength<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>                                                          
+                                                      </select>
+                                                    </div>                
+                                                  </div>
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Dosage(per day)<span>*</span></label>
+                                                      <select class="form-control form-control-sm">
+                                                        <option>-- Select --</option>                                                          
+                                                      </select>
+                                                    </div>                
+                                                  </div> 
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2">
+                                                      <label for="">Medication Period(Days)<span>*</span></label>
+                                                      <input type="text" class="form-control form-control-sm">
+                                                    </div>                
+                                                  </div>
+                                                  <div class="col-12 col-md-3">
+                                                    <div class="form-group custom-form mt-2 text-left">
+                                                      <a class="btn btn-primary custom-btn custom-btn-sm mt-2">Add Drugs</a>         
+                                                    </div>                
+                                                  </div>
+                                                                                                                                      
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+
+
+                                          <a class="btn btn-secondary custom-btn btnPrevious1">Previous</a>
+                                          <a class="btn btn-primary custom-btn btnNext1">Finish</a>                          
+                                      </div>
+                                    
+                
+                                      
+                
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                            
+                          </div>
+                        </div>                             
+                       
+                        <a class="btn btn-primary custom-btn">Save</a>
+                        <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                        <a class="btn btn-primary custom-btn btnNext">Next</a>
+
+                      </div>
+                      <div class="tab-pane text-center py-0 mb-1" id="tab4">      
+                        <div class="row pb-1 px-2 preauth-in-wrap">
+                          <div class="col-12 col-md-12">
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Network Hospital Details</h5>
+                              </div>
+                              <div class="card-body">                                
+                                  <div class="col-12">                                        
+                                    <div class="table-responsive">
+                                      <table id="networkhospital" class="table table-striped customtable">
+                                        <thead>
+                                        <tr>
+                                          <th>Name</th>
+                                          <th>Type</th>
+                                          <th>Address</th>                      
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>Shanti Devi Memorial Hospital</td> 
+                                            <td>Private</td>
+                                            <td>FARIDABAD,HARYANA </td>
+                                          </tr>    
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>                                  
+                              </div>
+                            </div>
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Diagnosis and Treatment</h5>
+                              </div>
+                              <div class="card-body">                                
+                                <div class="col-12 col-md-12 preauth-data text-left">                            
+                                  <span>Primary Diagnosis *</span>
+                                  <strong>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus ?</strong>                            
+                                </div>                                  
+                              </div>
+                            </div>
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Treatment Protocol</h5>
+                              </div>
+                              <div class="card-body">                                
+                                  <div class="col-12">                                        
+                                    <div class="table-responsive">
+                                      <table id="treatmentprotocol" class="table table-striped customtable">
+                                        <thead>
+                                        <tr>
+                                          <th>Speciality</th>
+                                          <th>Procedure</th>
+                                          <th>Quantity</th> 
+                                          <th>Amount(&#8377;)</th>
+                                          <th>Stratification</th>
+                                          <th>Implants</th>
+                                          <th>Update ICHI Details </th>                     
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>Paediatric medical management(M2)	</td> 
+                                            <td>High end radiological diagnostic (CT, MRI, Imaging including nuclear imaging) - can only be clubbed with medical package.(M200101)	</td>
+                                            <td>1 </td>
+                                            <td>5000</td>
+                                            <td> - </td>
+                                            <td> - </td>
+                                            <td>NA</td>
+                                          </tr>    
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>                                  
+                              </div>
+                            </div>
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Admission Details</h5>
+                              </div>
+                              <div class="card-body">    
+                                <div class="row p-2">                            
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Admission Type</label>
+                                      <div class="form-group mb-0">
+                                        <div class="form-radio">
+                                          <input type="radio" name="radio9" id="planned">
+                                          <label class="form-check-label" for="planned">Planned </label>
+                                        </div>
+                                        <div class="form-radio">
+                                          <input type="radio" name="radio9" id="emergency">
+                                          <label class="form-check-label" for="emergency">Emergency </label>
+                                        </div>                                          
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Admission Date</label>
+                                      <input type="date" class="form-control">
+                                    </div>
+                                  </div>
+
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Package Cost <span>*</span></label>
+                                      <input type="text" class="form-control" placeholder="₹ 0">
+                                    </div>
+                                  </div>
+
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Total Package Cost <span>*</span></label>
+                                      <input type="text" class="form-control" placeholder="₹ 0">
+                                    </div>
+                                  </div>
+
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Hospital Incentive</label>
+                                      <strong class="d-block sub-head" style="position: absolute; top: 20px; left: 15px;">100%</strong>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Remarks </label>
+                                      <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <p class="text-sm text-danger text-left mb-0">Note: Only ()?,./ special characters are allowed for Remarks and remarks are mandatory while assigning </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Work Flow</h5>
+                              </div>
+                              <div class="card-body">                                
+                                  <div class="col-12">                                        
+                                    <div class="table-responsive">
+                                      <table id="workflow" class="table table-striped customtable">
+                                        <thead>
+                                        <tr>
+                                          <th>S.No</th>
+                                          <th>Date and Time</th>
+                                          <th>Role</th> 
+                                          <th>Remarks</th>
+                                          <th>Action</th>
+                                          <th>Amount(&#8377;)</th>
+                                          <th>Preauth Query/Rejection Reason</th>                     
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>1</td> 
+                                            <td>06/06/2020 23:06:35</td>
+                                            <td>MEDCO</td>
+                                            <td>NA</td>
+                                            <td>Patient Registered</td>
+                                            <td>NA</td>
+                                            <td>NA</td>
+                                          </tr>  
+                                          <tr>
+                                            <td>2</td> 
+                                            <td>06/06/2020 23:06:35</td>
+                                            <td>MEDCO</td>
+                                            <td>NA</td>
+                                            <td>Patient Registered</td>
+                                            <td>NA</td>
+                                            <td>NA</td>
+                                          </tr>  
+                                          <tr>
+                                            <td>3</td> 
+                                            <td>06/06/2020 23:06:35</td>
+                                            <td>MEDCO</td>
+                                            <td>NA</td>
+                                            <td>Patient Registered</td>
+                                            <td>NA</td>
+                                            <td>NA</td>
+                                          </tr>  
+                                          <tr>
+                                            <td>4</td> 
+                                            <td>06/06/2020 23:06:35</td>
+                                            <td>MEDCO</td>
+                                            <td>NA</td>
+                                            <td>Patient Registered</td>
+                                            <td>NA</td>
+                                            <td>NA</td>
+                                          </tr>  
+                                          <tr>
+                                            <td>5</td> 
+                                            <td>06/06/2020 23:06:35</td>
+                                            <td>MEDCO</td>
+                                            <td>NA</td>
+                                            <td>Patient Registered</td>
+                                            <td>NA</td>
+                                            <td>NA</td>
+                                          </tr>    
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>                                  
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>              
+                          <a class="btn btn-primary custom-btn">Save</a>
+                          <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                          <a class="btn btn-primary custom-btn btnNext">Next</a>                          
+                      </div>
+
+                      <div class="tab-pane text-center py-0 mb-1" id="tab5">
+                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">                         
+                          <div class="col-12 col-md-12">
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">COVID Case Details</h5>
+                              </div>
+                              <div class="card-body">                                
+                                <div class="form-group custom-form custom-form-radio">
+                                  <label for="">Is this COVID case ? <span>*</span></label>
+                                  <div class="form-group mb-0">
+                                    <div class="form-radio">
+                                      <input type="radio" name="radio19" id="yes19">
+                                      <label class="form-check-label" for="yes19">Yes</label>
+                                    </div>
+                                    <div class="form-radio">
+                                      <input type="radio" name="radio19" id="no19">
+                                      <label class="form-check-label" for="no19">No</label>
+                                    </div>                                          
+                                  </div>
+                                </div>                                
+                              </div>
+                            </div>
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Treating Doctor Details</h5>
+                              </div>
+                              <div class="card-body">                                
+                                <div class="row px-2">
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Doctor Type <span>*</span></label>
+                                      <select class="form-control">
+                                        <option>-- Others --</option>  
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Name <span>*</span></label>
+                                      <select class="form-control">
+                                        <option>-- Others --</option>                                                 
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Regn No</label>
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Qualification</label>
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Contact No</label>
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                </div>                                
+                              </div>
+                            </div>
+
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Treatment/Surgery Date</h5>
+                              </div>
+                              <div class="card-body">                                
+                                <div class="row px-2">
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Treatment Start Date <span>*</span></label>                                      
+                                      <input type="date" class="form-control">
+                                    </div>
+                                  </div>
+                                </div>                                
+                              </div>
+                            </div>
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Manpower Details</h5>
+                              </div>
+                              <div class="card-body">                                
+                                <div class="col-12">
+                                  <div class="table-responsive">
+                                    <table id="manpowerdetails" class="table table-striped customtable">
+                                      <thead>
+                                      <tr>
+                                        <th>Doctor Type</th>
+                                        <th>Doctor Name</th>
+                                        <th>Doctor Reg No</th>                     
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>Class-1	</td> 
+                                          <td>DR GOWHER RASHID</td>
+                                          <td>26643</td>
+                                        </tr>    
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Treatment Summary</h5>
+                              </div>
+                              <div class="card-body">                                
+                                <div class="row px-2">
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Treatment Given <span>*</span></label>
+                                      <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Operative Findings <span>*</span></label>
+                                      <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Post Operative Period</label>
+                                      <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Post Surgery/Therapy Special Investigations Given</label>
+                                      <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Status at the time of Discharge</label>
+                                      <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Review</label>
+                                      <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <label for="">Advice</label>
+                                      <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form custom-form-radio">
+                                      <div class="form-group mb-0">
+                                        <div class="form-radio">
+                                          <input type="radio" name="radio20" id="discharge">
+                                          <label class="form-check-label" for="discharge">Discharge</label>
+                                        </div>
+                                        <div class="form-radio">
+                                          <input type="radio" name="radio20" id="death">
+                                          <label class="form-check-label" for="death">Death</label>
+                                        </div>                                          
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>                                
+                              </div>
+                            </div>
+
+                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Death</h5>
+                              </div>
+                              <div class="card-body">                                
+                                <div class="row px-2">
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Death Date <span>*</span></label>                                      
+                                      <input type="date" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Cause of Death <span>*</span></label>                                      
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Is Special Case <span>*</span></label>                                      
+                                      <select class="form-control">
+                                        <option>No</option>                                                 
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-md-4">
+                                    <div class="form-group custom-form">
+                                      <label for="">Procedure Consent <span>*</span></label>                                      
+                                      <div class="form-group custom-form custom-form-radio">
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="radio21" id="yess">
+                                            <label class="form-check-label" for="yess">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="radio21" id="noo">
+                                            <label class="form-check-label" for="noo">No</label>
+                                          </div>                                          
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <p class="text-sm text-danger text-left mb-0">Note: 1) Once the Discharge date/Death Date is updated in the discharge summary, it can not be modified at any point of time. </p>
+                                  </div>
+                                </div>                                
+                              </div>
+                            </div>
+
+
+
+                          </div>
+                        </div>
+                        <a class="btn btn-primary custom-btn">Save</a>  
+                        <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                        <a class="btn btn-primary custom-btn btnNext">Next</a>                                    
+                      </div>
+
+                      <div class="tab-pane text-center py-0 mb-1" id="tab6">
+                        <div class="row pt-2 pb-1 px-2">
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Claim Details</h5>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Preauth Approved Amount(Rs) </span>
+                            <strong>5000</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Preauth Date </span>
+                            <strong>06/06/2020 23:52:30 PM</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Claim Submitted Date </span>
+                            <strong>-</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Last Claim Updated Date </span>
+                            <strong>06/05/2022 14:46:35 PM</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Penalty Amount(Rs) </span>
+                            <strong>0</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Claim Amount(Rs) </span>
+                            <strong>5000 </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Trust liable Amount(Rs) </span>
+                            <strong>5000</strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Bill Amount(Rs)*</span>
+                            <strong>5000</strong>                            
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form mt-2">
+                              <label for="">Bill Date</label>
+                              <input type="date" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form mt-2">
+                              <label for="">Remarks </label>
+                              <textarea class="form-control" style="border-radius: .25rem;"></textarea>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form mt-2">
+                              <label for="">Action Type <span>*</span></label>
+                              <select class="form-control">
+                                <option>-- Select --</option>                 
+                                <option>Initiate Claim</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-12 form-group mb-2 pl-2">
+                            <div class="general-finding-forms px-0">
+                              <div class="form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">I hereby declare that the claim submission with all relevant documents is correct.</label>
+                              </div>                              
+                            </div>
+                          </div>
+                        </div>
+                            
+                        <a class="btn btn-primary custom-btn">Download Hospital Bill</a> 
+                        <a class="btn btn-primary custom-btn">Add/View Attachments</a>  
+                        <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                        <a class="btn btn-primary custom-btn btnNext">Submit</a>                            
+                      </div>
+
+                      <div class="tab-pane text-center py-0 mb-1" id="tab7">
+                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">   
+                            <div class="col-12 text-center mb-3">
+                              <a class="btn btn-primary custom-btn-sm">View All Inactive Attachments</a>
+                              <a class="btn btn-primary custom-btn-sm">View Data Anamoly Attachments</a>
+                            </div>
+                          
+                            <div class="col-12 col-md-12">
+                              <div class="card direct-chat preauth-tabs" style="box-shadow: none;">
+                                <div class="card-header py-0 px-0">
+                                  <ul class="nav nav001 justify-content-between">
+                                    <li class="active"><a href="#tab001" data-toggle="tab" aria-expanded="true">Preauthorization <br><span>1</span></a></li>
+                                    <li class=""><a href="#tab002" data-toggle="tab" aria-expanded="false">Discharge <br><span>2</span></a></li>
+                                    <li class=""><a href="#tab003" data-toggle="tab" aria-expanded="false">Death <br><span>3</span></a></li>
+                                    <li class=""><a href="#tab004" data-toggle="tab" aria-expanded="false">Claims <br><span>4</span></a></li>
+                                    <li class=""><a href="#tab005" data-toggle="tab" aria-expanded="false">General Investigations <br><span>5</span></a></li>
+                                    <li class=""><a href="#tab006" data-toggle="tab" aria-expanded="false">Special Investigations <br><span>6</span></a></li>
+                                  </ul>
+                                </div>
+                                <div class="card-body">
+                                  <div class="tab-content pt-2 pb-1 px-2">
+                                      <div class="tab-pane text-center py-0 mb-1 active" id="tab001">
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap" style="min-height:10px;">
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Preauthorization </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                  <div class="col-12">                                        
+                                                    <div class="table-responsive">
+                                                      <table id="preauthorization" class="table table-striped customtable">
+                                                        <thead>
+                                                        <tr>
+                                                          <th>Attachment Name</th>
+                                                          <th>Uploaded Date	</th>
+                                                          <th>Beneficiary Options</th>                      
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>Declaration Letter from Parent</td>
+                                                            <td>06/06/2020 23:14:13	</td>
+                                                            <td> </td>
+                                                          </tr>  
+                                                          <tr>
+                                                            <td>Parent Id Proof</td>
+                                                            <td>06/06/2020 23:15:10	</td>
+                                                            <td> </td>
+                                                          </tr>  
+                                                          <tr>
+                                                            <td>Certificate of Proof</td>
+                                                            <td>06/06/2020 23:13:47	</td>
+                                                            <td> </td>
+                                                          </tr>  
+                                                          <tr>
+                                                            <td>Patient Photo</td>
+                                                            <td>06/06/2020 23:16:19 </td>
+                                                            <td> </td>
+                                                          </tr>    
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>                                  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <a class="btn btn-primary custom-btn-sm btnNext001">Next</a>                          
+                                      </div>
+
+                                      <div class="tab-pane text-center py-0 mb-1" id="tab002">                          
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap" style="min-height:10px;">                          
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Discharge </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                  <div class="col-12">                                        
+                                                    No Attachments Found
+                                                  </div>                                  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                
+                                          <a class="btn btn-secondary custom-btn-sm btnPrevious001">Previous</a>
+                                          <a class="btn btn-primary custom-btn-sm btnNext001">Next</a>                          
+                                      </div>
+
+                                      <div class="tab-pane text-center py-0 mb-1" id="tab003"> 
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap" style="min-height:10px;">                          
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Death </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                  <div class="col-12">                                        
+                                                    <div class="table-responsive">
+                                                      <table id="death" class="table table-striped customtable">
+                                                        <thead>
+                                                        <tr>
+                                                          <th>Attachment Name</th>
+                                                          <th>Uploaded Date	</th>
+                                                          <th>Beneficiary Options</th>                      
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>Death Summary</td>
+                                                            <td>07/06/2020 00:04:53 </td>
+                                                            <td> </td>
+                                                          </tr>  
+                                                          <tr>
+                                                            <td>Death Certificate</td>
+                                                            <td>07/06/2020 00:04:39 </td>
+                                                            <td> </td>
+                                                          </tr>    
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>                                  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>                            
+                                       
+                                        <a class="btn btn-secondary custom-btn-sm btnPrevious001">Previous</a>
+                                        <a class="btn btn-primary custom-btn-sm btnNext001">Next</a>
+                
+                                      </div>
+
+                                      <div class="tab-pane text-center py-0 mb-1" id="tab004">      
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap" style="min-height:10px;">
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Claims </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                  <div class="col-12">                                        
+                                                    <div class="table-responsive">
+                                                      <table id="claims" class="table table-striped customtable">
+                                                        <thead>
+                                                        <tr>
+                                                          <th>Attachment Name</th>
+                                                          <th>View	</th>
+                                                          <th>Upload</th>
+                                                          <th>Beneficiary Options</th>                      
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>Bill Attachments(PDF Only)</td>
+                                                            <td> </td>
+                                                            <td> <a class="btn btn-primary custom-btn-sm btnNext001">Upload</a> </td>
+                                                            <td> </td>
+                                                          </tr>  
+                                                          <tr>
+                                                            <td>Case Sheet Attachments (PDF Only)</td>
+                                                            <td> </td>
+                                                            <td> <a class="btn btn-primary custom-btn-sm btnNext001">Upload</a> </td>
+                                                            <td> </td>
+                                                          </tr> 
+                                                          <tr>
+                                                            <td>Claim Clinical Photos</td>
+                                                            <td> </td>
+                                                            <td> <a class="btn btn-primary custom-btn-sm btnNext001">Upload</a> </td>
+                                                            <td> </td>
+                                                          </tr> 
+                                                          <tr>
+                                                            <td>Claims Attachments(Additional Support documents)</td>
+                                                            <td> </td>
+                                                            <td> <a class="btn btn-primary custom-btn-sm btnNext001">Upload</a> </td>
+                                                            <td> </td>
+                                                          </tr> 
+                                                          <tr>
+                                                            <td>Claim Webex Recordings	</td>
+                                                            <td> </td>
+                                                            <td> <a class="btn btn-primary custom-btn-sm btnNext001">Upload</a> </td>
+                                                            <td> </td>
+                                                          </tr> 
+                                                          <tr>
+                                                            <td>Implant Barcode/QR code</td>
+                                                            <td> </td>
+                                                            <td> <a class="btn btn-primary custom-btn-sm btnNext001">Upload</a> </td>
+                                                            <td> </td>
+                                                          </tr> 
+                                                          <tr>
+                                                            <td>Implant Bill Attachment(PDF Only)	</td>
+                                                            <td> </td>
+                                                            <td> <a class="btn btn-primary custom-btn-sm btnNext001">Upload</a> </td>
+                                                            <td> </td>
+                                                          </tr>    
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                    <div class="text-center mb-2">
+                                                      <a class="btn btn-primary custom-btn-sm">Click Here to download Hospital Bill</a>    
+                                                    </div>
+                                                  </div>                                  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                        <a class="btn btn-secondary custom-btn-sm btnPrevious001">Previous</a>
+                                        <a class="btn btn-primary custom-btn-sm btnNext001">Next</a>                          
+                                      </div>
+
+                                      <div class="tab-pane text-center py-0 mb-1" id="tab005">      
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap" style="min-height:10px;">
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">General Investigations </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                  <div class="col-12">                                        
+                                                    No Attachments Found
+                                                  </div>                                  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                        <a class="btn btn-secondary custom-btn-sm btnPrevious001">Previous</a>
+                                        <a class="btn btn-primary custom-btn-sm btnNext001">Next</a>                          
+                                      </div>
+
+                                      <div class="tab-pane text-center py-0 mb-1" id="tab006">      
+                                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap" style="min-height:10px;">
+                                          <div class="col-12 col-md-12">
+                                            <div class="card card-info direct-chat preauth-tabs mb-2">  
+                                              <div class="card-header py-0 px-3 bg-lightblue">
+                                                <h5 class="card-title mt-1">Special Investigations </h5>
+                                              </div>
+                                              <div class="card-body">                                
+                                                  <div class="col-12">                                        
+                                                    <div class="table-responsive">
+                                                      <table id="specialinvestigations" class="table table-striped customtable">
+                                                        <thead>
+                                                        <tr>
+                                                          <th>Attachment Name</th>
+                                                          <th>Uploaded Time	</th>
+                                                          <th>Pre or Post</th>
+                                                          <th>Beneficiary Options</th>                      
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>Clinical notes</td>
+                                                            <td>06/06/2020 23:10:15 </td>
+                                                            <td>PRE</td>
+                                                            <td> </td>
+                                                          </tr>    
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>                                  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                        <a class="btn btn-secondary custom-btn-sm btnPrevious001">Previous</a>
+                                        <a class="btn btn-primary custom-btn-sm btnNext001">Finish</a>                          
+                                      </div>
+                                                                         
+                
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+
+                            <div class="col-12 text-left">
+                              <p class="text-sm text-danger text-left mb-0">Note: File size should not exceed 500 kb </p>
+                              <p class="text-sm text-danger text-left mb-0">Attachment Names with blue color are related to Notifications </p>
+                              <div class="text-center">
+                                <a class="btn btn-primary custom-btn">Download as one PDF</a>
+                              </div>
+                              
+                            </div>
+
+
+                        </div>
+                        <a class="btn btn-primary custom-btn">Save</a>  
+                        <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                        <a class="btn btn-primary custom-btn btnNext">Next</a>                                    
+                      </div>
+
+                      <div class="tab-pane text-center py-0 mb-1" id="tab8">
+                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">                         
+                         <div class="col-12 px-0">
+                          <div class="card card-info direct-chat preauth-tabs">
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Patient Details</h5>
+                            </div>                            
+                            <div class="card-body">
+                              <div class="row pt-2 pb-1 px-2">
+                                <div class="col-12 col-sm-4 col-md-2 col-lg-2">
+                                  <img src="images/user-profile-l.jpg" class="img-thumbnail rounded mx-auto d-block" style="max-height: 120px;" alt="">
+                                </div>
+                                <div class="col-12 col-sm-8 col-md-10 col-lg-10">
+                                  <div class="row text-left">
+                                      <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                                        <span>Health Card Number </span>
+                                        <strong>P64UB8JH</strong>
+                                      </div>
+                                      <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                                        <span>Patient Name </span>
+                                        <strong>Sheetal Singh</strong>
+                                      </div>
+                                      <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                                        <span>Age </span>
+                                        <strong>38</strong>
+                                      </div>
+                                      <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                                        <span>Gender </span>
+                                        <strong>Female</strong>
+                                      </div>
+                                      <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                                        <span>Phone No.</span>
+                                        <strong>9879879870</strong>
+                                      </div>
+                                      <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                                        <span>Communication Contact No.</span>
+                                        <strong>9658965895</strong>
+                                      </div>
+                                      <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                                        <span>Address</span>
+                                        <strong>FARIDABAD, HARYANA </strong>
+                                      </div>
+                                      <div class="col-12 col-sm-4 col-md-3 preauth-data">
+                                        <span>Communication Address</span>
+                                        <strong>Delhi </strong>
+                                      </div>
+                                  </div> 
+                                </div>                                                   
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Admission Details</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>IP NO: </span>
+                                  <strong> </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Admission Date </span>
+                                  <strong>06-06-2020 </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Admission Type</span>
+                                  <strong>Planned </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Medco Legal Case </span>
+                                  <strong>No </strong>                            
+                                </div>
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Hospital Details</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Hospital Name </span>
+                                  <strong>Shanti Devi Memorial Hospital </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Address and Contact </span>
+                                  <strong>FARIDABAD,HARYANA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Doctor Name </span>
+                                  <strong>Pankaj MEDCO </strong>                            
+                                </div>
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Complaints</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                NA
+                              </div>                               
+                            </div>
+                          </div>
+                          
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">History Of Present Illness</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                NA
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Known Allergies</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                NA
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Habits/Addictions</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                NA
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Past Illness History</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                NA
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Family History</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                NA
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">General Examination Findings</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Height </span>
+                                  <strong>NA</strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Weight </span>
+                                  <strong>NA</strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>BMI </span>
+                                  <strong> </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Pallor </span>
+                                  <div class="form-group custom-form custom-form-radio mb-0">
+                                    <div class="form-group mb-0" style="top:0;">
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioPallor" id="Palloryes">
+                                        <label class="form-check-label" for="Palloryes">Yes</label>
+                                      </div>
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioPallor" id="Pallorno">
+                                        <label class="form-check-label" for="Pallorno">No</label>
+                                      </div>                                          
+                                    </div>
+                                  </div>                        
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Cyanosis </span>
+                                  <div class="form-group custom-form custom-form-radio mb-0">
+                                    <div class="form-group mb-0" style="top:0;">
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioCyanosis" id="Cyanosisyes">
+                                        <label class="form-check-label" for="Cyanosisyes">Yes</label>
+                                      </div>
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioCyanosis" id="Cyanosisno">
+                                        <label class="form-check-label" for="Cyanosisno">No</label>
+                                      </div>                                          
+                                    </div>
+                                  </div>                        
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Clubbing of Fingers/Toes </span>
+                                  <div class="form-group custom-form custom-form-radio mb-0">
+                                    <div class="form-group mb-0" style="top:0;">
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioClubbing" id="Clubbingyes">
+                                        <label class="form-check-label" for="Clubbingyes">Yes</label>
+                                      </div>
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioClubbing" id="Clubbingno">
+                                        <label class="form-check-label" for="Clubbingno">No</label>
+                                      </div>                                          
+                                    </div>
+                                  </div>                        
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Lymphadenopathy </span>
+                                  <div class="form-group custom-form custom-form-radio mb-0">
+                                    <div class="form-group mb-0" style="top:0;">
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioLymphadenopathy" id="Lymphadenopathyyes">
+                                        <label class="form-check-label" for="Lymphadenopathyyes">Yes</label>
+                                      </div>
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioLymphadenopathy" id="Lymphadenopathyno">
+                                        <label class="form-check-label" for="Lymphadenopathyno">No</label>
+                                      </div>                                          
+                                    </div>
+                                  </div>                        
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Edema of Feet </span>
+                                  <div class="form-group custom-form custom-form-radio mb-0">
+                                    <div class="form-group mb-0" style="top:0;">
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioEdema" id="Edemayes">
+                                        <label class="form-check-label" for="Edemayes">Yes</label>
+                                      </div>
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioEdema" id="Edemano">
+                                        <label class="form-check-label" for="Edemano">No</label>
+                                      </div>                                          
+                                    </div>
+                                  </div>                        
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Malnutrition </span>
+                                  <div class="form-group custom-form custom-form-radio mb-0">
+                                    <div class="form-group mb-0" style="top:0;">
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioMalnutrition" id="Malnutritionyes">
+                                        <label class="form-check-label" for="Malnutritionyes">Yes</label>
+                                      </div>
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioMalnutrition" id="Malnutritionno">
+                                        <label class="form-check-label" for="Malnutritionno">No</label>
+                                      </div>                                          
+                                    </div>
+                                  </div>                        
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Dehydration </span>
+                                  <div class="form-group custom-form custom-form-radio mb-0">
+                                    <div class="form-group mb-0" style="top:0;">
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioDehydration" id="Dehydrationyes">
+                                        <label class="form-check-label" for="Dehydrationyes">Yes</label>
+                                      </div>
+                                      <div class="form-radio mt-0">
+                                        <input type="radio" name="radioDehydration" id="Dehydrationno">
+                                        <label class="form-check-label" for="Dehydrationno">No</label>
+                                      </div>                                          
+                                    </div>
+                                  </div>                        
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Temperature </span>
+                                  <strong>33C</strong>                       
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Pulse Rate per Minute </span>
+                                  <strong>44</strong>                       
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Respiration Rate </span>
+                                  <strong>NA</strong>                       
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>BP Lt.Arm </span>
+                                  <strong>120/90</strong>                       
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>BP Rt.Arm </span>
+                                  <strong>120/90</strong>                       
+                                </div>
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Systematic Examination Findings</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                Systematic Examination Findings not found
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">General Investigations Done and Reports</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                General Investigation Reports not found for this Case
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Final Diagnosis</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="col-12">                                        
+                                <div class="table-responsive">
+                                  <table id="finaldiagnosis" class="table table-striped customtable">
+                                    <thead>
+                                    <tr>
+                                      <th>Primary Diagnosis	</th>
+                                      <th>Diagnosis Description
+                                      </th>                      
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>Other</td>
+                                        <td> </td>
+                                      </tr>    
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>                                  
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Therapy/Surgery Details</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="col-12">                                        
+                                <div class="table-responsive">
+                                  <table id="finaldiagnosis" class="table table-striped customtable">
+                                    <thead>
+                                    <tr>
+                                      <th>Category Name	</th>
+                                      <th>ICD Category Name </th>  
+                                      <th>Procedure Name</th>
+                                      <th>Units</th>
+                                      <th>Special Investigation</th>
+                                      <th>Remarks</th>
+                                      <th>Treating Doctor </th>                    
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>Paediatric medical management (7047)	</td>
+                                        <td> </td>
+                                        <td>High end radiological diagnostic (CT, MRI, Imaging including nuclear imaging) - can only be clubbed with medical package. (365616)</td>
+                                        <td>1</td>
+                                        <td>Clinical notes</td>
+                                        <td></td>
+                                        <td>DR NEERAJ GUPTA</td>
+                                      </tr>    
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>                                  
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Daily Vital Chart</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="col-12">                                        
+                                <div class="table-responsive">
+                                  <table id="finaldiagnosis" class="table table-striped customtable">
+                                    <thead>
+                                    <tr>
+                                      <th>S.No	</th>
+                                      <th>Clinical ID	 </th>  
+                                      <th>Date</th>
+                                      <th>BP</th>
+                                      <th>Pulse</th>
+                                      <th>Temperature</th>
+                                      <th>Respiratory Rate</th>                    
+                                      <th>Heart Sounds	</th>
+                                      <th>Lungs</th>
+                                      <th>Fluid Input	</th>
+                                      <th>Fluid Output	</th>
+                                      <th>Ward Type	</th>
+                                      <th>Daily Progress Notes </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>1</td>
+                                        <td>CC1491</td>
+                                        <td>09/05/2022	</td>
+                                        <td>50/33	</td>
+                                        <td>40</td>
+                                        <td>36</td>
+                                        <td>5</td>
+                                        <td>S1</td>
+                                        <td>good</td>
+                                        <td>M43</td>
+                                        <td>M43</td>
+                                        <td>General Ward</td>
+                                        <td>admin</td>
+                                      </tr>    
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>                                  
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Operation Record</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Surgeon Name & Reg No. </span>
+                                  <strong>Other</strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Post-operative Instructions </span>
+                                  <strong>NA</strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Medical or Cardiology Clearance </span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Blood Transfusion</span>
+                                  <strong>No </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Anaesthesiologist Name & Reg No.</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Anaesthesia Type</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Procedure Consent</span>
+                                  <strong>Yes </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Procedure Details with Specific Intra OP Findings</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Incision Type</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>IntraOP Photos/WebEx Taken</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Video Recording Done-Yes/No</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Swab Count and Instruments Count</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Sutures Ligatures</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Specimen Removed</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Drainage Count</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Blood Loss</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Complications</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Surgery Starting Time</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Surgery Ending Time</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                                <div class="col-12 col-md-3 preauth-data text-left">                            
+                                  <span>Condition of the Patient at the Time of Shifting</span>
+                                  <strong>NA </strong>                            
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Post Vital Chart</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                Post Vital Chart Not Found
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Vital Chart Drugs List</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                Vital Chart Drugs List Not Found
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Post Vital Chart Drugs List</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                Post Vital Chart Drugs List Not Found
+                              </div>                               
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Vital Chart Sub Cutaneous Insulin Chart</h5>
+                            </div>
+                            <div class="card-body">                                
+                               <div class="col-12">                                        
+                                <div class="table-responsive">
+                                  <table id="finaldiagnosis" class="table table-striped customtable">
+                                    <thead>
+                                    <tr>
+                                      <th>S.No	</th>
+                                      <th>Clinical ID	 </th>  
+                                      <th>Date</th>
+                                      <th>Doctor Name	</th>
+                                      <th>BBF(7:00 am)	</th>
+                                      <th>BL(1:00 pm)	</th>
+                                      <th>BD(7:00 pm)	</th>                    
+                                      <th>Plasma Blood Glucose MN Rate	</th>
+                                      <th>BBF(7:00 am)	</th>
+                                      <th>SR(1:00 pm)	</th>
+                                      <th>BD(7:00 pm)	</th>
+                                      <th>Insulin Dosage </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>1</td>
+                                        <td>CC1491</td>
+                                        <td>09/05/2022	</td>
+                                        <td>Admin	</td>
+                                        <td>NA</td>
+                                        <td>NA</td>
+                                        <td>NA</td>
+                                        <td>NA</td>
+                                        <td>NA</td>
+                                        <td>NA</td>
+                                        <td>NA</td>
+                                        <td>NA</td>
+                                        <td>NA</td>
+                                      </tr>    
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>                            
+                            </div>
+                          </div>
+
+                          <div class="card card-info direct-chat preauth-tabs mb-2">  
+                            <div class="card-header py-0 px-3 bg-lightblue">
+                              <h5 class="card-title mt-1">Post Vital Chart Sub Cutaneous Insulin Chart</h5>
+                            </div>
+                            <div class="card-body">                                
+                              <div class="row p-2">
+                                Post Clinical Notes Sub Cutaneous Insulin Chart not found for this Case
+                              </div>                               
+                            </div>
+                          </div>
+
+                         </div>
+                        </div>
+                        <a class="btn btn-primary custom-btn">Save</a>  
+                        <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                        <a class="btn btn-primary custom-btn btnNext">Next</a>                                    
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+  </div>
+
+
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="js/adminlte.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="js/datatable/jquery.dataTables.min.js"></script>
+  <script src="js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.responsive.min.js"></script>
+  <script src="js/datatable/responsive.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.buttons.min.js"></script>
+  <script src="js/datatable/buttons.bootstrap4.min.js"></script>
+  <script src="js/datatable/jszip.min.js"></script>
+  <script src="js/datatable/pdfmake.min.js"></script>
+  <script src="js/datatable/vfs_fonts.js"></script>
+  <script src="js/datatable/buttons.html5.min.js"></script>
+  <script src="js/datatable/buttons.print.min.js"></script>
+  <script src="js/datatable/buttons.colVis.min.js"></script>
+  
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/custom.js"></script>
+  
+  <script>
+      $(function () {
+        $(".customtable").DataTable({
+          "responsive": true, 
+          "lengthChange": false, 
+          "autoWidth": false, 
+          "searching": false, 
+          "info": false,  
+          "paging": false,        
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');        
+      });
+
+
+  </script>
+  
+   <script>
+		$(document).ready(function () {
+			$('#myDIV1').removeClass('active');
+			$('#myDIV2').removeClass('active');
+			$('#myDIV3').removeClass('active');
+			$('#myDIV4').addClass('active');
+		});
+</script>
+</body>
+
+</html>

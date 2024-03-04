@@ -1,0 +1,205 @@
+
+function schemeChange(){
+	
+	 $( "#statecode" ).val('').trigger('change');	
+	
+}
+
+function savePriceMasterData() { 
+     // var status = document.getElementById("status").value;
+      var state = document.getElementById("statecode").value;
+      var scheme = document.getElementById("scheme").value;
+ 	  var specialitycode = document.getElementById("speciality").value;
+ 	  var packagecode = document.getElementById("packageid").value;
+ 	  var procedurecode = document.getElementById("procedureid").value;
+ 	  var price = document.getElementById("price").value;
+ 	  var tier1price = document.getElementById("tier1price").value;
+ 	  var tier2price = document.getElementById("tier2price").value;
+ 	  var tier3price = document.getElementById("tier3price").value;
+ 	  // var procedurelabltype = document.getElementById("procedurelabltype").value;
+ 	  var pricecategory = document.getElementById("pricecategory").value;
+ 	  //var hospitalIncentives = document.getElementById("hospitalIncentives").value;
+ 	  
+ 	  if (scheme=="") {
+		document.getElementById("schemeError").innerHTML="Please Select Scheme";
+		document.getElementById("scheme").focus();
+		return false;
+	  }else{
+		document.getElementById("schemeError").innerHTML="";
+	  }
+	    if (state=="") {
+		document.getElementById("stateError").innerHTML="Please Select State";
+		document.getElementById("state").focus();
+		return false;
+	  }else{
+		document.getElementById("stateError").innerHTML="";
+	  }
+	    if (specialitycode=="") {
+		document.getElementById("specialityError").innerHTML="Please Select Speciality";
+		document.getElementById("speciality").focus();
+		return false;
+	  }else{
+		document.getElementById("specialityError").innerHTML="";
+	  }
+	    if (packagecode=="") {
+		document.getElementById("packageidError").innerHTML="Please Select Package";
+		document.getElementById("packageid").focus();
+		return false;
+	  }else{
+		document.getElementById("packageidError").innerHTML="";
+	  }
+	    if (procedurecode=="") {
+		document.getElementById("procedureidError").innerHTML="Please Select Procedure";
+		document.getElementById("procedureid").focus();
+		return false;
+	  }else{
+		document.getElementById("procedureidError").innerHTML="";
+	  }
+	   if (pricecategory=="") {
+		document.getElementById("pricecategoryError").innerHTML="Please Select Price Category";
+		document.getElementById("pricecategory").focus();
+		return false;
+	  }else{
+		document.getElementById("pricecategoryError").innerHTML="";
+	  }
+ 	  if (price=="") {
+		document.getElementById("priceError").innerHTML="Please Enter Price";
+		document.getElementById("price").focus();
+		return false;
+	  }else{
+		document.getElementById("priceError").innerHTML="";
+	  }
+	  
+	  if (tier1price=="") {
+		document.getElementById("tier1priceError").innerHTML="Please Enter Tier 1 Price";
+		document.getElementById("tier1price").focus();
+		return false;
+	  }else{
+		document.getElementById("tier1priceError").innerHTML="";
+	  }
+	  
+	  if (tier2price=="") {
+		document.getElementById("tier2priceError").innerHTML="Please Enter Tier 2 Price";
+		document.getElementById("tier2price").focus();
+		return false;
+	  }else{
+		document.getElementById("tier2priceError").innerHTML="";
+	  }
+	  
+	  if (tier3price=="") {
+		document.getElementById("tier3priceError").innerHTML="Please Enter Tier 3 Price";
+		document.getElementById("tier3price").focus();
+		return false;
+	  }else{
+		document.getElementById("tier3priceError").innerHTML="";
+	  }
+	
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/savePriceMasterData",
+      
+        data: {
+          "price": price,
+          "statecode": state,
+          "schemeid": scheme,
+          "specialitycode":specialitycode,
+          "packagecode":packagecode,
+          "procedurecode":procedurecode,
+          "tier1price":tier1price,
+          "tier2price":tier2price,
+          "tier3price":tier3price,
+          "pricecategory":pricecategory,
+        //  "hospitalincentives":hospitalIncentives,
+        },
+        success: function (data) {
+          //console.log(data);
+         offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+			 document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+			 
+             document.getElementById("price").value="";
+      		 document.getElementById("state").value="";
+      		 document.getElementById("scheme").value="";
+ 			 document.getElementById("price").value="";
+ 	  		 document.getElementById("tier1price").value="";
+ 	  		 document.getElementById("tier2price").value="";
+ 			 document.getElementById("tier3price").value="";
+ 	 		 document.getElementById("procedurelabltype").value="";
+ 	 		 
+ 	 		  $( "#statecode" ).val('').trigger('change');	
+			 $( "#speciality" ).val('').trigger('change');	
+			 $( "#packageid" ).val('').trigger('change');	
+			 $( "#procedureid" ).val('').trigger('change');		
+			 $("#pricecategory").val('').trigger('change');
+          }
+            else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+          
+           else {
+	        offRegister();
+            alert('API Gateway not respond. Please try again.');
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+function getPriceMasterData() {
+	 onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPriceMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#priceTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "specialtycode"},
+      		    { "mData": "packagecode"},
+      		    { "mData": "procedurecode"},
+      		    { "mData": "price"},
+      		   /* { "mData": "stateid"},*/
+      		    { "mData": "scheme_name"},
+      		  /*  { "mData": "pricecategory"},*/
+      		    { "mData": "tier1"},
+      		    { "mData": "tier2"},
+      		    { "mData": "tier3"},
+      		   // { "mData": "procedurelabltypes"},
+      		   // { "mData": "hospitalincentives"},
+				],
+				
+      		}).buttons().container().appendTo('#priceTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#priceTable').DataTable( {	
+      		}).buttons().container().appendTo('#priceTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	        offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 

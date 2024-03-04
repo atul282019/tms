@@ -1,0 +1,43 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class VitalTestProcedureMappingRequest {
+	
+	private String specialitycode;
+	private String packagecode;
+	private String procedurecode;
+	private String vitaltestid;
+	private String mandatorystatus;
+	
+	public String getSpecialitycode() {
+		return specialitycode;
+	}
+	public void setSpecialitycode(String specialitycode) {
+		this.specialitycode = specialitycode;
+	}
+	public String getPackagecode() {
+		return packagecode;
+	}
+	public void setPackagecode(String packagecode) {
+		this.packagecode = packagecode;
+	}
+	public String getProcedurecode() {
+		return procedurecode;
+	}
+	public void setProcedurecode(String procedurecode) {
+		this.procedurecode = procedurecode;
+	}
+	public String getVitaltestid() {
+		return vitaltestid;
+	}
+	public void setVitaltestid(String vitaltestid) {
+		this.vitaltestid = vitaltestid;
+	}
+	public String getMandatorystatus() {
+		return mandatorystatus;
+	}
+	public void setMandatorystatus(String mandatorystatus) {
+		this.mandatorystatus = mandatorystatus;
+	}
+	
+	
+}

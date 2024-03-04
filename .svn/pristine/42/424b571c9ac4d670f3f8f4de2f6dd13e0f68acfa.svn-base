@@ -1,0 +1,36 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class PackageCategoryMasterRequest {
+
+	 
+    private String packagename;
+	
+    private String version;
+	
+    private Integer  status;
+
+
+	public String getPackagename() {
+		return packagename;
+	}
+
+	public void setPackagename(String packagename) {
+		this.packagename = packagename;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+}

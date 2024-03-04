@@ -1,0 +1,146 @@
+package com.gov.nha.bis.server.rest.service.Impl;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.Gson;
+import com.gov.nha.bis.server.config.token.NhaBisUserAuthenticateTokenService;
+import com.gov.nha.bis.server.properties.ApplicationConstantConfig;
+import com.gov.nha.bis.server.requestResponse.PatientRegisterRequest;
+import com.gov.nha.bis.server.requestResponse.ResponseGoldenAPI;
+import com.gov.nha.bis.server.rest.service.PatientRegistrationService;
+import com.gov.nha.bis.server.util.CommonUtility;
+
+@Service
+public class PatientRegistrationServiceImpl implements PatientRegistrationService{
+
+	@Autowired
+	public ApplicationConstantConfig applicationConstantConfig; 
+	
+	@Autowired
+	public NhaBisUserAuthenticateTokenService nhaBisUserAuthenticateTokenService;
+	
+	private static final Logger logger = LogManager.getLogger(PatientRegistrationServiceImpl.class);
+	
+	@Override
+	public String saveRegisterPatientData(ResponseGoldenAPI reg) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(gson.toJson(reg), applicationConstantConfig.SAVE_REGISTER_PATIENT_SERVICE);
+	}
+
+	public  String registerUser(PatientRegisterRequest userForm,ResponseGoldenAPI goldenapiresponse, String url) {
+		return getUserAuthenticationDetails(userForm.getToken(),nhaBisUserAuthenticateTokenService.getTokenOauth2_0(applicationConstantConfig.USER_REGISTER_AUTHENTICATION_Client_ID,
+				applicationConstantConfig.USER_REGISTER_AUTHENTICATION_Client_Secret,
+				applicationConstantConfig.USER_REGISTER_AUTHENTICATION_Token_URL)
+				, registerUserRequestJson(userForm,goldenapiresponse), url);
+	}
+	
+	public  String registerUserRequestJson(PatientRegisterRequest userForm,ResponseGoldenAPI goldenapiresponse){
+		JSONObject data= new JSONObject();
+		
+		data.put("memberName", goldenapiresponse.getMemberName());
+		data.put("memberId", goldenapiresponse.getMember_id());
+		data.put("yearOfBirth", goldenapiresponse.getYearOfBirth());
+		data.put("nhaid", "PA2WT3IP");
+		
+		data.put("vendorToken","");
+		data.put("gender", userForm.getGender());
+		data.put("memType", "SELF");
+		data.put("relationship", "");
+		data.put("dependantType", "");
+		data.put("aaaURNId", "");
+		data.put("hhdtype", "IT");
+		data.put("hhid", "ITIT000090055");
+		data.put("benType", "S");
+		data.put("scode", "22");
+		
+		//data.put("idType", "MOBILE");
+		data.put("idType",userForm.getId_name());
+		//data.put("idNo", "8989898989");
+		data.put("idNo", userForm.getId_number());
+		data.put("years", "27");
+		data.put("months", "7");
+		data.put("days", "8");
+		data.put("newBorn", "N");
+		data.put("regHospDt", "2021-01-18");
+		
+		JSONObject addressDtls= new JSONObject();
+		addressDtls.put("pinCode", "202398");
+		addressDtls.put("statelgdCode", "22");
+		//addressDtls.put("address", "77, , , MUZAFFARNAGAR, UTTAR PRADESH");
+		addressDtls.put("address", userForm.getAddress());
+		addressDtls.put("subdistrictlgdCode", "");
+		addressDtls.put("districtlgdCode", "643");
+		addressDtls.put("villageTown", "248549");
+		addressDtls.put("benstatelgdCode", "");
+		addressDtls.put("bendistrictlgdCode", "");
+		addressDtls.put("city", "");
+		addressDtls.put("commAddr", "");
+		addressDtls.put("commState", "");
+		addressDtls.put("commDist", "");
+		addressDtls.put("commMandal", "");
+		addressDtls.put("commMdlMcl", "");
+		addressDtls.put("commVillage", "");
+		addressDtls.put("commCity", "");
+		addressDtls.put("commPin", "");
+		addressDtls.put("mdlMcl", "");
+		addressDtls.put("commContact", "9069060046");
+		data.put("addressDtls", addressDtls);
+		
+		JSONObject patAuthDtls= new JSONObject();
+		patAuthDtls.put("authenticationType", "");
+		patAuthDtls.put("regBiom", "");
+		patAuthDtls.put("regAuthType", "FACE AUTH");
+		patAuthDtls.put("biomFailAttachPath", "");
+		patAuthDtls.put("biomFailReason", "");
+		patAuthDtls.put("authRespCode", "");
+		patAuthDtls.put("biomFailbase64Data", "");
+		data.put("patAuthDtls", patAuthDtls);
+		
+		logger.info(data.toString());
+		return data.toString();
+	}
+	
+	public   String getUserAuthenticationDetails(String loginToken, String sAccessToken,String requestJson,String url){
+		String returnStr=null;
+		RestTemplate restTemplate = new RestTemplate();
+		try{
+
+			logger.info("url===="+url);
+			HttpHeaders headers = new HttpHeaders();
+
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.setBearerAuth(sAccessToken);
+			headers.add("user-token", loginToken);
+			HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
+
+			returnStr = restTemplate.postForObject(url, entity, String.class);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			return returnStr;
+	}
+
+	@Override
+	public String getRegisteredPatientData() {
+			return CommonUtility.userRequest(null, applicationConstantConfig.GET_ALL_REGISTERED_PATIENT_DATA);
+		}
+
+	@Override
+	public String getTodayAndTotalPatient() {
+		// TODO Auto-generated method stub
+		return CommonUtility.userRequest(null, applicationConstantConfig.GET_PATIENT_DATA_COUNT_TOTAL_TODAY);
+	}
+	
+	
+	
+	
+}

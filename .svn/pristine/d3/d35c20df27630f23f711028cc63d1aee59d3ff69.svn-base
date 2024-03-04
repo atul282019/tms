@@ -1,0 +1,91 @@
+package com.gov.nha.bis.server.rest.service;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.Gson;
+import com.gov.nha.bis.server.config.token.NhaBisUserAuthenticateTokenService;
+import com.gov.nha.bis.server.model.UserForm;
+import com.gov.nha.bis.server.properties.ApplicationConstantConfig;
+import com.gov.nha.bis.server.util.CommonUtility;
+
+@Service
+public class UserAuthenticationService {
+
+	@Autowired
+	public NhaBisUserAuthenticateTokenService nhaBisUserAuthenticateTokenService;
+
+	@Autowired
+	public ApplicationConstantConfig applicationConstantConfig;
+
+	private static final Logger logger = LogManager.getLogger(UserAuthenticationService.class);
+
+	public  String getUserAuthorization(UserForm userForm, String url) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(null,gson.toJson(userForm), url);
+	}
+
+	public  String getGoldenAPI(String token,String userName,String mobileNo, String state, String url) {
+		String response="";
+		response=getGoldenAPI(getGoldenAPIRequestJson(token, userName,mobileNo,state), url);
+		return response;
+	}
+
+	public static String getGoldenAPIRequestJson(String token,String userName,String mobileNo,String state){
+
+		JSONObject data= new JSONObject();
+
+		data.put("hmac", "212");
+		data.put("token", "716558b4-fdba-4701-b06a-d211f4b60d7b");
+		JSONObject beneficiaryDetails= new JSONObject();
+
+		beneficiaryDetails.put("uuid", "PA2WT3IP");
+		beneficiaryDetails.put("hhId", "");
+		beneficiaryDetails.put("mobileNumber", "");
+		beneficiaryDetails.put("aadharToken", "");
+
+		JSONObject rationCardDetails= new JSONObject();
+
+		rationCardDetails.put("rationCard", "");
+		rationCardDetails.put("stateCode", "6");
+
+		beneficiaryDetails.put("rationCardDetails", rationCardDetails);
+
+		data.put("beneficiaryDetails", beneficiaryDetails);
+
+		logger.info(data.toString());
+		return data.toString();
+	}
+
+	public  String getGoldenAPI(String requestJson,String url){
+		String returnStr=null;
+		RestTemplate restTemplate = new RestTemplate();
+		try{
+
+			HttpHeaders headers = new HttpHeaders();
+
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
+
+			returnStr = restTemplate.postForObject(url, entity, String.class);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return returnStr;
+	}
+
+	public String getCurrentHosp(String loginid, String stateCode) {
+		return CommonUtility.userRequest(null,null, applicationConstantConfig.GET_CURRENT_USER_HOSPITAL_DATA+"?uid="+loginid+"&scode="+stateCode);
+	}
+
+}

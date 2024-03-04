@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block>
+
+<body class="home-bg hold-transition sidebar-mini layout-fixed" onload="getSpecialityMasterApproval()">
+	<div class="wrapper">
+		<!-- Navbar -->
+
+		<header th:insert="fragments/header.html :: header"> </header>
+
+		<!-- /.navbar -->
+
+		<!-- Main Sidebar Container -->
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+			<!-- Brand Logo -->
+			<a th:href="@{/registration}" class="brand-link">
+				<img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+			</a>
+
+			<!-- Sidebar -->
+
+			<header th:insert="fragments/sidenav.html :: sidevav"> </header>
+
+			<!-- /.sidebar -->
+		</aside>
+
+
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0">Speciality Approval</h1>
+						</div><!-- /.col -->
+						<!--<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active">Add Speciality</li>
+							</ol>
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.container-fluid -->
+			</div>
+			<section class="content">
+
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-info direct-chat">
+								<div class="card-header py-1 px-3">
+									<h3 class="card-title">Speciality Master Approval Details</h3>
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool" data-card-widget="collapse"
+											title="Collapse">
+											<i class="fas fa-minus"></i>
+										</button>
+										<button type="button" class="btn btn-tool" data-card-widget="remove"
+											title="Remove">
+											<i class="fas fa-times"></i>
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body" style="display: block;">
+									<div class="row pt-2 pb-1 px-2">
+										<div class="col-12">
+											<table id="ProcedureApprovalTable" class="table table-striped">
+												<thead>
+													<tr>
+														<th>Speciality Id</th>
+														<th>Speciality Code</th>
+														<th>Speciality Name</th>
+														<th>Speciality type</th>
+														<th>State</th>
+														<th>Approval Status</th>
+														<th>Approval By</th>
+														<th>Approval Date</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+	</div>
+
+	<!-- <div th:replace="fragments/footer.html :: footer"></div>-->
+
+	<!--    <div th:replace="fragments/footerlibs.html :: footerlibs"> </div>-->
+
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/adminlte.js"></script>
+
+	<!-- DataTables  & Plugins -->
+	<script src="js/datatable/jquery.dataTables.min.js"></script>
+	<script src="js/datatable/dataTables.bootstrap4.min.js"></script>
+	<script src="js/datatable/dataTables.responsive.min.js"></script>
+	<script src="js/datatable/responsive.bootstrap4.min.js"></script>
+	<script src="js/datatable/dataTables.buttons.min.js"></script>
+	<script src="js/datatable/buttons.bootstrap4.min.js"></script>
+	<script src="js/datatable/jszip.min.js"></script>
+	<script src="js/datatable/pdfmake.min.js"></script>
+	<script src="js/datatable/vfs_fonts.js"></script>
+	<script src="js/datatable/buttons.html5.min.js"></script>
+	<script src="js/datatable/buttons.print.min.js"></script>
+	<script src="js/datatable/buttons.colVis.min.js"></script>
+
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/select2.full.min.js"></script>
+	<script src="js/custom.js"></script>
+
+	<script src="tms-js/procedure-approval.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$('#myDIV20').addClass('active');
+			$('#myDIV21').removeClass('active');
+		});
+	</script>
+
+	<div class="modal fade" id="modal-sm">
+		<div class="modal-dialog modal-sm" style="transform: translate(0, 0);">
+			<div class="modal-content">
+				<div class="modal-body">
+					<p>Are you sure you want to Approve. </p>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+					<input id="deleteid" type="hidden">
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="ApproveSpecialityDialog()">Yes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

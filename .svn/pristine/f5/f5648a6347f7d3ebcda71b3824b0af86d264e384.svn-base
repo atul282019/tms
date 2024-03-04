@@ -1,0 +1,71 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class StratificationMasterRequest {
+
+	private String stratificationdetail;
+    private String stratificationoptions;
+    private String stratification_code;
+    private String stratification_criteria;
+	private String price;
+	private String versionid;
+    private String schemeid;
+    private String statecode;
+    private String remarks;
+    
+    public String getStratificationdetail() {
+		return stratificationdetail;
+	}
+	public void setStratificationdetail(String stratificationdetail) {
+		this.stratificationdetail = stratificationdetail;
+	}
+	public String getStratificationoptions() {
+		return stratificationoptions;
+	}
+	public void setStratificationoptions(String stratificationoptions) {
+		this.stratificationoptions = stratificationoptions;
+	}
+	public String getStratification_code() {
+		return stratification_code;
+	}
+	public void setStratification_code(String stratification_code) {
+		this.stratification_code = stratification_code;
+	}
+	public String getStratification_criteria() {
+		return stratification_criteria;
+	}
+	public void setStratification_criteria(String stratification_criteria) {
+		this.stratification_criteria = stratification_criteria;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getVersionid() {
+		return versionid;
+	}
+	public void setVersionid(String versionid) {
+		this.versionid = versionid;
+	}
+	public String getSchemeid() {
+		return schemeid;
+	}
+	public void setSchemeid(String schemeid) {
+		this.schemeid = schemeid;
+	}
+	public String getStatecode() {
+		return statecode;
+	}
+	public void setStatecode(String statecode) {
+		this.statecode = statecode;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+		
+
+}

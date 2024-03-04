@@ -1,0 +1,90 @@
+package com.gov.nha.bis.server.requestResponse;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class VitalTestMasterRequest {
+	
+	private String height;
+	private String weight;
+	private String tempreture;
+	private String alergies;
+	public String getAlergies() {
+		return alergies;
+	}
+	public void setAlergies(String alergies) {
+		this.alergies = alergies;
+	}
+	private String bloodgroup;
+	private MultipartFile ecofile;
+	private MultipartFile ecgfile;
+	private MultipartFile covidfile;
+	
+	private String eco;
+	private String ecg;
+	private String covid;
+	
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+	public String getTempreture() {
+		return tempreture;
+	}
+	public void setTempreture(String tempreture) {
+		this.tempreture = tempreture;
+	}
+	
+	public String getBloodgroup() {
+		return bloodgroup;
+	}
+	public void setBloodgroup(String bloodgroup) {
+		this.bloodgroup = bloodgroup;
+	}
+	public MultipartFile getEcofile() {
+		return ecofile;
+	}
+	public void setEcofile(MultipartFile ecofile) {
+		this.ecofile = ecofile;
+	}
+	public MultipartFile getEcgfile() {
+		return ecgfile;
+	}
+	public void setEcgfile(MultipartFile ecgfile) {
+		this.ecgfile = ecgfile;
+	}
+	public MultipartFile getCovidfile() {
+		return covidfile;
+	}
+	public void setCovidfile(MultipartFile covidfile) {
+		this.covidfile = covidfile;
+	}
+	public String getEco() {
+		return eco;
+	}
+	public void setEco(String eco) {
+		this.eco = eco;
+	}
+	public String getEcg() {
+		return ecg;
+	}
+	public void setEcg(String ecg) {
+		this.ecg = ecg;
+	}
+	public String getCovid() {
+		return covid;
+	}
+	public void setCovid(String covid) {
+		this.covid = covid;
+	}
+	
+	
+	
+}

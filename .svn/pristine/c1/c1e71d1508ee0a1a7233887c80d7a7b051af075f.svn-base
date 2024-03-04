@@ -1,0 +1,64 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class DocumentMasterRequest {
+
+	    private Integer schemeid;
+	    private Integer statecode;
+	    private String specialitycode;
+	    private String packagecode;
+	    private String procedurecode;
+	    private String claimprocessingdoc;
+	    private String preauthdoc;
+	    private String version;
+	    
+		public Integer getSchemeid() {
+			return schemeid;
+		}
+		public void setSchemeid(Integer schemeid) {
+			this.schemeid = schemeid;
+		}
+		public Integer getStatecode() {
+			return statecode;
+		}
+		public void setStatecode(Integer statecode) {
+			this.statecode = statecode;
+		}
+		public String getSpecialitycode() {
+			return specialitycode;
+		}
+		public void setSpecialitycode(String specialitycode) {
+			this.specialitycode = specialitycode;
+		}
+		public String getPackagecode() {
+			return packagecode;
+		}
+		public void setPackagecode(String packagecode) {
+			this.packagecode = packagecode;
+		}
+		public String getProcedurecode() {
+			return procedurecode;
+		}
+		public void setProcedurecode(String procedurecode) {
+			this.procedurecode = procedurecode;
+		}
+		public String getClaimprocessingdoc() {
+			return claimprocessingdoc;
+		}
+		public void setClaimprocessingdoc(String claimprocessingdoc) {
+			this.claimprocessingdoc = claimprocessingdoc;
+		}
+		public String getPreauthdoc() {
+			return preauthdoc;
+		}
+		public void setPreauthdoc(String preauthdoc) {
+			this.preauthdoc = preauthdoc;
+		}
+		public String getVersion() {
+			return version;
+		}
+		public void setVersion(String version) {
+			this.version = version;
+		}
+	    
+	
+}

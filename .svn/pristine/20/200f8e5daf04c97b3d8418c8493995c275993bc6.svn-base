@@ -1,0 +1,146 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class TreatmentProtocol {
+	private String txnid;
+	private String speciality;
+	private String packageid;
+	private String ichiCode;
+	private String procedureid;
+	private String investigationActive;
+	private String presentIllnesHistory;
+	
+	private String investigationActivetxt;
+	private String specialitytxt;
+	private String packageidtxt;
+	private String ichiCodetxt;
+	private String procedureidtxt;
+	
+	
+	private String non_nabh_price;
+	private String nabh_price;
+	private String implantstatus;
+	private String stratificationstatus;
+	private String erupistatus;
+	
+	
+	private String tempId;
+	
+	public String getTempId() {
+		return tempId;
+	}
+	public void setTempId(String tempId) {
+		this.tempId = tempId;
+	}
+	public String getTxnid() {
+		return txnid;
+	}
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
+	}
+	public String getSpeciality() {
+		return speciality;
+	}
+	public void setSpeciality(String speciality) {
+		this.speciality = speciality;
+	}
+	public String getPackageid() {
+		return packageid;
+	}
+	public void setPackageid(String packageid) {
+		this.packageid = packageid;
+	}
+	public String getProcedureid() {
+		return procedureid;
+	}
+	public void setProcedureid(String procedureid) {
+		this.procedureid = procedureid;
+	}
+	public String getInvestigationActive() {
+		return investigationActive;
+	}
+	public void setInvestigationActive(String investigationActive) {
+		this.investigationActive = investigationActive;
+	}
+	public String getPresentIllnesHistory() {
+		return presentIllnesHistory;
+	}
+	public void setPresentIllnesHistory(String presentIllnesHistory) {
+		this.presentIllnesHistory = presentIllnesHistory;
+	}
+	@Override
+	public String toString() {
+		return "TreatmentProtocol [txnid=" + txnid + ", speciality=" + speciality + ", packageid=" + packageid
+				+ ", procedureid=" + procedureid + ", investigationActive=" + investigationActive + ", getTxnid()="
+				+ getTxnid() + ", getSpeciality()=" + getSpeciality() + ", getPackageid()=" + getPackageid()
+				+ ", getProcedureid()=" + getProcedureid() + ", getInvestigationActive()=" + getInvestigationActive()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+	public String getIchiCode() {
+		return ichiCode;
+	}
+	public void setIchiCode(String ichiCode) {
+		this.ichiCode = ichiCode;
+	}
+	public String getSpecialitytxt() {
+		return specialitytxt;
+	}
+	public void setSpecialitytxt(String specialitytxt) {
+		this.specialitytxt = specialitytxt;
+	}
+	public String getPackageidtxt() {
+		return packageidtxt;
+	}
+	public void setPackageidtxt(String packageidtxt) {
+		this.packageidtxt = packageidtxt;
+	}
+	public String getIchiCodetxt() {
+		return ichiCodetxt;
+	}
+	public void setIchiCodetxt(String ichiCodetxt) {
+		this.ichiCodetxt = ichiCodetxt;
+	}
+	public String getProcedureidtxt() {
+		return procedureidtxt;
+	}
+	public void setProcedureidtxt(String procedureidtxt) {
+		this.procedureidtxt = procedureidtxt;
+	}
+	public String getInvestigationActivetxt() {
+		return investigationActivetxt;
+	}
+	public void setInvestigationActivetxt(String investigationActivetxt) {
+		this.investigationActivetxt = investigationActivetxt;
+	}
+	public String getNon_nabh_price() {
+		return non_nabh_price;
+	}
+	public void setNon_nabh_price(String non_nabh_price) {
+		this.non_nabh_price = non_nabh_price;
+	}
+	public String getNabh_price() {
+		return nabh_price;
+	}
+	public void setNabh_price(String nabh_price) {
+		this.nabh_price = nabh_price;
+	}
+	public String getImplantstatus() {
+		return implantstatus;
+	}
+	public void setImplantstatus(String implantstatus) {
+		this.implantstatus = implantstatus;
+	}
+	public String getStratificationstatus() {
+		return stratificationstatus;
+	}
+	public void setStratificationstatus(String stratificationstatus) {
+		this.stratificationstatus = stratificationstatus;
+	}
+	public String getErupistatus() {
+		return erupistatus;
+	}
+	public void setErupistatus(String erupistatus) {
+		this.erupistatus = erupistatus;
+	}
+	
+}

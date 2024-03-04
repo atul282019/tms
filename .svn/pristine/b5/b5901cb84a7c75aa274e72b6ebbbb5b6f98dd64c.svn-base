@@ -1,0 +1,57 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class VitalStatsProcedureMappingRequest {
+	
+
+	private Long[]  vitalid;
+	//private String specialitycode;
+	//private String packagecode;
+	private String procedurecode;
+	//private String mandatorystatus;
+	//private Integer status;
+	
+	public Long[]  getVitalid() {
+		return vitalid;
+	}
+	public void setVitalid(Long[]  vitalid) {
+		this.vitalid = vitalid;
+	}
+//	public String getSpecialitycode() {
+//		return specialitycode;
+//	}
+//	public void setSpecialitycode(String specialitycode) {
+//		this.specialitycode = specialitycode;
+//	}
+//	public String getPackagecode() {
+//		return packagecode;
+//	}
+//	public void setPackagecode(String packagecode) {
+//		this.packagecode = packagecode;
+//	}
+	public String getProcedurecode() {
+		return procedurecode;
+	}
+	public void setProcedurecode(String procedurecode) {
+		this.procedurecode = procedurecode;
+	}
+//	public String getMandatorystatus() {
+//		return mandatorystatus;
+//	}
+//	public void setMandatorystatus(String mandatorystatus) {
+//		this.mandatorystatus = mandatorystatus;
+//	}
+//	public Integer getStatus() {
+//		return status;
+//	}
+//	public void setStatus(Integer status) {
+//		this.status = status;
+//	}
+//	@Override
+//	public String toString() {
+//		return "VitalStatsProcedureMappingRequest [vitalid=" + vitalid + ", specialitycode=" + specialitycode
+//				+ ", packagecode=" + packagecode + ", procedurecode=" + procedurecode + ", mandatorystatus="
+//				+ mandatorystatus + ", status=" + status + "]";
+//	}
+	
+	
+}

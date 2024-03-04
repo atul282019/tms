@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+
+<body class="home-bg hold-transition sidebar-mini layout-fixed" onload="getRegisteredPatientList(),getIdMaster(), getPatientCountTodatAndTotal(),getSchemeMaster()" >
+  <div class="wrapper">
+  
+    <!-- Navbar -->
+
+		<header th:insert="fragments/header.html :: header"> </header>
+   
+    <!-- /.navbar -->
+
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a th:href="@{/registration}" class="brand-link">
+        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+      </a>
+
+      <!-- Sidebar -->
+     
+      <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+     
+      <!-- /.sidebar -->
+    </aside>
+
+
+     <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Patient Registration</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item">Registration</li>
+                <li class="breadcrumb-item active">Patient Registration</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <div class="left-inner">
+                    <h4 class="mb-0">Today</h4>
+                    <p class="mb-0">Register</p>
+                  </div>
+                  <div class="right-inner">
+                    <div class="counter">
+                     <span id="todayRegisteredPatient"> </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <div class="left-inner">
+                    <h4 class="mb-0">Total</h4>
+                    <p class="mb-0">Register</p>
+                  </div>
+                  <div class="right-inner">
+                    <div class="counter">
+                      <span id="totalRegisteredPatient"> </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Add New Patient</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                  
+                 <div class="col-12 col-md-4">
+					<div class="form-group custom-form">
+						<label for="">Current Hospital</label>
+							<select class="form-control masterbox" id="sesshosp" name="sesshosp" onchange="getUserHospital();" style="min-width: 170px;">
+						</select>
+					</div>
+				 </div>
+                  
+                  <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Select Your Scheme</label>
+                        <select class="form-control masterbox" id="schemename" name="schemename">
+                          <option value="" >-- Select --</option>       
+                                                     
+                        </select>
+                         <div class="error" id="schemenameError" ></div> 
+                      </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Select Your ID Type</label>
+                        <select class="form-control masterbox" id="id_name" name="id_name" onchange="onSchemeChange()">
+                         <option value="" >-- Select --</option>
+                                
+                        </select>
+                        <div class="error" id="id_nameError" ></div> 
+                      </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form" id="aadhaarDiv" style="display: none;">
+                        <label for="">AAdhaar No.</label>
+                        <input type="text" class="form-control" maxlength="12"  placeholder="ID No." id="id_number" 
+                        name="id_number" onkeypress="return isNumberKey(event)" onchange="validateAadhar()" >
+                        <div class="error" id="aadhaarError" ></div> 
+                      </div>
+                      
+                       <div class="form-group custom-form" id="abhaDiv" style="display: none;">
+                        <label for="">ABHA No.</label>
+                        <input type="text" class="form-control" maxlength="14" onkeypress="return isNumberKey(event)"  placeholder="ABHA No." id="abhaNumber" 
+                        name="abhaNumber"  >
+                        <div class="error" id="abhaNumberError" ></div> 
+                      </div>
+                      
+                       <div class="form-group custom-form" id="pmjayDiv" style="display: none;">
+                        <label for="">PMJAY No.</label>
+                        <input type="text" class="form-control" maxlength="8"  placeholder="PMJAY Id." id="pmjayId" 
+                        name="pmjayId"  >
+                        <div class="error" id="pmjayIdError" ></div> 
+                      </div>
+                      
+                       <div class="form-group custom-form" id="mobileDiv" style="display: none;">
+                        <label for="">Mobile No.</label>
+                        <input type="text" class="form-control" onkeypress="return isNumberKey(event)" maxlength="10"  placeholder="Mobile No." id="mobileNumber" 
+                        name="mobileNumber"  >
+                        <div class="error" id="mobileNumberError" ></div> 
+                      </div>
+                      
+                    </div>
+                    
+                   
+                  </div>     
+                  <div class="row py-2 px-3">
+                    <h6><b class="sub-head">Auth Mode</b><hr class="mt-1 mb-1"></h6>
+                    <div class="col-12 col-sm-6 col-md-5 col-lg-5">
+                      <div class="custom-form-group form-group">
+                          <div class="nav mb-1 bg-white custom-radio-otp justify-content-between radio-group" id="pills-tab" role="tablist" style="top:0;">                                                                          
+                         
+                            <div class="form-radio" role="presentation" id="finger-home-tab" data-bs-toggle="pill" data-bs-target="#finger-home" type="button" aria-controls="finger-home" aria-selected="false">
+                              <input type="radio" id="finger" name="fav_language" onclick="onAuthOpenAction()" ><label for="finger" >Finger</label>
+                            </div>
+                            <div class="form-radio" role="presentation" id="iris-home-tab" data-bs-toggle="pill" data-bs-target="#iris-home" type="button" aria-controls="iris-home" aria-selected="false">
+                              <input type="radio" id="iris" name="fav_language" onclick="onAuthOpenAction()" ><label for="iris" >IRIS</label>
+                            </div>
+                            <div class="form-radio" role="presentation" id="face-home-tab" data-bs-toggle="pill" data-bs-target="#face-home" type="button" aria-controls="face-home" aria-selected="false">
+                              <input type="radio" id="face" name="fav_language" onclick="onAuthOpenAction()" ><label for="face">Face</label>
+                            
+                        </div>
+                          </div>
+                          <div class="tab-content mt-1" id="pills-tabContent">                                    
+                        
+                            <div class="tab-pane fade" id="finger-home" role="tabpanel" aria-labelledby="finger-home-tab">
+                              <h6>Scan Your Finger</h6>
+                              <div id="scanyourFingerwrap" class="row">
+                                <div class="col-12 col-md-12">
+                                  <button type="button" class="btn custom-btn-sm btn-dark" onclick="captureBioAuth('F')" >Scan
+                                   Your Finger</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="tab-pane fade" id="iris-home" role="tabpanel" aria-labelledby="iris-home-tab">
+                              <h6>Capture Your Biometric</button>
+                              <div id="captureyourBiometricwrap" class="row">
+                                <div class="col-12 col-md-12">
+                                   <button type="button" class="btn custom-btn-sm btn-dark" onclick="captureBioAuth('I')">Scan
+                                     Your Iris</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="tab-pane fade" id="face-home" role="tabpanel" aria-labelledby="face-home-tab">
+                              <h6>Face eKYC</h6>
+                             
+                               <div id="faceprints">
+                                      
+                                      <img id="face_id" name="face_id" alt=""
+                                        src="#" width="100" height="100" style="display:none">
+                                            <button class="btn custom-btn-sm btn-dark" id="faceBtn"
+                                            type="button"  onclick="captureFace()">Scan Your Face </button>
+                                          <span id="faceIdCapture" style="display:none"> 
+                                          	<a href="#"><img src="images/checked.jpg" alt="" width="50" height="50" /></a>
+                                          </span>
+	                                    </div>
+                              
+		                              <div id="scanyourFacewrap" class="row" style="display: none;">
+		                                <div class="col-12 col-md-12">
+		                             
+		                                </div>
+		                              </div>
+                            </div>
+                            
+                          </div>
+                               </div>
+                                 
+               
+                    </div>
+                    <div class="col-12 col-sm-2 col-md-2 col-lg-2 text-center mb-2"> 
+                    
+                     <input type="hidden" path="pidData" id="pidData" />
+                     <input type="hidden" id="faceSeccess">
+                     <input type="hidden" id="authType" name="authType" value="Face Auth" />
+                     <input type="hidden" id="pht" name="pht" />
+                     <input type="hidden" id="loginId" name="loginId"  th:value="${session.loginId}"/>
+                     <input type="hidden" id="roleName" name="roleName"  th:value="${session.roleName}"/>
+                     <input type="hidden" id="hospitalName" name="hospitalName"  th:value="${session.hospitalName}"/>
+                     <input type="hidden" id="mobileNo" name="mobileNo"  th:value="${session.mobileNo}"/>
+                     <input type="hidden" id="stateCode" name="stateCode"  value="22"/>
+                     <input type="hidden" id="token" name="token"  th:value="${session.token}"/>
+                     
+                     <input type="hidden" id="post_s" name="kycpostoffice" />
+                     <input type="hidden" id="state_name_s" name="kycStatename" />
+                     <input type="hidden" id="district_name_s" name="kycDistrictName" />
+                     <input type="hidden" id="status" name="kycStatus" />
+                    <input type="hidden" id="uidtoken" name="kycUidtoken" />
+                     
+                      <label for="" class="blank"></label>                 
+                      
+                   
+                    </div>
+                  </div>  
+                    
+                    <!-- success error div -->
+		             <div id="succmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+			        	<span id="succmsg"></span>   
+			        </div>
+			        
+			        <div id="failmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+			        	<span id="failmsg"></span>
+			        </div>
+                      
+                      <!-- success error div -->
+                  
+                  <div class="row py-2 px-3" style="display: none;" id="ekyDetail">
+                    <div class="col-12">
+                      <div class="card card-info direct-chat preauth-tabs">
+                        <div class="card-header py-1 px-3">
+                          <h3 class="card-title">eKYC Details </h3>
+                        </div>
+                        <div class="card-body">
+                          <div class="row pt-2 pb-1 px-2">
+                            <div class="col-12 col-sm-4 col-md-2 col-lg-2">
+                              <img id="phtId" src="images/user-profile-l.jpg" class="img-thumbnail rounded mx-auto d-block" style="max-height: 120px;" alt="">
+                            </div>
+                            <div class="col-12 col-sm-8 col-md-10 col-lg-10">
+                              <div class="row">
+                                  <div class="col-12 col-sm-4 col-md-4 preauth-data">
+                                    <span>Name </span>
+                                    <strong id="kycName"></strong>
+                                  </div>
+                                  <div class="col-12 col-sm-4 col-md-4 preauth-data">
+                                    <span>Gender </span>
+                                    <strong id="kycGender"></strong>
+                                  </div>
+                                  <div class="col-12 col-sm-4 col-md-4 preauth-data">
+                                    <span>Guardian's Name </span>
+                                    <strong id="kycFname"></strong>
+                                  </div>
+                                  <div class="col-12 col-sm-4 col-md-4 preauth-data">
+                                    <span>DOB </span>
+                                    <strong id="kycDob">05-07-1980</strong>
+                                  </div>
+                                  <div class="col-12 col-sm-8 col-md-8 preauth-data">
+                                    <span>Address</span>
+                                    <strong id="kycAdr1" ></strong>
+                                  </div>
+                              </div> 
+                            </div>                                                   
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                  
+                  <div class="row py-2 px-3">
+                  	<div class="col-12">
+                  		<button type="submit" id="registerbtn" class="btn btn-primary custom-btn" onclick="registerPatient()" >Register</button>
+                  	</div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Patient Details</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12">
+                      <table id="example1" class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th style="width: 50px;">Sr. No.</th>
+                          <th>TxnId</th>
+                          <th>ID Name</th>
+                          <th>ID No.</th>
+                          <th>Scheme Name</th>
+                          <th>Auth Mode</th>          
+                           <th></th>                          
+                        </tr>
+                        </thead>
+                        <tbody>
+                                      
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+				
+				  <div id="overlay" class="overlay_full" onclick="offScan()">
+                      <div class="fancy-spinner">
+			                <div class="ring"></div>
+			                <div class="ring"></div>
+			                <div class="dot"></div>
+			                <span>Scan Device...</span>
+			                </div>
+                        
+                      </div>
+                      
+                       <div id="register" class="overlay_full" onclick="offRegister()">
+	                      <div class="fancy-spinner">
+				                <div class="ring"></div>
+				                <div class="ring"></div>
+				                <div class="dot"></div>
+				                <span>Register</span>
+				                </div>
+                        
+                      </div>
+                      
+                       <div id="scan" class="overlay_full" onclick="offScan()">
+	                      <div class="fancy-spinner">
+				                <div class="ring"></div>
+				                <div class="ring"></div>
+				                <div class="dot"></div>
+				                <span>Scan</span>
+				                </div>
+                        
+                      </div>
+                
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+  </div>
+    <!-- <div th:replace="fragments/footer.html :: footer"></div>-->
+      
+      <div th:replace="fragments/footerlibs.html :: footerlibs"> </div>
+      <script src="tms-js/face-auth.js" ></script>   
+      <script src="tms-js/biometricAuth.js" ></script>   
+      <script src="tms-js/Verhoeff.js" ></script>   
+      <script src="tms-js/patient-registration.js" ></script>   
+      <script>
+		$( document ).ready(function() {
+			getUserHospital();	
+		});
+	  </script>
+   <script>
+   
+   		function onDeviceScan() {
+		  document.getElementById("scan").style.display = "flex";
+		}
+		
+		function offonDeviceScan() {
+		  document.getElementById("scan").style.display = "none";
+		}
+
+   
+		function onScan() {
+		  document.getElementById("overlay").style.display = "flex";
+		}
+		
+		function offScan() {
+		  document.getElementById("overlay").style.display = "none";
+		}
+		
+			function onRegister() {
+		  document.getElementById("register").style.display = "flex";
+		}
+		
+		function offRegister() {
+		  document.getElementById("register").style.display = "none";
+		}
+		
+		$( document ).ready(function() {
+			$(':input[type="submit"]').prop('disabled', true);
+		 
+		});
+		
+
+ 		
+  function onAuthOpenAction(){
+    
+   
+  if (document.getElementById("finger").checked) {
+      portscanView();
+   }
+  if (document.getElementById("iris").checked) {
+       portscanView();
+   
+   }
+  if (document.getElementById("face").checked) {
+      
+   
+   }
+  }
+ 	
+  function portscanView() {
+      onDeviceScan();
+      setTimeout(function () { portscan(); }, 5000);
+
+   }	
+   </script>
+  
+   
+   
+   
+</body>
+
+</html>

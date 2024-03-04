@@ -1,0 +1,44 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class ImplantIDMasterRequest {
+	
+
+	private String implantname;
+	private String price;
+	private Integer schemeid;
+	private Integer statecode;
+
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getImplantname() {
+		return implantname;
+	}
+
+	public void setImplantname(String implantname) {
+		this.implantname = implantname;
+	}
+
+	public Integer getSchemeid() {
+		return schemeid;
+	}
+
+	public void setSchemeid(Integer schemeid) {
+		this.schemeid = schemeid;
+	}
+
+	public Integer getStatecode() {
+		return statecode;
+	}
+
+	public void setStatecode(Integer statecode) {
+		this.statecode = statecode;
+	}
+	
+}

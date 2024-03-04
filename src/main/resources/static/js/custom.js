@@ -1,0 +1,274 @@
+/* Diagnosis Table Add Row click on Plus  */
+function addRows(){ 
+	var table = document.getElementById('diagnosis');
+	var rowCount = table.rows.length;
+	var cellCount = table.rows[0].cells.length; 
+	var row = table.insertRow(rowCount);
+	for(var i =0; i <= cellCount; i++){
+		var cell = 'cell'+i;
+		cell = row.insertCell(i);
+		var copycel = document.getElementById('col'+i).innerHTML;
+		cell.innerHTML=copycel;
+		if(i == 2){ 
+			var radioinput = document.getElementById('col3').getElementsByTagName('input'); 
+			for(var j = 0; j <= radioinput.length; j++) { 
+				if(radioinput[j].type == 'radio') { 
+					var rownum = rowCount;
+					radioinput[j].name = 'gender['+rownum+']';
+				}
+			}
+		}
+	}
+}
+function deleteRows(){
+	var table = document.getElementById('diagnosis');
+	var rowCount = table.rows.length;
+	if(rowCount > '2'){
+		var row = table.deleteRow(rowCount-1);
+		rowCount--;
+	}
+	else{
+		alert('There should be atleast one row');
+	}
+}
+/* Diagnosis Table Add Row click on Plus  */
+
+
+
+/* Treatment Protocol Table Add Row click on Plus  */
+function addRows1(){ 
+	var table = document.getElementById('treatmentwrap');
+	var rowCount = table.rows.length;
+	var cellCount = table.rows[0].cells.length; 
+	var row = table.insertRow(rowCount);
+	for(var i =0; i <= cellCount; i++){
+		var cell = 'cell'+i;
+		cell = row.insertCell(i);
+		var copycel = document.getElementById('coll'+i).innerHTML;
+		cell.innerHTML=copycel;
+		if(i == 4){ 
+			var radioinput = document.getElementById('coll4').getElementsByTagName('input'); 
+			for(var j = 0; j <= radioinput.length; j++) { 
+				if(radioinput[j].type == 'radio') { 
+					var rownum = rowCount;
+					radioinput[j].name = 'gender['+rownum+']';
+				}
+			}
+		}
+	}
+}
+function deleteRows1(){
+	var table = document.getElementById('treatmentwrap');
+	var rowCount = table.rows.length;
+	if(rowCount > '2'){
+		var row = table.deleteRow(rowCount-1);
+		rowCount--;
+	}
+	else{
+		alert('There should be atleast one row');
+	}
+}
+/* Treatment Protocol Table Add Row click on Plus  */
+
+
+
+
+
+
+
+
+
+//Initialize Select2 Elements
+$('.select2').select2()
+
+//Initialize Select2 Elements
+$('.select2bs4').select2({
+  theme: 'bootstrap4'
+})
+
+
+
+/* JS For tabs button next prev */
+    $('.btnNext').click(function(){
+        $('.nav > .active').next('li').find('a').trigger('click');
+    });
+  
+    $('.btnPrevious').click(function(){
+        $('.nav > .active').prev('li').find('a').trigger('click');
+    });
+/* JS For tabs button next prev */
+
+
+/* JS For Daily Vital Chart tabs button next prev */
+$('.btnNext1').click(function(){
+  $('.nav1 > .active').next('li').find('a').trigger('click');
+});
+
+$('.btnPrevious1').click(function(){
+  $('.nav1 > .active').prev('li').find('a').trigger('click');
+});
+/* JS For Daily Vital Chart tabs button next prev */
+
+/* JS For Attachments Chart tabs button next prev */
+$('.btnNext001').click(function(){
+  $('.nav001 > .active').next('li').find('a').trigger('click');
+});
+
+$('.btnPrevious001').click(function(){
+  $('.nav001 > .active').prev('li').find('a').trigger('click');
+});
+/* JS For Attachments Chart tabs button next prev */
+
+
+$(".answer").hide();
+$(".coupon_question").click(function() {
+    if($(this).is(":checked")) {
+        $(".answer").show();
+    } else {
+        $(".answer").hide();
+    }
+});
+
+
+
+$(".allergic-wrap").hide();
+$(".allergictab").click(function() {
+    if($(this).is(":checked")) {
+        $(".allergic-wrap").show();
+    } else {
+        $(".allergic-wrap").hide();
+    }
+});
+$(".allergictabno").click(function() {
+  if($(this).is(":checked")) {
+      $(".allergic-wrap").hide();
+  } else {
+      $(".allergic-wrap").show();
+  }
+});
+
+
+
+
+$(".habits-wrap").hide();
+$(".habitswraptab").click(function() {
+    if($(this).is(":checked")) {
+        $(".habits-wrap").show();
+    } else {
+        $(".habits-wrap").hide();
+    }
+});
+$(".habitswraptabno").click(function() {
+  if($(this).is(":checked")) {
+      $(".habits-wrap").hide();
+  } else {
+      $(".habits-wrap").show();
+  }
+});
+
+
+$(".medico-wrap").hide();
+$(".medicowraptabno").click(function() {
+    if($(this).is(":checked")) {
+        $(".medico-wrap").hide();
+    } else {
+        $(".medico-wrap").show();
+    }
+});
+$(".medicowraptab").click(function() {
+  if($(this).is(":checked")) {
+      $(".medico-wrap").show();
+  } else {
+      $(".medico-wrap").hide();
+  }
+});
+
+
+
+
+
+
+
+/* JS For upload documents table */
+	
+var tbody = $('#addTableRow2').children('tbody');
+	
+	var table = tbody.length ? tbody : $('#addTableRow2');   
+    $(document).on("click", "#addTableBtn2", function() {
+      $('.saveTable2').attr('disabled', 'disabled');
+      //Add row
+      $("#addTableRow2").append('<tr><td><select class="form-control form-control-sm"><option>-- Select --</option><option>Aadhaar Card</option><option>ABHA Card</option></select></td><td><input type="file" class="custom-btn-sm btn-secondary"></td><td class="text-right"><button type="button" class="btn btn-sm RemoveTable2" title="Remove"><i class="fas fa-trash text-primary"></i></button><button type="button" class="btn btn-sm mr-1" id="addTableBtn2"><i class="fas fa-plus text-primary"></i></button></td></tr>');
+    });
+    $(document).on("click", ".RemoveTable2", function() {
+      $(this).parent().parent().remove();
+    })
+
+
+    $('.saveTable2').attr('disabled', 'disabled');
+    $('#addTableRow2 input').on('input', function () {
+      $('.saveTable2').attr('disabled', 'disabled');
+      var empty = false;
+      $(this).closest("tr").find('input, select').each(function () {
+        if ($(this).val() == '') {
+          empty = true;
+        }
+      });
+  
+      if (empty) {
+          $(this).parent().children('.saveTable2').attr('disabled', 'disabled');
+      } else {
+          $(this).parent().children('.saveTable2').removeAttr('disabled');
+      }
+    });
+
+    $(document).on("click", ".saveTable2", function() {
+      $(this).hide();
+      $(this).parent().children(".editTable2").show();
+      $(this).parent().parent().addClass("readonlyTable");
+      $("#addTableRow2 .form-control").attr("readonly", true);
+      var readonly_select = $('#addTableRow2 select');
+      $(readonly_select).attr('readonly', true).attr('data-original-value', $(readonly_select).val()).on('change', function(i) {
+        $(i.target).val($(this).attr('data-original-value'));
+      });
+    });
+	
+/* JS For upload documents table */
+
+/* JS For upload documents Datatable */
+$(function () {
+  $(".table-document").DataTable({
+    "responsive": true, 
+    "lengthChange": false, 
+    "autoWidth": false, 
+    "searching": false,    
+    "paging": false,
+    "ordering": false,      
+    "info": false,
+  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');        
+});
+
+/* JS For upload documents Datatable */
+
+/* JS For Get OTP */
+$("#getOtp").on('click', function() {
+  $("#getotpwrap").fadeIn(); 
+});
+
+$("#scanyourFinger").on('click', function() {
+  $("#scanyourFingerwrap").fadeIn(); 
+});
+
+$("#captureyourBiometric").on('click', function() {
+  $("#captureyourBiometricwrap").fadeIn(); 
+});
+
+$("#scanyourFace").on('click', function() {
+  $("#scanyourFacewrap").fadeIn(); 
+});
+/* JS For Get OTP */
+
+
+// Initialize select2
+$(document).ready(function(){           
+  $("#selUser").select2();           
+});

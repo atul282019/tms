@@ -1,0 +1,85 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class PackageMasterRequest {
+
+	private Integer state_code;
+	private Integer schemeid;
+	private String spacilitycode;
+	private String packagecode;
+	private String packagename;
+	private String  nabh_price;
+	private String  non_nabh_price;
+	private String  version;
+	private String ichi_procedure_icdc_code;
+	
+	public Integer getState_code() {
+		return state_code;
+	}
+	public void setState_code(Integer state_code) {
+		this.state_code = state_code;
+	}
+	public Integer getSchemeid() {
+		return schemeid;
+	}
+	public void setSchemeid(Integer schemeid) {
+		this.schemeid = schemeid;
+	}
+	
+	public String getSpacilitycode() {
+		return spacilitycode;
+	}
+	public void setSpacilitycode(String spacilitycode) {
+		this.spacilitycode = spacilitycode;
+	}
+	public String getPackagecode() {
+		return packagecode;
+	}
+	public void setPackagecode(String packagecode) {
+		this.packagecode = packagecode;
+	}
+	public String getPackagename() {
+		return packagename;
+	}
+	public void setPackagename(String packagename) {
+		this.packagename = packagename;
+	}
+	public String getNabh_price() {
+		return nabh_price;
+	}
+	public void setNabh_price(String nabh_price) {
+		this.nabh_price = nabh_price;
+	}
+	public String getNon_nabh_price() {
+		return non_nabh_price;
+	}
+	public void setNon_nabh_price(String non_nabh_price) {
+		this.non_nabh_price = non_nabh_price;
+	}
+	public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	public String getIchi_procedure_icdc_code() {
+		return ichi_procedure_icdc_code;
+	}
+	public void setIchi_procedure_icdc_code(String ichi_procedure_icdc_code) {
+		this.ichi_procedure_icdc_code = ichi_procedure_icdc_code;
+	}
+	@Override
+	public String toString() {
+		return "PackageMasterRequest [state_code=" + state_code + ", schemeid=" + schemeid + ", spacilitycode="
+				+ spacilitycode + ", packagecode=" + packagecode + ", packagename=" + packagename + ", nabh_price="
+				+ nabh_price + ", non_nabh_price=" + non_nabh_price + ", version=" + version
+				+ ", ichi_procedure_icdc_code=" + ichi_procedure_icdc_code + ", getState_code()=" + getState_code()
+				+ ", getSchemeid()=" + getSchemeid() + ", getSpacilitycode()=" + getSpacilitycode()
+				+ ", getPackagecode()=" + getPackagecode() + ", getPackagename()=" + getPackagename()
+				+ ", getNabh_price()=" + getNabh_price() + ", getNon_nabh_price()=" + getNon_nabh_price()
+				+ ", getVersion()=" + getVersion() + ", getIchi_procedure_icdc_code()=" + getIchi_procedure_icdc_code()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+	
+	
+}

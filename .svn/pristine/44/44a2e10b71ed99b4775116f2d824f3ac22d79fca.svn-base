@@ -1,0 +1,42 @@
+function getImplantForProcedureMapByState(){
+	
+	
+}
+ 
+  function getImplantForProcedureMapByState() {
+	
+		var schemeid = document.getElementById("schemeid").value;
+		var statecode = document.getElementById("statecode").value;
+		
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getImplantForProcedureMapByState",
+         data: {    
+	
+				"schemeid":schemeid,
+				"statecode":userstate,
+       		 },
+       		  beforeSend : function(xhr) {
+			
+			},
+           success: function(data){
+            newData = data;
+			$("#implantCode option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+    
+         	for (var key in obj) {
+	             var values =  obj[key];
+	             var x = document.getElementById("implantCode");
+	             var option = document.createElement("option");
+	             option.text = values.implantdetails;
+	             option.value = values.implantid;
+	             x.add(option);
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 

@@ -1,0 +1,214 @@
+
+ function saveInvestigation(){
+	  var investigationCode = document.getElementById("investigationCode").value;
+      var investigationName = document.getElementById("investigationName").value;
+      var statecode = document.getElementById("statecode").value;
+      var schemeid = document.getElementById("schemeid").value;
+	  var investigationid = document.getElementById("investigationid").value;
+	  var alphanumeric = /^[a-z0-9\s]+$/i; // alpha number with space only
+	  var onlySpace = /^$|.\S+./; // only space
+	  if (schemeid=="") {
+		document.getElementById("schemeidError").innerHTML="Please Select Scheme";
+		document.getElementById("schemeid").focus();
+		return false;
+	  }else{
+		document.getElementById("schemeidError").innerHTML="";
+	  }
+	    if (statecode=="") {
+		document.getElementById("statecodeError").innerHTML="Please Select State";
+		document.getElementById("statecode").focus();
+		return false;
+	  }else{
+		document.getElementById("statecodeError").innerHTML="";
+	  }
+ 	  if (investigationName=="") {
+		document.getElementById("investigationNameError").innerHTML="Please Enter Investigation Name";
+		document.getElementById("investigationName").focus();
+		return false;
+	  }
+	  else if(!investigationName.match(alphanumeric) || !investigationName.match(onlySpace)){
+		document.getElementById("investigationNameError").innerHTML="Investigation Name Consist Special Character";
+		document.getElementById("investigationName").focus();
+		return false;
+	}
+	  else{
+		document.getElementById("investigationNameError").innerHTML="";
+	  }
+	  
+	    if (investigationCode=="") {
+		document.getElementById("investigationCodeError").innerHTML="Please Enter Investigation Code";
+		document.getElementById("investigationCode").focus();
+		return false;
+	  }
+	  else if(!investigationCode.match(alphanumeric) || !investigationCode.match(onlySpace)){
+		document.getElementById("investigationCodeError").innerHTML="Investigation Code Consist Special Character";
+		document.getElementById("investigationCode").focus();
+		return false;
+	}
+	  else{
+		document.getElementById("investigationCodeError").innerHTML="";
+	  }
+	   onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/saveInvestigationMasterData",
+        data: {
+          "schemeid": schemeid,
+          "statecode": statecode,
+          "investigationname": investigationName,
+          "investigationcode": investigationCode,
+          "investigationid":investigationid,
+        },
+        success: function (data) {
+         console.log(data);
+         offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.status == "SUCCESS") {
+			 document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(1000);
+         	 document.getElementById("investigationCode").value="";
+      		 document.getElementById("investigationName").value="";
+    		 $("#schemeid").val('').trigger('change');
+			$("#statecode").val('').trigger('change');
+			getInvestigationMasterData();
+          }
+           else if(obj.status=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=obj.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(2000);
+			}
+           else {
+	        offRegister();
+            alert('API Gateway not respond. Please try again.');
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+function getInvestigationMasterData() {
+	var role=$('#role').val();
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getDataInvestigationMaster",
+           success: function(data){
+			console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#InvestigationMasterData').DataTable( {	
+			 "destroy":true, "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],"aaSorting": [],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			//{"mData": null, render: function(){return i++;}   },
+	 			{ "mData": "investigationid"},
+				{ "mData": "investigationname"},
+				{ "mData": "investigationcode"},
+      		    { "mData": "scheme_name"},
+      		    { "mData": "status"},
+      		    { "mData": "approvalstatus"},
+      		     { "mData": "investigationid", render: function (data2, type, row) {
+					if(row.statecode===row.ustate){
+   						 return '<button  id="editInvestigation" value="'+data2+'" class="btn btn-primary custom-btn" onclick="editInvestigation(this)">Edit&nbsp;</button>';
+					}else{
+						 return '';
+						}
+                    }
+                },
+                { "mData": "investigationid", render: function (data2, type, row) {
+            	return '<button  id="deleteInvestigation" value="'+data2+'" class="btn btn-primary custom-btn" data-toggle="modal" data-target="#modal-sm" onclick="FillInvestigationDialog(this.value)">Active/Inactive&nbsp;</button>';
+       			}},    
+				],
+      		}).buttons().container().appendTo('#InvestigationMasterData_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#InvestigationMasterData').DataTable( {	
+      		}).buttons().container().appendTo('#InvestigationMasterData_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	      offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+ 
+function editInvestigation(value){
+	  var row = jQuery(value).closest('tr')
+      var investigationid = row[0].children[0].innerHTML;
+      onRegister();
+      $.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getInvestigationMasterDetailByInvestigationId",
+		 data: {
+			"investigationid":investigationid,
+			},
+           success: function(data){
+			offRegister();
+			console.log("data--"+data)
+            var data1 = jQuery.parseJSON(data);
+            console.log("data--"+data1.data);
+            //console.log("data--"+data1.data.packagecode);
+			if(data1.status=="SUCCESS"){
+			document.getElementById("investigationid").value=data1.data.investigationid;
+			$('#investigationCode').attr('readonly', true);
+			$("#schemeid").select2().val(data1.data.schemeid).trigger("change");
+			$("#statecode").select2().val(data1.data.statecode).trigger("change");
+			document.getElementById("investigationName").value=data1.data.investigationname;
+			document.getElementById("investigationCode").value=data1.data.investigationcode;
+			document.getElementById("radiodiv").style.display="block";
+			$("#stratBtn").html("Update");
+      		}
+      		if(data1.status=="FAILURE"){
+			offRegister();
+			}
+        },
+        error: function(e){
+	      offRegister();
+         }
+    });
+  }
+ 
+  function FillInvestigationDialog(value){
+	document.getElementById("deleteInvestigation").value=value;
+}
+   function deleteInvestigation() {
+     investigationid  = document.getElementById("deleteInvestigation").value;
+      onRegister();
+      $.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/deleteInvestigationMasterByInvestigationId",
+		 data: {
+			"investigationid":investigationid,
+		},
+           success: function(data){
+	 		offRegister();
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			getInvestigationMasterData();
+      		}
+      		if(data1.status=="FAILURE"){
+			}
+        },
+        error: function(e){
+	      offRegister();
+         }
+    });
+      
+}
+
+
+ 
+
+     

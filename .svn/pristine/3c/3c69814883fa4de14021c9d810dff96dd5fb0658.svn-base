@@ -1,0 +1,72 @@
+package com.gov.nha.bis.server.util;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.StringTokenizer;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestTemplate;
+
+
+
+public class CommonUtility {
+
+	private static final Logger logger = LogManager.getLogger(CommonUtility.class);
+
+	public static String userRequest(String sAccessToken,String requestJson,String url){
+		String returnStr=null;
+		RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		try{
+			logger.info(" Request Json for url"+url+"---"+requestJson);
+
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			if(sAccessToken!=null && !sAccessToken.isEmpty()) {
+				headers.setBearerAuth(sAccessToken);
+			}
+
+			HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
+
+			returnStr = restTemplate.postForObject(url, entity, String.class);
+			logger.info(" response Json---"+returnStr);
+			return returnStr;
+		}catch(HttpStatusCodeException e) {
+			logger.error("HttpStatusCodeException error in---"+url+"-"+e.getResponseBodyAsString());
+			return e.getResponseBodyAsString();
+		}catch(Exception e){
+			logger.error(" error in---"+url+"-"+e);
+			return null;
+		}finally {
+			restTemplate=null;headers=null;sAccessToken=null;requestJson=null;url=null;	
+		}		
+	}
+
+	public static String getClientIpAddress(HttpServletRequest request) {
+		String xForwardedForHeader = request.getHeader("X-Forwarded-For");
+		if (xForwardedForHeader == null) {
+			return request.getRemoteAddr();
+		} else {
+			// As of https://en.wikipedia.org/wiki/X-Forwarded-For
+			// The general format of the field is: X-Forwarded-For: client, proxy1, proxy2 ...
+			// we only want the client
+			return new StringTokenizer(xForwardedForHeader, ",").nextToken().trim();
+		}
+	}
+
+	public static String getSysDate(String format) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat(format);
+			return sdf.format(new Date());	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}

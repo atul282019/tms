@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta id="ctx" name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
+	<title>TMS | Check Document </title>
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="icon" type="image/ico" sizes="16x16" href="img/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	<link href="sass/bootstrap.min.css" rel="stylesheet">
+	<!-- all.min CSS -->
+	<link href="sass/all.min.css" rel="stylesheet">
+	<!-- adminlte min CSS -->
+	<link href="sass/adminlte.min.css" rel="stylesheet">
+	<!-- custom CSS -->
+	<link href="sass/font-awesome.css" rel="stylesheet">
+	<!-- custom CSS -->
+	<link href="sass/custom.css" rel="stylesheet">
+</head>
+
+<body class="home-bg">
+	<div class="header-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="login-header">
+						<div class="left-logo"><a th:href="@{/login}"><img class="img-fluid" src="images/PMJAY-logo-eng.png" alt=""></a></div>
+						<div class="mid-logo"><a th:href="@{/login}"><img class="img-fluid" src="images/abnhpm.png" alt=""></a></div>
+						<div class="right-logo"><a th:href="@{/login}"><img class="img-fluid" src="images/nha-logo.png" alt=""></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="login-form">
+		<div class="mx-auto col-12 col-md-5">
+			<div class="login-form-card">
+				<div class="left-login-form">
+					<h2 class="card-title w-100">Check Document</h2>
+					<form class="quickForm">
+						<div class="card-body p-0">			
+							<div class="form-group">
+								<label for="state" class="mb-0">Report Type</label>
+								<select class="form-control select2" id="reportType" name="reportType">
+									<option value="">-- Select Report Type--</option>
+									<option value="CBC">Blood Report</option>
+									<option value="IRN">Iron test Report</option>
+									<option value="KFT">Kidney function Test</option>
+									<option value="LFT">Liver Function Test</option>
+									<option value="LPD">Lipid Test</option>
+									<option value="CBC-KFT">Blood Test and Kidney Function Test</option>
+									<option value="KFT-LFT">Kidney function Test and Liver Function Test</option>
+								</select>
+								<div class="error" id="reportTypeError"></div>				
+							</div>
+							<div class="form-group">
+								<label for="">Report Document</label>
+								<input type="file" class="form-control" id="reportDocument"	name="reportDocument" placeholder="Report Document"
+									accept="application/pdf,image/gif, image/jpeg, image/png,image/jpg" onchange="validateFile()"
+													value="org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@3b0f4821">
+									<div class="error" id="reportDocumentError"></div>
+							</div>
+							</div>
+							<div class="col-12">
+								<!-- <div id="errorUpdate" style="color: red;" class="error-text"> </div> -->
+								<div id="infoUpdate" style="color: green;" class="error-text"> </div>
+								<div id="mathper" style="color: green;" class="error-text"> </div>
+								<div id="erroMessage" style="color: red;" class="error-text" >
+								</div>
+							</div>
+
+						<div class="card-footer text-center p-0 mt-4" style="background: none;">
+							<button type="button" class="btn btn-primary custom-btn" id="readImage" onclick="readImageContent()">Submit</button>
+						</div>
+						<div id="login" class="overlay_full" onclick="offLogin()">
+							<div class="fancy-spinner">
+								<div class="ring"></div>
+								<div class="ring"></div>
+								<div class="dot"></div>
+								<span>Checking</span>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+			
+	</section>
+	
+	<div class="copyright-wrap">
+		This Website belongs to National Health Authority, Ministry of Health and Family Welfare, Government of India.
+	</div>
+
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/adminlte.js"></script>
+	<script>
+
+		function onLogin() {
+			document.getElementById("login").style.display = "flex";
+		}
+
+		function offLogin() {
+			document.getElementById("login").style.display = "none";
+		}
+
+	</script>
+	
+	<script>
+	function readImageContent() {
+		
+		
+		var reportType = document.getElementById("reportType").value;
+		var report =  document.getElementById("reportDocument").value;
+		
+			if(reportType == null || reportType==""){
+				document.getElementById("reportTypeError").innerHTML = "Please Select Report Type";
+				document.getElementById("reportType").focus();
+				return false;
+			}
+			else{
+				document.getElementById("reportTypeError").innerHTML = "";
+			}
+			if(report == null || report==""){
+				document.getElementById("reportDocumentError").innerHTML = "Please Upload Report Document";
+				document.getElementById("reportDocument").focus();
+				return false;
+			}
+			else{
+				document.getElementById("reportDocumentError").innerHTML = "";
+			}
+			var formData = new FormData();
+			formData.append("reportType",reportType)
+			formData.append("reportDocument", reportDocument.files[0]);
+			onLogin();
+			$.ajax({
+				type: "POST",
+	    		enctype: 'multipart/formData',
+	    		url:""+$('#ctx').attr('content')+"/readImageContent",
+	    		data: formData,
+	    		processData: false,
+	    		contentType: false,
+	    		success: function(data) {
+	    			offLogin();
+					var data1 = jQuery.parseJSON(data);
+					if (data1.status == "Y") {
+						document.getElementById("infoUpdate").innerHTML="Result: "+data1.result;
+						document.getElementById("mathper").innerHTML="Matching Percentage: "+data1.matchper;
+						document.getElementById("mathper").style.display="block";
+						document.getElementById("infoUpdate").style.display="block";
+						document.getElementById("erroMessage").style.display="none";
+						document.getElementById("erroMessage").innerHTML="";
+					}
+					if (data1.status == "N") {
+						document.getElementById("infoUpdate").style.display="none";
+						document.getElementById("mathper").innerHTML="";
+						document.getElementById("mathper").style.display="none";
+						document.getElementById("erroMessage").style.display="block";
+						document.getElementById("infoUpdate").innerHTML="";
+						document.getElementById("erroMessage").innerHTML="Error: "+data1.errormsg;
+					}
+				},
+				error: function(e) {
+					offRegister();
+				}
+			});
+		}
+		
+	
+	 function validateFile() {
+	  		var allowedFiles = [".pdf",".jpeg",".png",".jpg"];
+	  		var fileUpload = document.getElementById("reportDocument").value;
+	  		var lblError = document.getElementById("reportDocumentError");
+	  		var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+	  		var fileInput = document.getElementById("reportDocument");
+	  		if (!regex.exec(fileUpload)) {
+	  			lblError.innerHTML = "Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.";
+	  			document.getElementById("reportDocument").value = "";
+	  			return false;
+	  		} else if (fileInput.files[0].size > (1024 * 1024)) {
+	  			document.getElementById("reportDocumentError").innerHTML = "File Size must be Less Than 2 MB";
+	  			document.getElementById("reportDocument").value = "";
+	  			return false;
+	  		} else {
+	  			lblError.innerHTML = "";
+	  		}
+	    }
+	 
+	 
+	</script>
+</body>
+
+</html>

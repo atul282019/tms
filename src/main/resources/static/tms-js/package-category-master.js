@@ -1,0 +1,230 @@
+function savePackageCategoryMasterData() {
+	var catname = document.getElementById("categoryName").value;
+	var version = document.getElementById("version").value;
+
+	var status = $('input[name=radio7]:checked').val();
+	var packagecatid = document.getElementById("packagecatid").value;
+	if (status == "") {
+		status = 1;
+	}
+	var regName = /^[a-zA-Z\s]*$/;
+	var onlySpace = /^$|.\S+./; // only space
+
+	if (catname == "") {
+		document.getElementById("categoryNameError").innerHTML = "Please Enter Category";
+		document.getElementById("categoryName").focus();
+		return false;
+	} else if (!catname.match(regName)) {
+		document.getElementById("categoryNameError").innerHTML = "Category Consist Special Character";
+		document.getElementById("categoryName").focus();
+		return false;
+	} else {
+		document.getElementById("categoryNameError").innerHTML = "";
+	}
+
+	if (version == "") {
+		document.getElementById("versionError").innerHTML = "Please Enter Version";
+		document.getElementById("version").focus();
+		return false;
+	} else {
+		document.getElementById("versionError").innerHTML = "";
+	}
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/savePackageCategoryMasterData",
+		data: {
+			"catname": catname,
+			"version": version,
+			"status": status,
+			"packagecatid": packagecatid,
+		},
+		success: function(data) {
+			offRegister();
+			var obj = jQuery.parseJSON(data);
+			if (obj.status == "SUCCESS") {
+				document.getElementById("succmsg").innerHTML = "Data Saved Successfully";
+				document.getElementById("succmsgdiv").style.display = "block";
+				$('#succmsgdiv').delay(5000).fadeOut(400);
+				document.getElementById("categoryName").value = "";
+				document.getElementById("version").value = "";
+				//	document.getElementById("status").value = "";
+				$("#savePackCatId").html("Submit");
+				getCategoryMasterData();
+			} else if (obj.status == "FAILURE") {
+				offRegister();
+				document.getElementById("failmsg").innerHTML = obj.message;
+				document.getElementById("failmsgDiv").style.display = "block";
+				$('#failmsgDiv').delay(5000).fadeOut(400);
+			} else {
+				offRegister();
+				alert('API Gateway not respond. Please try again.');
+			}
+		},
+		error: function(e) {
+			offRegister();
+			alert('API Gateway not respond. Please try again.');
+		}
+
+	});
+}
+
+
+function editPackageCategory(value) {
+
+	var row = jQuery(value).closest('tr')
+	var packagecatid = row[0].children[0].innerHTML;
+
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/getPackCategoryDetailByCategoryId",
+		data: {
+			"packagecatid": packagecatid,
+		},
+		success: function(data) {
+			offRegister();
+			console.log("data--" + data)
+			var data1 = jQuery.parseJSON(data);
+			console.log("data--" + data1.data);
+			console.log("data--" + data1.data.packagecode);
+			if (data1.status == "SUCCESS") {
+				$("#version").select2().val(data1.data.version).trigger("change");
+				document.getElementById("categoryName").value = data1.data.catname;
+				document.getElementById("packagecatid").value = data1.data.packagecatid;
+				document.getElementById("radiodiv").style.display = "block";
+				$('#packagecode').attr('readonly', true);
+
+				if (data1.data.status === 1) {
+					$("#one").prop("checked", true);
+				} else {
+					$("#zero").prop("checked", true);
+				}
+
+				$("#savePackCatId").html("Update");
+				getCategoryMasterData();
+			}
+			if (data1.status == "FAILURE") {
+				offRegister();
+			}
+		},
+		error: function(e) {
+			offRegister();
+		}
+	});
+}
+
+
+function FillPackageDialog(value) {
+	document.getElementById("deletePackage").value = value;
+}
+function deletePackage() {
+	packageid = document.getElementById("deletePackage").value;
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/deletePackCategoryDetailByCategoryId",
+		data: {
+			"packagecatid": packagecatid,
+		},
+		success: function(data) {
+			offRegister();
+			var data1 = jQuery.parseJSON(data);
+			if (data1.status == "SUCCESS") {
+
+				getPackageMasterData();
+
+			}
+			if (data1.status == "FAILURE") {
+			}
+		},
+		error: function(e) {
+			offRegister();
+		}
+	});
+
+}
+
+
+function getCategoryMasterData() {
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/getPackageCategoryMasterData",
+		success: function(data) {
+			//console.log("data--"+data)
+			var data1 = jQuery.parseJSON(data);
+
+			if (data1.status == "SUCCESS") {
+				offRegister();
+				var data2 = data1.data;
+				//console.log("Data "+ data2);
+				$("#categoryTable").dataTable().fnClearTable();
+				$("#categoryTable").dataTable().fnDraw();
+				$("#categoryTable").dataTable().fnDestroy();
+				var i = 1;
+				var table = $('#categoryTable').DataTable({
+					"responsive": true, "lengthChange": true, "autoWidth": false, "pagingType": "full_numbers", "pageLength": 50,
+					"buttons": ["csv", "excel"],
+					"language": { "emptyTable": "No Data available" },
+					"aaData": data2,
+					"aoColumns": [
+						//{"mData": null, render: function(){return i++;}   },
+						{ "mData": "packagecatid" },
+						{ "mData": "catname" },
+						{ "mData": "version" },
+						{
+							"mData": "packagecatid", render: function(data2, type, row) {
+								return '<button  id="editPackage" value="' + data2 + '" class="btn btn-primary custom-btn" onclick="editPackageCategory(this)">Edit&nbsp;</button>';
+							}
+						},
+						{
+							"mData": "packagecatid", render: function(data2, type, row) {
+								return '<button  id="deletePackage" value="' + data2 + '" class="btn btn-primary custom-btn" data-toggle="modal" data-target="#modal-sm" onclick="FillCategoryDialog(this.value)">Inactive&nbsp;</button>';
+							}
+						},
+					],
+
+				}).buttons().container().appendTo('#categoryTable_wrapper .col-md-6:eq(0)');
+			}
+			else {
+				var table = $('#categoryTable').DataTable({
+				}).buttons().container().appendTo('#categoryTable_wrapper .col-md-6:eq(0)');
+			}
+		},
+		error: function(e) {
+			offRegister();
+			alert('Error: ' + e);
+		}
+	});
+}
+
+
+
+function FillCategoryDialog(value) {
+	document.getElementById("deleteCategory").value = value;
+}
+function deleteCategory() {
+	packagecatid = document.getElementById("deleteCategory").value;
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/deletePackCategoryDetailByCategoryId",
+		data: {
+			"packagecatid": packagecatid,
+		},
+		success: function(data) {
+			offRegister();
+			var data1 = jQuery.parseJSON(data);
+			if (data1.status == "SUCCESS") {
+				getCategoryMasterData();
+
+			}
+			if (data1.status == "FAILURE") {
+			}
+		},
+		error: function(e) {
+			offRegister();
+		}
+	});
+}

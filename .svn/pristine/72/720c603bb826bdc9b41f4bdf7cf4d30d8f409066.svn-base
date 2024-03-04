@@ -1,0 +1,29 @@
+package com.gov.nha.bis.server.rest.service;
+
+import com.gov.nha.bis.server.preauth_requestResponse.PrimaryDiagnosis;
+import com.gov.nha.bis.server.preauth_requestResponse.SavePreauthorizationMasterRequest;
+import com.gov.nha.bis.server.preauth_requestResponse.SecondaryDiagnosis;
+
+public interface PreAuthDataService {
+
+	String getPatientDataById(String txnid);
+
+	String savePrimaryDaignosis(PrimaryDiagnosis diagnosis);
+
+	String saveSecondaryDiagnosis(SecondaryDiagnosis diagnosis);
+
+	String getPrimaryDaignoseData(String txnid);
+
+	String getSecondaryDaignoseData(String txnid);
+
+	String deletePrimaryDaignoseData(String txnid, String tempId);
+
+	String deleteSecondaryDaignoseData(String txnid, String tempId);
+
+
+	
+	String savePreAuth(SavePreauthorizationMasterRequest savePreauthorizationMasterRequest);
+
+
+
+}

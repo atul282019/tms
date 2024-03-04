@@ -1,0 +1,457 @@
+package com.gov.nha.bis.server.requestResponse;
+
+
+import java.io.Serializable;
+
+
+public class PatientRegisterRequest implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6047086312809415818L;
+
+	  private String token;
+	  
+	  private String memberName;
+	  private String gender;
+	  private String yearOfBirth;
+	  private String memberId;
+	  private String address;
+	
+	  private String dateofbirth;
+	  private String fathename;
+	
+	  private String nhaid;
+	  private String vendorToken;
+	 
+	  private String memType;
+	  private String relationship;
+	  private String dependantType;
+	  private String aaaURNId;
+	  private String hhdtype;
+	  private String hhid;
+	  private String benType;
+	  private String scode;
+	  private String idType;
+	  private String idNo;
+	  private String years;
+	  private String months;
+	  private String days;
+	  private String newBorn;
+	  private String regHospDt;
+	  
+	  //PatAuthDtls
+	  private String authenticationType;
+	  private String regBiom;
+	  private String regAuthType;
+	  private String biomFailAttachPath;
+	  private String biomFailReason;
+	  private String authRespCode;
+	  private String biomFailbase64Data;
+	  
+	  //AddressDtls
+	  private String pinCode;
+	  private String statelgdCode;
+	
+	  private String subdistrictlgdCode;
+	  private String districtlgdCode;
+	  private String villageTown;
+	  private String benstatelgdCode;
+	  private String bendistrictlgdCode;
+	  private String city;
+	  private String commAddr;
+	  private String commState;
+	  private String commDist;
+	  private String commMandal;
+	  private String commMdlMcl;
+	  private String commVillage;
+	  private String commCity;
+	  private String commPin;
+	  private String mdlMcl;
+	  private String commContact;
+
+	  
+	  private String id_name;
+	  private String id_number;
+	  private String schemename;
+	  private String authmode;
+	  
+	  private String photo;
+	  private Long txnid;
+	  
+	  private String hospitalid;
+		private String loginuserid;
+		
+		public String getHospitalid() {
+			return hospitalid;
+		}
+		public void setHospitalid(String hospitalid) {
+			this.hospitalid = hospitalid;
+		}
+		public String getLoginuserid() {
+			return loginuserid;
+		}
+		public void setLoginuserid(String loginuserid) {
+			this.loginuserid = loginuserid;
+		}
+		
+	  public Long getTxnid() {
+		return txnid;
+	 }
+	 public void setTxnid(Long txnid) {
+		this.txnid = txnid;
+	 }
+
+	 
+	  public String getDateofbirth() {
+			return dateofbirth;
+		}
+		public void setDateofbirth(String dateofbirth) {
+			this.dateofbirth = dateofbirth;
+		}
+	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+		public String getId_name() {
+			return id_name;
+		}
+		public void setId_name(String id_name) {
+			this.id_name = id_name;
+		}
+		public String getId_number() {
+			return id_number;
+		}
+		public void setId_number(String id_number) {
+			this.id_number = id_number;
+		}
+		public String getSchemename() {
+			return schemename;
+		}
+		public void setSchemename(String schemename) {
+			this.schemename = schemename;
+		}
+		public String getAuthmode() {
+			return authmode;
+		}
+		public void setAuthmode(String authmode) {
+			this.authmode = authmode;
+		}
+		
+	  
+	  
+	  
+	  
+		public String getMemberName() {
+			return memberName;
+		}
+		public void setMemberName(String memberName) {
+			this.memberName = memberName;
+		}
+		public String getGender() {
+			return gender;
+		}
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
+		public String getYearOfBirth() {
+			return yearOfBirth;
+		}
+		public void setYearOfBirth(String yearOfBirth) {
+			this.yearOfBirth = yearOfBirth;
+		}
+		public String getMemberId() {
+			return memberId;
+		}
+		public void setMemberId(String memberId) {
+			this.memberId = memberId;
+		}
+		public String getAddress() {
+			return address;
+		}
+		public void setAddress(String address) {
+			this.address = address;
+		}
+	
+	public String getNhaid() {
+		return nhaid;
+	}
+	public void setNhaid(String nhaid) {
+		this.nhaid = nhaid;
+	}
+	public String getVendorToken() {
+		return vendorToken;
+	}
+	public void setVendorToken(String vendorToken) {
+		this.vendorToken = vendorToken;
+	}
+	public String getMemType() {
+		return memType;
+	}
+	public void setMemType(String memType) {
+		this.memType = memType;
+	}
+	public String getRelationship() {
+		return relationship;
+	}
+	public void setRelationship(String relationship) {
+		this.relationship = relationship;
+	}
+	public String getDependantType() {
+		return dependantType;
+	}
+	public void setDependantType(String dependantType) {
+		this.dependantType = dependantType;
+	}
+	public String getAaaURNId() {
+		return aaaURNId;
+	}
+	public void setAaaURNId(String aaaURNId) {
+		this.aaaURNId = aaaURNId;
+	}
+	public String getHhdtype() {
+		return hhdtype;
+	}
+	public void setHhdtype(String hhdtype) {
+		this.hhdtype = hhdtype;
+	}
+	public String getHhid() {
+		return hhid;
+	}
+	public void setHhid(String hhid) {
+		this.hhid = hhid;
+	}
+	public String getBenType() {
+		return benType;
+	}
+	public void setBenType(String benType) {
+		this.benType = benType;
+	}
+	public String getScode() {
+		return scode;
+	}
+	public void setScode(String scode) {
+		this.scode = scode;
+	}
+	public String getIdType() {
+		return idType;
+	}
+	public void setIdType(String idType) {
+		this.idType = idType;
+	}
+	public String getIdNo() {
+		return idNo;
+	}
+	public void setIdNo(String idNo) {
+		this.idNo = idNo;
+	}
+	public String getYears() {
+		return years;
+	}
+	public void setYears(String years) {
+		this.years = years;
+	}
+	public String getMonths() {
+		return months;
+	}
+	public void setMonths(String months) {
+		this.months = months;
+	}
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days) {
+		this.days = days;
+	}
+	public String getNewBorn() {
+		return newBorn;
+	}
+	public void setNewBorn(String newBorn) {
+		this.newBorn = newBorn;
+	}
+	public String getRegHospDt() {
+		return regHospDt;
+	}
+	public void setRegHospDt(String regHospDt) {
+		this.regHospDt = regHospDt;
+	}
+	public String getAuthenticationType() {
+		return authenticationType;
+	}
+	public void setAuthenticationType(String authenticationType) {
+		this.authenticationType = authenticationType;
+	}
+	public String getRegBiom() {
+		return regBiom;
+	}
+	public void setRegBiom(String regBiom) {
+		this.regBiom = regBiom;
+	}
+	public String getRegAuthType() {
+		return regAuthType;
+	}
+	public void setRegAuthType(String regAuthType) {
+		this.regAuthType = regAuthType;
+	}
+	public String getBiomFailAttachPath() {
+		return biomFailAttachPath;
+	}
+	public void setBiomFailAttachPath(String biomFailAttachPath) {
+		this.biomFailAttachPath = biomFailAttachPath;
+	}
+	public String getBiomFailReason() {
+		return biomFailReason;
+	}
+	public void setBiomFailReason(String biomFailReason) {
+		this.biomFailReason = biomFailReason;
+	}
+	public String getAuthRespCode() {
+		return authRespCode;
+	}
+	public void setAuthRespCode(String authRespCode) {
+		this.authRespCode = authRespCode;
+	}
+	public String getBiomFailbase64Data() {
+		return biomFailbase64Data;
+	}
+	public void setBiomFailbase64Data(String biomFailbase64Data) {
+		this.biomFailbase64Data = biomFailbase64Data;
+	}
+	public String getPinCode() {
+		return pinCode;
+	}
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
+	public String getStatelgdCode() {
+		return statelgdCode;
+	}
+	public void setStatelgdCode(String statelgdCode) {
+		this.statelgdCode = statelgdCode;
+	}
+	public String getSubdistrictlgdCode() {
+		return subdistrictlgdCode;
+	}
+	public void setSubdistrictlgdCode(String subdistrictlgdCode) {
+		this.subdistrictlgdCode = subdistrictlgdCode;
+	}
+	public String getDistrictlgdCode() {
+		return districtlgdCode;
+	}
+	public void setDistrictlgdCode(String districtlgdCode) {
+		this.districtlgdCode = districtlgdCode;
+	}
+	public String getVillageTown() {
+		return villageTown;
+	}
+	public void setVillageTown(String villageTown) {
+		this.villageTown = villageTown;
+	}
+	public String getBenstatelgdCode() {
+		return benstatelgdCode;
+	}
+	public void setBenstatelgdCode(String benstatelgdCode) {
+		this.benstatelgdCode = benstatelgdCode;
+	}
+	public String getBendistrictlgdCode() {
+		return bendistrictlgdCode;
+	}
+	public void setBendistrictlgdCode(String bendistrictlgdCode) {
+		this.bendistrictlgdCode = bendistrictlgdCode;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getCommAddr() {
+		return commAddr;
+	}
+	public void setCommAddr(String commAddr) {
+		this.commAddr = commAddr;
+	}
+	public String getCommState() {
+		return commState;
+	}
+	public void setCommState(String commState) {
+		this.commState = commState;
+	}
+	public String getCommDist() {
+		return commDist;
+	}
+	public void setCommDist(String commDist) {
+		this.commDist = commDist;
+	}
+	public String getCommMandal() {
+		return commMandal;
+	}
+	public void setCommMandal(String commMandal) {
+		this.commMandal = commMandal;
+	}
+	public String getCommMdlMcl() {
+		return commMdlMcl;
+	}
+	public void setCommMdlMcl(String commMdlMcl) {
+		this.commMdlMcl = commMdlMcl;
+	}
+	public String getCommVillage() {
+		return commVillage;
+	}
+	public void setCommVillage(String commVillage) {
+		this.commVillage = commVillage;
+	}
+	public String getCommCity() {
+		return commCity;
+	}
+	public void setCommCity(String commCity) {
+		this.commCity = commCity;
+	}
+	public String getCommPin() {
+		return commPin;
+	}
+	public void setCommPin(String commPin) {
+		this.commPin = commPin;
+	}
+	public String getMdlMcl() {
+		return mdlMcl;
+	}
+	public void setMdlMcl(String mdlMcl) {
+		this.mdlMcl = mdlMcl;
+	}
+	public String getCommContact() {
+		return commContact;
+	}
+	public void setCommContact(String commContact) {
+		this.commContact = commContact;
+	}
+	
+	  public String getFathename() {
+			return fathename;
+		}
+		public void setFathename(String fathename) {
+			this.fathename = fathename;
+		}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	@Override
+	public String toString() {
+		return "PatientRegisterRequest [memberName=" + memberName + ", gender=" + gender + ", yearOfBirth="
+				+ yearOfBirth + ", memberId=" + memberId + ", address=" + address + "]";
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
+}

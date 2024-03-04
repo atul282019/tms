@@ -1,0 +1,269 @@
+
+function schemeChange() {
+	$("#specialitytype").val('').trigger('change');
+	$("#version").val('').trigger('change');
+	document.getElementById("specialityCode").value = "";
+	document.getElementById("specialityName").value = "";
+}
+
+function saveSpecialityMasterData() {
+	var specialityname = document.getElementById("specialityName").value.trim();
+	var version = document.getElementById("version").value.trim();
+	var specialitytype = document.getElementById("specialitytype").value.trim();
+	var schemecode = document.getElementById("schemeid").value.trim();
+	var statecode = document.getElementById("statecode").value.trim();
+	var specialitycode = document.getElementById("specialityCode").value.trim();
+
+	var specialityid = document.getElementById("specialityid").value.trim();
+
+	var alphanumeric = /^[a-z0-9\s]+$/i; // alpha number with space only
+	var onlySpace = /^$|.\S+./; // only space
+	
+	if (schemecode == "") {
+		document.getElementById("schemeidError").innerHTML = "Please Select Scheme";
+		document.getElementById("schemeid").focus();
+		return false;
+	} else {
+		document.getElementById("schemeidError").innerHTML = "";
+	}
+
+	if (statecode == "") {
+		document.getElementById("statecodeError").innerHTML = "Please Select State";
+		document.getElementById("statecode").focus();
+		return false;
+	} else {
+		document.getElementById("statecodeError").innerHTML = "";
+	}
+
+	if (specialityname == "") {
+		document.getElementById("specialityNameError").innerHTML = "Please Enter Speciality";
+		document.getElementById("specialityName").focus();
+		return false;
+	} else if (!specialityname.match(alphanumeric) && !specialityname.match(onlySpace)) {
+		document.getElementById("specialityNameError").innerHTML = "Speciality Consist Special Character";
+		document.getElementById("specialityName").focus();
+		return false;
+	} else {
+		document.getElementById("specialityNameError").innerHTML = "";
+	}
+
+	if (specialitycode == "") {
+		document.getElementById("specialityCodeError").innerHTML = "Please Enter Specility Code";
+		document.getElementById("specialityCode").focus();
+		return false;
+	} else if (!specialitycode.match(alphanumeric) && !specialitycode.match(onlySpace)) {
+		document.getElementById("specialityCodeError").innerHTML = "Specility Consist Special Character";
+		document.getElementById("specialityCode").focus();
+		return false;
+	} else {
+		document.getElementById("specialityCodeError").innerHTML = "";
+	}
+
+	if (version == "") {
+		document.getElementById("versionError").innerHTML = "Please Select Version";
+		document.getElementById("version").focus();
+		return false;
+	} else {
+		document.getElementById("versionError").innerHTML = "";
+	}
+
+	if (specialitytype == "") {
+		document.getElementById("specialitytypeError").innerHTML = "Please Select Speciality Type";
+		document.getElementById("specialitytype").focus();
+		return false;
+	} else {
+		document.getElementById("specialitytypeError").innerHTML = "";
+	}
+
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/saveSpecialityMasterData",
+		data: {
+			"specialityname": specialityname,
+			"version": version,
+			"schemecode": schemecode,
+			"statecode": statecode,
+			"specialitycode": specialitycode,
+			"specialitytype": specialitytype,
+			"specialityid": specialityid,
+			
+		},
+		success: function(data) {
+			// console.log(data);
+			offRegister();
+			var obj = jQuery.parseJSON(data);
+			if (obj.status == "SUCCESS") {
+				document.getElementById("succmsg").innerHTML = "Data Saved Successfully";
+				document.getElementById("succmsgdiv").style.display = "block";
+				$('#succmsgdiv').delay(5000).fadeOut(400);
+				document.getElementById("specialityName").value = "";
+				document.getElementById("version").value = "";
+				document.getElementById("specialityCode").value = "";
+				$("#statecode").val('').trigger('change');
+				$("#schemeid").val('').trigger('change');
+				$("#specialitytype").val('').trigger('change');
+				getSpecialityMasterData();
+				$("#btnSave").html("Submit");
+				$('#specialityCode').attr('readonly', false);
+				document.getElementById("specialityid").value="";
+
+			} else if (obj.status == "FAILURE") {
+				document.getElementById("failmsg").innerHTML = obj.message;
+				document.getElementById("failmsgDiv").style.display = "block";
+				$('#failmsgDiv').delay(5000).fadeOut(2000);
+			} else {
+				offRegister();
+				alert('API Gateway not respond. Please try again.');
+			}
+		},
+		error: function(e) {
+			offRegister();
+			alert('API Gateway not respond. Please try again.');
+		}
+	});
+}
+
+
+function getSpecialityMasterData() {
+	var role=$('#role').val();
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/getSpecialityMasterData",
+		success: function(data) {
+			
+			var data1 = jQuery.parseJSON(data);
+			if (data1.status == "SUCCESS") {
+				offRegister();
+				var data2 = data1.data;
+				var table = $('#speciality').DataTable({
+					"destroy":true,"responsive": true, "lengthChange": true, "autoWidth": false, "pagingType": "full_numbers", "pageLength": 50,
+					"buttons": ["csv", "excel"], "aaSorting": [],
+					"language": { "emptyTable": "No Data available" },
+					"aaData": data2,
+					"aoColumns": [
+						{ "mData": "specialityid" },
+						{ "mData": "specialityname" },
+						{ "mData": "specialitycode" },
+						{ "mData": "scheme_name" },
+						{ "mData": "state_name" },
+						{ "mData": "status" },
+						{ "mData": "approvalstatus" },
+						{
+							"mData": "specialityid",
+							"render": function(data2, type, row) {
+								 if(row.statecode===row.ustate && row.approvalstatus!=='Pending For Review' && row.approvalstatus!=='Pending For Edit Review'){
+									return '<button  id="editspeciality" class="btn btn-primary custom-btn" onclick="editSpeciality(this)">Edit&nbsp;</button>';
+								}else{
+									return '';
+								}
+							}
+						},
+						{
+							"mData": "specialityid",
+							"render": function(data2, type, row) {
+								return '<button  id="deleteSpeciality" value="' + data2 + '" class="btn btn-primary custom-btn" data-toggle="modal" data-target="#modal-sm" onclick="FillDialog(this.value)">Active/Inactive&nbsp;</button>';
+							}
+						},
+						{ "mData": "specialitytype" },
+						{
+							"mData": "statestatus",
+							"render": function(data2, type, row) {
+								if(role=='96' && row.statecode==='999'){
+									return 'INACTIVE';
+								}else if(data2!=null && data2!=""){
+									return 'INACTIVE';
+								}else{
+									return 'ACTIVE';
+								}
+							}
+						},
+						{ "mData": "version" },
+
+					],
+
+				}).buttons().container().appendTo('#SpecialityTable_wrapper .col-md-6:eq(0)');
+			}else {
+				var table = $('#SpecialityTable').DataTable({
+				}).buttons().container().appendTo('#SpecialityTable_wrapper .col-md-6:eq(0)');
+			}
+		},
+		error: function(e) {
+			offRegister();
+			alert('Error: ' + e);
+		}
+	});
+}
+
+
+function editSpeciality(value) {
+	var row = jQuery(value).closest('tr')
+	var specilityid = row[0].children[0].innerHTML;
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/getSpecialityDetailBySpecialityId",
+		data: {
+			"specilityid": specilityid,
+		},
+		success: function(data) {
+			console.log("data--" + data)
+			var data1 = jQuery.parseJSON(data);
+			console.log("data--" + data1.data);
+			console.log("data--" + data1.data.specialitycode);
+			if (data1.status == "SUCCESS") {
+				$("#schemeid").select2().val(data1.data.schemecode).trigger("change");
+				$("#statecode").select2().val(data1.data.statecode).trigger("change");
+				$("#specialitytype").select2().val(data1.data.specialitytype).trigger("change");
+				$("#version").select2().val(data1.data.version).trigger("change");
+				document.getElementById("specialityCode").value = data1.data.specialitycode;
+				document.getElementById("specialityName").value = data1.data.specialityname;
+				document.getElementById("specialityid").value = data1.data.specialityid;
+				$('#specialityCode').attr('readonly', true);
+				$("#btnSave").html("Update");
+				offRegister();
+			}
+			if (data1.status == "FAILURE") {
+				offRegister();
+			}
+		},
+		error: function(e) {
+			offRegister();
+		}
+	});
+}
+
+function FillDialog(value) {
+	document.getElementById("deleteid").value = value;
+}
+
+
+function deleteSpeciality() {
+	specilityid = document.getElementById("deleteid").value;
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/deleteSpecialityDetailBySpecialityId",
+		data: {
+			"specilityid": specilityid,
+		},
+		success: function(data) {
+			offRegister();
+			console.log("data--" + data)
+			var data1 = jQuery.parseJSON(data);
+			console.log("data--" + data1.data);
+			console.log("data--" + data1.data.specialitycode);
+			if (data1.status == "SUCCESS") {
+				getSpecialityMasterData();
+			}
+			if (data1.status == "FAILURE") {
+
+			}
+		},
+		error: function(e) {
+			offRegister();
+		}
+	});
+
+}

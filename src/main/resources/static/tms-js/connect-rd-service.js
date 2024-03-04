@@ -1,0 +1,95 @@
+
+function createSessionRemote() {
+	$.ajax({
+	     type: "POST",
+	     url: ""+$('#ctx').attr('content')+"/createSession",
+	     success: function (data) {
+	      // console.log(data);
+	       var obj = jQuery.parseJSON(data);
+	       if (obj['status'] == "Y") {
+	     
+	        document.getElementById("face_id").src = "data:image/jpeg;base64," + obj['qrimg'];
+	        waitRemoteAck();
+	        } 
+	        else {
+	         $('#errorOtp').html("Remote Device Connection Failed.");
+	         document.getElementById("infoOtp").style.display = "none";
+	         document.getElementById("errorOtp").style.display = "block";
+	       
+	
+	       }
+	     },
+	     error: function (e) {
+	     alert('API Gateway not respond. Please try again.');
+ }
+
+  });
+
+
+}
+
+
+  
+  
+  
+  
+function waitRemoteAck() {
+	$.ajax({
+     type: "POST",
+     url: ""+$('#ctx').attr('content')+"/waitForAck",
+     success: function (data) {
+       console.log(data);
+       var obj = jQuery.parseJSON(data);
+       if (obj['status'] == "Y") {
+       		sendAckConf();
+      	$('#infoOtp').html("Remote Device has been successfull connected  : Mobile :"+obj['phoneno']+"  Remote Device IP Address :"+obj['devip']);
+         document.getElementById("infoOtp").style.display = "block";
+         document.getElementById("errorOtp").style.display = "none";
+        } 
+        else {
+         $('#errorOtp').html("Remote Device Connection Failed.");
+        document.getElementById("infoOtp").style.display = "none";
+         document.getElementById("errorOtp").style.display = "block";
+
+       }
+     },
+     error: function (e) {
+       alert('API Gateway not respond. Please try again.');
+ }
+
+  });
+
+
+}
+  
+  
+function sendAckConf() {
+
+	$.ajax({
+     type: "POST",
+     url: ""+$('#ctx').attr('content')+"/sendAckConf",
+     success: function (data) {
+       console.log(data);
+       var obj = jQuery.parseJSON(data);
+       if (obj['status'] == "Y") {
+      	
+      	 $('#infoOtp').html("Remote Device has been successfull connected  :Public IP :"+obj['rip']);
+         document.getElementById("infoOtp").style.display = "block";
+         document.getElementById("errorOtp").style.display = "none";
+        } 
+        else {
+         $('#errorOtp').html("Remote Device Connection Failed.");
+      	 document.getElementById("infoOtp").style.display = "none";
+        document.getElementById("errorOtp").style.display = "block";
+
+       }
+     },
+     error: function (e) {
+     alert('API Gateway not respond. Please try again.');
+ }
+
+  });
+
+
+}
+  

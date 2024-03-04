@@ -1,0 +1,235 @@
+package com.gov.nha.bis.server.controller;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.gov.nha.bis.server.model.UserForm;
+import com.gov.nha.bis.server.properties.ApplicationConstantConfig;
+import com.gov.nha.bis.server.requestResponse.LoginUserHospitalResponse;
+import com.gov.nha.bis.server.rest.service.UserAuthenticationService;
+import com.gov.nha.bis.server.util.CommonUtility;
+
+@Controller
+@CrossOrigin
+public class LoginController extends NhaBisBaseController{
+
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+	@Autowired
+	public ApplicationConstantConfig applicationConstantConfig;
+
+	@Autowired
+	UserAuthenticationService userAuthenticationService;
+
+	@GetMapping(value="/index")
+	public ModelAndView firstPage(Model model) {
+		return new ModelAndView("login", "command", "");
+	}	
+
+	@GetMapping(value="/login")
+	public ModelAndView login(Model model) {
+		return new ModelAndView("login", "command", "");
+	}
+
+	@GetMapping(value="/registration")
+	public ModelAndView patientRegistration(Model model) {
+		return new ModelAndView("patient-register", "command", "");
+	}	
+
+	@GetMapping(value="/claininitiation")
+	public ModelAndView claimInitiation(Model model) {
+		return new ModelAndView("claim-initiation", "command", "");
+	}	
+
+	@GetMapping(value="/claiminitiationdetail")
+	public ModelAndView claimInitiationProcess(Model model) {
+		return new ModelAndView("claim-initiation-details", "command", "");
+	}	
+
+	@GetMapping(value="/preauth")
+	public ModelAndView preAuth(Model model) {
+		return new ModelAndView("preauth", "command", "");
+	}	
+
+	@RequestMapping(value = "/usrHome", method = RequestMethod.POST)
+	public String userLogin(HttpSession session,HttpServletRequest request,@ModelAttribute("userForm") UserForm userForm, BindingResult result,Model model) {
+		String	response= null;
+		try {
+			userForm.setIp(CommonUtility.getClientIpAddress(request));
+			response= userAuthenticationService.getUserAuthorization(userForm, applicationConstantConfig.GET_LOGIN_USER);
+			logger.info("User Authentication Response"+response);
+			if(!ObjectUtils.isEmpty(response)) {	
+
+				JSONObject userJson= new JSONObject(response);
+				if(userJson.getString("status")!=null 
+						&& userJson.getString("status").equalsIgnoreCase("SUCCESS")
+						&&  userJson.getJSONObject("data")!=null) {
+
+					//api token
+					if(userJson.getJSONObject("data").has("token")  
+							&& !userJson.getJSONObject("data").isNull("token")) {
+						session.setAttribute("token", userJson.getJSONObject("data").getString("token"));
+					}
+					session.setAttribute("userName", userJson.getJSONObject("data").getString("userName"));
+					session.setAttribute("mobileNo", userJson.getJSONObject("data").getString("mobileNo"));
+					session.setAttribute("loginId", userJson.getJSONObject("data").getString("loginId"));
+					session.setAttribute("roleName", userJson.getJSONObject("data").getString("roleName"));
+					session.setAttribute("stateCode", userJson.getJSONObject("data").getString("stateCode"));
+					//JWT TOKEN
+					session.setAttribute("loginToken", userJson.getString("token"));
+
+
+					return "patient-register";
+				}else if(userJson.getString("status")!=null 
+						&& userJson.getString("status").equalsIgnoreCase("FAILURE")){
+
+					model.addAttribute("message", userJson.getString("message"));
+					return "login";
+				}else {
+					model.addAttribute("message", "API GAteway not responding");
+					return "login";
+				}
+			}
+			model.addAttribute("message", "API GAteway not responding");
+			return "login";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "API GAteway not responding");
+			return "login";
+		}finally {
+			response= null;
+		}
+	}
+
+	@GetMapping(value="/getCurrentHosp")
+	public @ResponseBody List<LoginUserHospitalResponse> getCurrentHosp(Model model,HttpSession session,@RequestParam String hid,HttpServletRequest request) {
+		String response= null;String storedhospId =null;
+		List<LoginUserHospitalResponse> lsthosp = new ArrayList<LoginUserHospitalResponse>();
+		try {
+			storedhospId=(String)session.getAttribute("hospitalId");
+			//get current user hospital data
+			response= userAuthenticationService.getCurrentHosp((String)session.getAttribute("loginId"),(String)session.getAttribute("stateCode"));
+			if(!ObjectUtils.isEmpty(response)) {	
+				JSONObject userJson= new JSONObject(response);
+				if(userJson.getString("status")!=null 
+						&& userJson.getString("status").equalsIgnoreCase("SUCCESS")
+						&&  userJson.getJSONArray("data")!=null) {
+					for (int i = 0; i < userJson.getJSONArray("data").length(); i++) {  
+						// store each object in JSONObject  
+						JSONObject explrObject = userJson.getJSONArray("data").getJSONObject(i);
+						
+						LoginUserHospitalResponse hosp = new LoginUserHospitalResponse();
+						hosp.setHcat(explrObject.getString("hcat"));
+						hosp.setHid(explrObject.getString("hid"));
+						hosp.setHname(explrObject.getString("hname"));
+						hosp.setHstate( explrObject.getString("hstate"));
+						
+						boolean isSessionStore =  false;
+						
+						if(storedhospId==null && i==0) {
+							isSessionStore = true;
+						}else if(storedhospId!=null && hid!=null
+								&& !storedhospId.equalsIgnoreCase(hid)
+								&& explrObject.getString("hid").equalsIgnoreCase(hid)){
+							isSessionStore = true;
+						}else if(storedhospId!=null && (hid==null || hid.equalsIgnoreCase(""))
+								&& explrObject.getString("hid").equalsIgnoreCase(storedhospId)){
+							isSessionStore = true;
+						}
+						
+						if(isSessionStore) {
+							session.setAttribute("hospitalId", explrObject.getString("hid"));
+							session.setAttribute("hospitalName", explrObject.getString("hname"));
+							session.setAttribute("hospState", explrObject.getString("hstate"));
+							//session.setAttribute("hospGrade", explrObject.getString("roleName"));
+							session.setAttribute("hospitalCat", explrObject.getString("hcat"));
+							hosp.setSelected(true);
+						}else {
+							hosp.setSelected(false);
+						}
+						
+						lsthosp.add(hosp);
+					}
+					return lsthosp;
+				}
+			}
+		} catch (Exception e) {
+			logger.info("Error in setting current hospital in Session.");
+			e.printStackTrace();
+		}
+		return null;			
+	}	
+	//	@RequestMapping(value = "/usrHome", method = RequestMethod.POST)
+	//	public String userLogin(HttpSession session,HttpServletRequest request,@ModelAttribute("userForm") UserForm userForm, BindingResult result,Model model) {
+	//		String	response= null;
+	//		try {
+	//			userForm.setIp(CommonUtility.getClientIpAddress(request));
+	//			response= userAuthenticationService.getUserAuthorization(userForm, applicationConstantConfig.GET_LOGIN_USER);
+	//			logger.info("User Authentication Response"+response);
+	//			if(!ObjectUtils.isEmpty(response)) {	
+	//				
+	//				JSONObject userJson= new JSONObject(response);
+	//				if(userJson.getString("status")!=null 
+	//						&& userJson.getString("status").equalsIgnoreCase("SUCCESS")
+	//						&&  userJson.getJSONObject("data")!=null) {
+	//					
+	//					//api token
+	//					session.setAttribute("token", userJson.getJSONObject("data").getString("token"));
+	//					session.setAttribute("userName", userJson.getJSONObject("data").getString("userName"));
+	//					session.setAttribute("hospitalName", userJson.getJSONObject("data").getString("hospitalName"));
+	//					session.setAttribute("mobileNo", userJson.getJSONObject("data").getString("mobileNo"));
+	//					session.setAttribute("loginId", userJson.getJSONObject("data").getString("loginId"));
+	//					session.setAttribute("roleName", userJson.getJSONObject("data").getString("roleName"));
+	//					session.setAttribute("hospitalId", userJson.getJSONObject("data").getString("hospitalId"));
+	//					session.setAttribute("hospitalCat", "NABH");
+	//					//session.setAttribute("stateCode", userJson.getJSONObject("data").getString("stateCode"));
+	//					session.setAttribute("stateCode","22");
+	//					//JWT TOKEN
+	//					session.setAttribute("loginToken", userJson.getString("token"));
+	//					
+	//					
+	//					return "patient-register";
+	//				}else if(userJson.getString("status")!=null 
+	//						&& userJson.getString("status").equalsIgnoreCase("FAILURE")){
+	//					
+	//					model.addAttribute("message", userJson.getString("message"));
+	//					return "login";
+	//				}else {
+	//					model.addAttribute("message", "API GAteway not responding");
+	//					return "login";
+	//				}
+	//			}
+	//			model.addAttribute("message", "API GAteway not responding");
+	//			return "login";
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//			model.addAttribute("message", "API GAteway not responding");
+	//			return "login";
+	//		}finally {
+	//			response= null;
+	//		}
+	//	}
+
+
+}

@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+	
+<body class="home-bg hold-transition sidebar-mini layout-fixed"
+ onload= "getSpeciality(),walletBalance(), getStratMasterData(),getImplantMasterDataByState()">
+  <div class="wrapper">
+    <!-- Navbar -->
+     <header th:insert="fragments/header.html :: header"> </header>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a th:href="@{/registration}" class="brand-link">
+        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+
+        <!-- Sidebar Menu -->
+        	 <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Pre Auth Registration</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item">Registration</li>
+                <li class="breadcrumb-item active">Pre Auth Registration</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+      <section class="content">        
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Registration Details</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                      <div class="col-12 col-sm-4 col-md-2 col-lg-2">
+                        <img id="patientImage" src="#" class="img-thumbnail rounded mx-auto d-block" style="max-height: 120px;" alt="">
+                      </div>
+                       <div class="col-12 col-sm-8 col-md-10 col-lg-10">
+                         <div class="row">
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Name </span>
+                              <strong id="patientName"></strong>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Gender </span>
+                              <strong id="patientGender"></strong>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Beneficiary Card ID </span>
+                              <strong id="beneficiaryCardId"></strong>
+                            </div>
+                         <!--   <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Age </span>
+                              <strong id="BeneficaryAge"></strong>
+                            </div>-->
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Registration Date</span>
+                              <strong id="benRegistrationData"></strong>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Contact No.</span>
+                              <strong id="benContactName"></strong>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Family ID</span>
+                              <strong id="FamilyId"></strong>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Verified By</span>
+                              <strong id="verified"></strong>
+                            </div>
+                            
+                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 preauth-data">
+                              <span>Wallet Balance</span>
+                              <strong id="walletBlance" Style="color: red;"></strong>
+                            </div>
+                            
+                         </div> 
+                      </div>                                                   
+                  </div>     
+                                            
+                </div>
+              </div>
+
+              <div class="card direct-chat preauth-tabs" style="box-shadow: none;">
+                <div class="card-header py-0 px-0">
+                  <ul class="nav justify-content-between preauth-inner-tabs">
+                    <li class="active"><a href="#tab0" data-toggle="tab">Diagnosis <br><span>1</span></a></li>
+                    <li><a href="#tab1" data-toggle="tab">Treatment Protocol <br><span>2</span></a></li>
+                    <li><a href="#tab2" data-toggle="tab">General Findings <br><span>3</span></a></li>
+                    <li><a href="#tab3" data-toggle="tab">Personal History <br><span>4</span></a></li>
+                    <li><a href="#tab4" data-toggle="tab">Past & Family History <br><span>5</span></a></li>
+                    <li><a href="#tab5" data-toggle="tab">Admission Details <br><span>6</span></a></li>
+                    <li><a href="#tab8" data-toggle="tab">Investigation Details <br><span>7</span></a></li>                    
+                    <li><a href="#tab10" data-toggle="tab" onclick="getpreview();">Preview <br><span>8</span></a></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content pt-2 pb-1 px-2">
+                  
+                  
+                  <div class="tab-pane text-center py-0 mb-1 active" id="tab0">
+                  	<div class="row">
+						<div class="col-12 col-md-6">
+						<div class="inner-wrap p-1 mb-2">
+							<div class="row pt-2 pb-1 px-2 preauth-in-wrap">
+                        <div class="col-12">
+                          <form action="#" method="post" id="primarydaigform">
+                            <table id="diagnosis" class="table diagnosis-table mb-0">
+                              <tr>
+                                <th></th>
+                                <th></th> 
+                              </tr> 
+                              <tr class="itemdaignose"> 
+                                <td id="col0">
+                                  <div class="form-group custom-form">
+		                              <label for="primaryDiagnosis">Primary Diagnosis</label>
+		                              <input type="text" id="primaryDiagnosis" name="primaryDiagnosis"  placeholder="Primary Diagnosis" class="form-control">
+		                           	   <div class="error" id="primaryDiagnosisError" ></div> 
+		                           </div>
+                                </td> 
+
+                                
+                                <td id="col2"> 
+                                  <div class="form-group custom-form">
+		                            <label for="">ICD Code</label>
+		                             <select class="form-control select2" id="pidcCodee" name="pidcCodee" >
+		                                <option value="" >-- Select--</option>   
+		                                <option value="1A07.Z">1A07.Z - Typhoid fever, unspecified</option>   
+		                                <option value="DC11.3">DC11.3 - Calculus of gallbladder or cystic duct without cholecystitis or cholangitis</option>     
+		                             </select>
+		                             <div class="error" id="picdCodeError" ></div> 
+		                          </div>
+                                </td>                                     
+                              </tr>  
+                            </table> 
+                            <table style="float: right;" class="mb-0"> 
+                              <tr> 
+                                <td>
+                                	<button type="button" onclick="primaryPreAuthDiagnose()" class="btn btn-sm btn-primary btn-floting" style="border-radius: 50%;"><i class="fa fa-plus"></i></button>
+                                </td>
+                              </tr>  
+                            </table>
+                          </form>
+                        </div>
+						<!-- success error div -->
+			             <div id="diagnosismsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="pdiagnosismsg"></span>   
+				        </div>
+				        <div id="diagnosisFailmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="pdiagnosisfailmsg"></span>
+				        </div>  
+                       <!-- success error div -->
+                      </div>
+                      
+                      <div class="table-responsive border-bottom-1">
+                              <table id="primarydaignoseData" class="table table-document datatable mb-0">
+                                	<thead>
+	                      		<tr>
+	                      			<th>Primary Diagnosis</th>
+	                      			<th>ICD Code</th>
+	                      			<th>Action</th>
+	                      		</tr>
+	                      	</thead>
+	                      	
+	                      </table>
+                      </div>
+					</div>
+				</div>
+						
+						
+						<div class="col-12 col-md-6">
+						<div class="inner-wrap p-1 mb-2">
+							<div class="row pt-2 pb-1 px-2 preauth-in-wrap">
+                        <div class="col-12">
+                          <form action="#" method="post" id="secondarydaigform">
+                            <table id="diagnosis" class="table diagnosis-table mb-0">
+                              <tr>
+                                <th></th>
+                                <th></th> 
+                              </tr> 
+                              <tr class="itemdaignose"> 
+                                <td id="col1">
+                                  <div class="form-group custom-form">
+		                              <label for="secondaryDiagnosis ">Secondary Diagnosis</label>
+		                              <input type="text" id="secondaryDiagnosis" name="secondaryDiagnosis" placeholder="Secondary Diagnosis" class="form-control">
+		                               <div class="error" id="secondaryDiagnosisError" ></div> 
+		                            </div>
+                                </td> 
+                                
+                                <td id="col2"> 
+                                  <div class="form-group custom-form">
+		                            <label for="">ICD Code</label>
+		                             <select class="form-control select2" id="idcCodee" name="idcCodee" >
+		                                <option value="" >-- Select--</option>   
+		                                <option value="1A07.Z">1A07.Z - Typhoid fever, unspecified</option>   
+		                                <option value="DC11.3">DC11.3 - Calculus of gallbladder or cystic duct without cholecystitis or cholangitis</option>     
+		                             </select>
+		                             <div class="error" id="icdCodeError" ></div> 
+		                          </div>
+                                </td>                                     
+                              </tr>  
+                            </table> 
+                            <table style="float: right;"> 
+                              <tr> 
+                                <td>
+                                	<button type="button" onclick="secondaryPreAuthDiagnose()" class="btn btn-sm btn-primary btn-floting" style="border-radius: 50%;"><i class="fa fa-plus"></i></button>
+                                </td>
+                                
+                              </tr>  
+                            </table>
+                          </form>
+                        </div>
+						<!-- success error div -->
+			             <div id="diagnosismsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="sdiagnosismsg"></span>   
+				        </div>
+				        <div id="diagnosisFailmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="sdiagnosisfailmsg"></span>
+				        </div>  
+                       <!-- success error div -->
+                      </div>
+                      
+                      <div class="table-responsive border-bottom-1">
+                              <table id="secondarydaignoseData" class="table table-document datatable">
+                                	<thead>
+	                      		<tr>
+	                      			<th>Secondary Diagnosis</th>
+	                      			<th>ICD Code</th>
+	                      			<th>Action</th>
+	                      		</tr>
+	                      	</thead>
+	                      	
+	                      </table>
+                      </div>
+						</div>                  	
+                  	</div>
+                  	</div>
+                                        
+                         
+                      <a class="btn btn-primary custom-btn btnNext">Next</a>                          
+                    </div>
+                  
+                      <div class="tab-pane text-center py-0 mb-1" id="tab1">
+                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">                          
+                          <div class="col-12 col-md-4 ">
+                            <div class="form-group custom-form">
+                              <label for="speciality">Speciality<span>*</span></label>
+                              <select class="form-control select2" id="speciality" name="speciality" onchange="getPackageMasterBySPecilityCode()">
+                                <option value="">-- Select Speciality --</option>        
+                              </select>
+                              <div class="error" id="specialityError" ></div> 
+                            </div>
+                          </div>
+                          
+                            <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="procedureid" >Package <span>*</span></label>
+                              <select class="form-control select2" id="packageid" name="packageid" onchange="getProcedureMasterBySpecilityAndPackageCode()">
+                                <option value="">-- Select Package --</option>                 
+                               </select>
+                               <div class="error" id="packageidError" ></div> 
+                            </div>
+                          </div>
+                          
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="procedureid">Procedure<span>*</span></label>
+                              <select class="form-control select2" id="procedureid" name="procedureid" onchange="getInvestigationByProcedureCode(); showStratificationAndImplant();">
+                                <option value="">-- Select Procedure --</option>                 
+                               </select>
+                               <div class="error" id="procedureidError" ></div> 
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="ichiCode">ICHI Code / Description<span>*</span></label>
+                              <select class="form-control select2" id="ichiCode" name="ichiCode">
+                                <option value="">-- Select ICHI Code --</option>  
+                                <option value="1">ichi code 1</option>     
+                                <option value="2">ichi code 2</option>                                                 
+                              </select>
+                              <div class="error" id="ichiCodeError" ></div> 
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form custom-dd-select">
+                              <label for="investigationActive">Investigations </label>                              
+                              <select class="form-control select2" multiple="multiple" style="border-radius: .25rem;" id="investigationActive" name="investigationActive">
+                              </select>
+                              <div class="error" id="investigationActiveError" ></div> 
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">History Of Present Illness</label>
+                              <textarea class="form-control" style="border-radius: .25rem; min-height: 82px;" id="presentIllnesHistory" name="presentIllnesHistory"></textarea>
+                            </div>
+                          </div>
+                          <div class="col-12" id="stratdiv" style="display: none;">
+                          	<div class="row">
+                          		<div class="col-12 col-md-4">
+                          			<div class="form-group custom-form custom-dd-select">
+		                                <label for="">Stratification Code <span>*</span></label>
+		                                <select class="form-control select2" id="stratCode" name="stratCode" onchange="stratificationDetails()" multiple>
+		                                  <option value="">-- Select --</option>    
+		                                </select>
+		                                <div class="error" id="stratCodeError" ></div>
+		                              </div>
+                          		</div>
+                          		<div class="col-12 col-md-4">
+                          			<div class="form-group custom-form custom-starti-code">
+		                                <label>Cost</label>
+		                                <input type="text" id="stratificationCost" class="form-control" readonly="">		                                
+	                              </div>
+                          		</div>
+                          	</div>
+                          </div>
+                          
+                          <div class="col-12" id="implantdiv" style="display: none;">
+                          	<div class="row">
+                          		<div class="col-12 col-md-4">
+                          			<div class="form-group custom-form custom-dd-select">
+		                                <label for="">Implant Code <span>*</span></label>
+		                                <select class="form-control select2" id="implantCode" name="implantCode" onchange="getImplantDetailByImplantId()" multiple>
+		                                  <option value="">-- Select --</option>
+		                                </select>
+		                                <div class="error" id="implantCodeError" ></div>
+		                              </div>		
+                          		</div>
+                          		<div class="col-12 col-md-4">
+                          			<div class="form-group custom-form custom-starti-code">
+		                                <label>Cost</label>
+	                  					<input type="text" id="implantCost" class="form-control" readonly="">		                              	
+		                              </div>
+                          		</div>
+                          	</div>
+                          </div>
+                          <div class="col-12 text-right mt-2">
+                          	<button type="button" onclick="preAuthTreatmentProtocal()" class="btn btn-primary custom-btn">Add Treatment</button>
+                          </div>
+                          
+                          <div class="col-12">
+                            <div class="table-responsive border-bottom-1">
+                              <table id="treatMentProtocalTable" class="table table-document datatable">
+                                <thead>
+                                  <tr>
+                                    <th class="border-top-0" width="16%">Speciality</th>
+                                    <th class="border-top-0" width="16%">Package</th>
+                                    <th class="border-top-0" width="16%">Procedure</th>
+                                    <th class="border-top-0" width="16%">ICHI Code / Description</th>
+                                    <th class="border-top-0" width="16%">Investigations</th>
+                                    <th class="border-top-0" width="16%">Package Cost</th>
+                                    <th class="border-top-0" width="20%">Can Add Stratification</th>
+                                    <th class="border-top-0" width="20%">Can Add Implant</th>
+                                    <th class="border-top-0" width="20%">Can Create Erupi Voucher ?</th>
+                                    <th class="border-top-0" width="20%">Action</th>
+                                    <th class="border-top-0" width="20%">History Of Present Illness</th>
+                                    <th class="border-top-0" width="20%">Package Type</th>
+                                    <th class="border-top-0" width="20%">Procedure Label</th>
+                                    <th class="border-top-0" width="20%">Added Stratification (- saperated)</th>
+                                    <th class="border-top-0" width="20%">Stratification Cost</th>
+                                    <th class="border-top-0" width="20%">Added Implant (- saperated)</th>
+                                    <th class="border-top-0" width="20%">Implant Cost</th>
+                                  </tr>										 
+                                </thead>
+                              </table>                                      
+                            </div>
+                          </div>
+                        </div>                        
+                          <!-- success error div -->
+			             <div id="tsuccmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="tsuccmsg"></span>   
+				        </div>
+				        <div id="tfailmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="tfailmsg"></span>
+				        </div>  
+				        <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                        <a class="btn btn-primary custom-btn btnNext">Next</a>                     
+                      </div>
+                      
+                      <div class="tab-pane text-center py-0 mb-1" id="tab2">                          
+                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">                          
+                          <div class="col-12">                            
+                                <div class="generalExamsfindings-wrap">
+                                  <div class="row">
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck1">Temperature (C/F) <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="temperatureParameter" id="c" value="C" >
+                                            <label class="form-check-label" for="c">C</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="temperatureParameter" id="f" value="F">
+                                            <label class="form-check-label" for="f">F</label>
+                                          </div> 
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="temperature" name="temperature" type="text">                                            
+                                          </div>                                         
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck2">Pulse Rate per Minute <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">                                          
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="pluseRate" name="pluseRate" type="text">                                            
+                                          </div>                                         
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck3">BP Lt.Arm mm/Hg <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="bpLt" name="bpLt" type="text">                                            
+                                          </div>
+                                          <div class="form-radio">/</div>
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="bpht" name="bpht" type="text">                                            
+                                          </div>                                         
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck4">BP Rt.Arm mm/Hg <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="bpRt" name="bpRt" type="text">                                            
+                                          </div>
+                                          <div class="form-radio">/</div>
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="bpRth" name="bpRth" type="text">                                            
+                                          </div>                                         
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck5">Height (in Cm) <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">                                          
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="height" name="height" type="text">                                            
+                                          </div>                                         
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck6">Weight (in Kg) <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">                                          
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="weight" name="weight" type="text">                                            
+                                          </div>                                         
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck7">BMI <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">                                          
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm"  id="bmi" name="bmi" type="text">                                            
+                                          </div>                                         
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="pallor">Pallor <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio"  id="pallor1" name="pallor" value="Y">
+                                            <label class="form-check-label" for="pallor1">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" id="pallor2" name="pallor" value="N">
+                                            <label class="form-check-label" for="pallor2">No</label>
+                                          </div>                                                                                 
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck9">Cyanosis <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="cyanosis" id="cyanosis1" value="Y">
+                                            <label class="form-check-label" for="cyanosis1">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="cyanosis" id="cyanosis2" value="N">
+                                            <label class="form-check-label" for="cyanosis1">No</label>
+                                          </div>                                                                                 
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck10">Clubbing Of Fingers/Toes <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="clubOfFingertoes" id="clubOfFingertoes1">
+                                            <label class="form-check-label" for="yes2">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="clubOfFingertoes" id="clubOfFingertoes2">
+                                            <label class="form-check-label" for="clubOfFingertoes2">No</label>
+                                          </div>                                                                                 
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck11">Lymphadenopathy <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="lymphadenopathy" id="lymphadenopathy1">
+                                            <label class="form-check-label" for="lymphadenopathy1">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="lymphadenopathy" id="lymphadenopathy2">
+                                            <label class="form-check-label" for="lymphadenopathy2">No</label>
+                                          </div>                                                                                 
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck12">Oedema In Feet <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="oedemaInFeet" id="oedemaInFeet1">
+                                            <label class="form-check-label" for="oedemaInFeet1">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="oedemaInFeet" id="oedemaInFeet2">
+                                            <label class="form-check-label" for="oedemaInFeet2">No</label>
+                                          </div>                                                                                 
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck13">Malnutrition <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="malnutrition" id="malnutrition1">
+                                            <label class="form-check-label" for="malnutrition1">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="malnutrition" id="malnutrition2">
+                                            <label class="form-check-label" for="malnutrition2">No</label>
+                                          </div>                                                                                 
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck14">Dehydration <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="dehydration" id="dehydration1">
+                                            <label class="form-check-label" for="dehydration1">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="dehydration" id="dehydration2">
+                                            <label class="form-check-label" for="dehydration2">No</label>
+                                          </div>                                                                                 
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-4">
+                                      <div class="general-finding-forms">
+                                        <div class="form-check mb-0">
+                                          <label class="form-check-label" for="exampleCheck15">Respiration (Count for a full Minute) Rate <span></span></label>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input class="form-control form-control-sm" id="respirationRate" name="respirationRate" type="text">                                            
+                                          </div>                                                                                  
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>                              
+                          </div>
+                        </div>
+					  <!-- success error div -->
+			             <div id="succmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="succmsg"></span>   
+				        </div>
+				        <div id="failmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="failmsg"></span>
+				        </div>   
+				        
+				        <div class="error" id="examinationError" ></div> 
+                        <!-- success error div -->
+                         <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                         <button type="button" class="btn btn-primary custom-btn" onclick="preAuthExamination()" >Save & Next</button>
+                      </div>
+                      
+                      <div class="tab-pane text-center py-0 mb-1" id="tab3"> 
+                        <form class="quickForm">
+                          <div class="row pt-2 pb-1 px-2 preauth-in-wrap">
+                            <div class="col-12 col-md-4">
+                              <div class="form-group custom-form">
+                                <label for="appetite">Appetite</label>
+                                <select class="form-control select2" id="appetite" name="appetite">
+                                  <option value="">-- Select --</option>                         
+                                  <option value="Normal">Normal</option>
+                                  <option value="Lost">Lost</option>            
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                              <div class="form-group custom-form">
+                                <label for="diet">Diet</label>
+                                <select class="form-control select2" id="diet" name="diet">
+                                  <option value="">-- Select --</option>                 
+                                  <option value="Veg">Veg</option>
+                                  <option value="Non-Veg">Non-Veg</option>
+                                  <option value="Eggeterian">Eggeterian</option>            
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                              <div class="form-group custom-form">
+                                <label for="bowels">Bowels</label>
+                                <select class="form-control select2" id="bowels" name="bowels">
+                                  <option value="">-- Select --</option>                 
+                                  <option value="Regular">Regular</option>
+                                  <option value="Irregular">Irregular</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                              <div class="form-group custom-form">
+                                <label for="nutrition">Nutrition</label>
+                                <select class="form-control select2" id="nutrition" name="nutrition">
+                                  <option value="">-- Select --</option>                 
+                                  <option value="Normal">Normal</option>
+                                  <option value="Abnormal">Abnormal</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                              <div class="form-group custom-form custom-form-radio">
+                                <label for="">Known Allergies</label>
+                                <div class="form-group mb-0">
+                                  <div class="form-radio">
+                                    <input type="radio" name="knownAllergies" id="knownAllergies1" class="allergictab" value="Y">
+                                    <label class="form-check-label allergictab" for="knownAllergies1">Yes</label>
+                                  </div>
+                                  <div class="form-radio">
+                                    <input type="radio" name="knownAllergies" id="knownAllergies2" class="allergictabno" value="N">
+                                    <label class="form-check-label allergictabno" for="knownAllergies2">No</label>
+                                  </div>                                          
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                              <div class="form-group custom-form custom-form-radio">
+                                <label for="">Habits/Addictions</label>
+                                <div class="form-group mb-0">
+                                  <div class="form-radio">
+                                    <input type="radio" name="habit" id="habit1" class="habitswraptab" value="Y">
+                                    <label class="form-check-label habitswraptab" for="habit1">Yes</label>
+                                  </div>
+                                  <div class="form-radio">
+                                    <input type="radio" name="habit" id="habit2" class="habitswraptabno" value="N">
+                                    <label class="form-check-label habitswraptabno" for="habit2">No</label>
+                                  </div>                                          
+                                </div>
+                              </div>
+                            </div>
+                            
+                           
+                             <div class="col-12 col-md-12 allergic-wrap mb-2">
+                              <div class="card card-info direct-chat preauth-tabs mb-1">
+                                <div class="card-header py-0 px-3 bg-lightblue">
+                                  <h5 class="card-title mt-1">Allergy Details </h5>
+                                </div>
+                                <div class="card-body">                                
+                                  <div class="row p-1">
+                                    <div class="col-12 col-md-4 my-1">
+                                      <div class="form-group custom-form custom-form-radio">
+                                        <label for="">Allergic to Medicine</label>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="allergic" id="allergicyes" value="Y">
+                                            <label class="form-check-label" for="allergicyes">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="allergic" id="allergicno" value="N">
+                                            <label class="form-check-label" for="allergicno">No</label>
+                                          </div>                                          
+                                        </div>
+                                      </div>    
+                                    </div>
+                                    
+                                    <div class="col-12 col-md-4 my-1">
+                                      <div class="form-group custom-form custom-form-radio">
+                                        <label for="">Allergic to Substance other than Medicine</label>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="medicine" id="medicineyes" value="Y">
+                                            <label class="form-check-label" for="medicineyes">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="medicine" id="medicineno" value="N">
+                                            <label class="form-check-label" for="medicineno">No</label>
+                                          </div>                                          
+                                        </div>
+                                      </div>    
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-12 habits-wrap mb-2">
+                              <div class="card card-info direct-chat preauth-tabs mb-1">
+                                <div class="card-header py-0 px-3 bg-lightblue">
+                                  <h5 class="card-title mt-1">Habits/Addictions Details </h5>
+                                </div>
+                                <div class="card-body">                                
+                                  <div class="row p-1">
+                                    <div class="col-12 col-md-4 my-1">
+                                      <div class="form-group custom-form custom-form-radio">
+                                        <label for="">Alcohol</label>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="alcohol" id="regular" value="Regular">
+                                            <label class="form-check-label" for="regular">Regular</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="alcohol" id="occasional" value="Occasional">
+                                            <label class="form-check-label" for="occasional">Occasional</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="alcohol" id="teetotaler" value="Teetotaler">
+                                            <label class="form-check-label" for="teetotaler">Teetotaler</label>
+                                          </div>                                          
+                                        </div>
+                                      </div>    
+                                    </div>
+                                    
+                                    <div class="col-12 col-md-4 my-1">
+                                      <div class="form-group custom-form custom-form-radio">
+                                        <label for="">Tobacco</label>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="tobacco" id="snuff" value="Snuff">
+                                            <label class="form-check-label" for="snuff">Snuff</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="tobacco" id="chewable" value="Chewable">
+                                            <label class="form-check-label" for="chewable">Chewable</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="tobacco" id="smoking" value="Smoking">
+                                            <label class="form-check-label" for="smoking">Smoking</label>
+                                          </div>                                          
+                                        </div>
+                                      </div>    
+                                    </div>
+
+                                    <div class="col-12 col-md-4 my-1">
+                                      <div class="form-group custom-form custom-form-radio">
+                                        <label for="">Drug Use</label>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="drug" id="drugyes" value="Y">
+                                            <label class="form-check-label" for="drugyes">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="drug" id="drugno" value="N">
+                                            <label class="form-check-label" for="drugno">No</label>
+                                          </div>                                                                                  
+                                        </div>
+                                      </div>    
+                                    </div>
+
+                                    <div class="col-12 col-md-4 my-1">
+                                      <div class="form-group custom-form custom-form-radio">
+                                        <label for="">Betel Nut</label>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="betel" id="betelyes" value="Y">
+                                            <label class="form-check-label" for="betelyes">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="betel" id="betelno" value="N">
+                                            <label class="form-check-label" for="betelno">No</label>
+                                          </div>                                                                                  
+                                        </div>
+                                      </div>    
+                                    </div>
+
+                                    <div class="col-12 col-md-4 my-1">
+                                      <div class="form-group custom-form custom-form-radio">
+                                        <label for="">Betel Leaf</label>
+                                        <div class="form-group mb-0">
+                                          <div class="form-radio">
+                                            <input type="radio" name="Leaf" id="Leafyes" value="Y">
+                                            <label class="form-check-label" for="Leafyes">Yes</label>
+                                          </div>
+                                          <div class="form-radio">
+                                            <input type="radio" name="Leaf" id="Leafno" value="N">
+                                            <label class="form-check-label" for="Leafno">No</label>
+                                          </div>                                                                                  
+                                        </div>
+                                      </div>    
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                          </div>
+                        <div class="error" id="personalHistoryError" ></div>                               
+                       <!-- success error div -->
+			             <div id="historysuccmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="historysuccmsg"></span>   
+				        </div>
+				        <div id="historyfailmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="historyfailmsg"></span>
+				        </div>   
+                      <!-- success error div -->
+                        <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                        <button type="button" class="btn btn-primary custom-btn" onclick="preAuthPersonalHistory()">Save & Next</button>                    	
+                      </form>
+                      </div>
+                      <div class="tab-pane text-center py-0 mb-1" id="tab4">      
+                        <div class="row pb-1 px-2 preauth-in-wrap">
+                          <div class="col-12 col-md-6">
+                            <div class="card card-info direct-chat preauth-tabs mb-1">
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">History Of Past Illness </h5>
+                              </div>
+                              <div class="card-body">                                
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="history-past-illness">
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH12" name="PH12">
+                                            <label class="form-check-label" for="PH12">Endocrine Diseases </label>
+                                          </div>                                    
+                                        </div>
+                                      
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH1" name="PH1">
+                                            <label class="form-check-label" for="PH1">Diabetes </label>
+                                          </div>                                    
+                                        </div>
+                                      
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH2" name="PH2">
+                                            <label class="form-check-label" for="PH2">Hypertension </label>
+                                          </div>                                    
+                                        </div>
+                                      
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH3">
+                                            <label class="form-check-label" for="PH3">CAD </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH4">
+                                            <label class="form-check-label" for="PH4">Asthma </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH5" name="PH5">
+                                            <label class="form-check-label" for="PH5">Tuberculosis </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH7" name="PH7" >
+                                            <label class="form-check-label" for="PH7">Stroke </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH8" name="PH8" >
+                                            <label class="form-check-label" for="PH8">Cancers </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH9" name="PH9">
+                                            <label class="form-check-label" for="PH9">Blood Transfusion </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH10" name="PH10">
+                                            <label class="form-check-label" for="PH10">Surgeries </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0" style="display: inline-block;">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH11" name="PH11">
+                                            <label class="form-check-label" for="PH11" >Others if any </label>
+                                          </div>
+                                          
+                                          <div class="mb-2" style="display:none" id="otherifAnyHistory">
+	                                          <div class="form-check my-0">
+	                                            <input type="text" class="form-control form-control-sm" id="otherifAnyHistorytxt" name="otherifAnyHistorytxt">
+	                                          </div>                                    
+	                                        </div>                                    
+                                        </div>
+                                        
+										
+                                        
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="PH13" name="PH13" >
+                                            <label class="form-check-label" for="PH13">Not Applicable </label>
+                                          </div>                                    
+                                        </div>
+                                      </div>
+                                  </div>                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-12 col-md-6">
+                            <div class="card card-info direct-chat preauth-tabs mb-1">
+                              <div class="card-header py-0 px-3 bg-lightblue">
+                                <h5 class="card-title mt-1">Family History </h5>
+                              </div>
+                              <div class="card-body">                                
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="history-past-illness">
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH1" name="FH1">
+                                            <label class="form-check-label" for="FH1">Diabetes </label>
+                                          </div>                                    
+                                        </div>
+                                      
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH2" name="FH2">
+                                            <label class="form-check-label" for="FH2">Hypertension </label>
+                                          </div>                                    
+                                        </div>
+                                      
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH3" name="FH3">
+                                            <label class="form-check-label" for="FH3">Heart Disease </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH4" name="FH4" >
+                                            <label class="form-check-label" for="FH4">Stroke </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH5" name="FH5" >
+                                            <label class="form-check-label" for="FH5">Cancers </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH6" name="FH6">
+                                            <label class="form-check-label" for="FH6">Tuberculosis </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH7" name="FH7">
+                                            <label class="form-check-label" for="FH7">Asthma </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH8" name="FH8">
+                                            <label class="form-check-label" for="FH8">Any Other Hereditary Disease </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH9" name="FH9" >
+                                            <label class="form-check-label" for="FH9">Psychiatrist Illness </label>
+                                          </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0" style="display: inline-block;">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH11" name="FH11">
+                                            <label class="form-check-label" for="FH11">Any Other </label>
+                                          </div>
+                                          
+                                          <div class="mb-2" style="display:none" id="familyHistorytxt">
+	                                          <div class="form-check my-0">
+	                                            <input type="text" class="form-control form-control-sm" id="anyotherfamilyHistorytxt" name="anyotherfamilyHistorytxt">
+	                                          </div>                                    
+	                                        </div>                                    
+                                        </div>
+
+                                        <div class="general-finding-forms my-0">
+                                          <div class="form-check my-0">
+                                            <input type="checkbox" class="form-check-input" id="FH12" name="FH12" >
+                                            <label class="form-check-label" for="FH12">Not Applicable </label>
+                                          </div>                                    
+                                        </div>
+
+                                      </div>
+
+                                  </div>                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>        
+                         
+                         <!-- success error div -->
+			             <div id="familysuccmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="familysuccmsg"></span>   
+				        </div>
+				        <div id="familyfailmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="familyfailmsg"></span>
+				        </div>   
+                      <!-- success error div -->
+                          <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                          <a class="btn btn-primary custom-btn" onclick="preAuthPastFamilyHistory()">Save & Next</a>
+                      </div>
+                      <div class="tab-pane text-center py-0 mb-1" id="tab5">
+                        <div class="row pt-2 pb-1 px-2 preauth-in-wrap">
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">Admission Type <span>*</span></label>
+                              <select class="form-control select2" id="caseType" name="caseType">
+                                <option value="">-- Select --</option>                 
+                                <option value="Planned">Planned</option>
+                                <option value="Emergency">Emergency</option>            
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">Proposed Surgery/Treatment Date</label>
+                              <input type="date" class="form-control" id="treatmentDate">
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">Admission Date <span>*</span></label>
+                              <input type="date" class="form-control" id="admissionDt" name="admissionDt">
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form custom-form-radio">
+                              <label for="">Medico Legal Case, If any <span>*</span></label>
+                              <div class="form-group mb-0">
+                                <div class="form-radio">
+                                  <input type="radio" name="medico" id="medico1" class="medicowraptab" value="Y">
+                                  <label class="form-check-label" for="yes9">Yes</label>
+                                </div>
+                                <div class="form-radio">
+                                  <input type="radio" name="medico" id="medico2" class="medicowraptabno" checked value="N">
+                                  <label class="form-check-label" for="no9">No</label>
+                                </div>                                          
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="col-12 col-md-4 medico-wrap">
+                            <div class="form-group custom-form">
+                              <label for="">FIR/LMC No. <span>*</span></label>
+                              <input type="text" class="form-control" id="firLmc" name="firLmc">
+                            </div>
+                          </div>
+
+                          <div class="col-12 col-md-4 medico-wrap">
+                            <div class="form-group custom-form">
+                              <label for="">Police Station Name <span>*</span></label>
+                              <input type="text" class="form-control" id="policeStation" name="policeStation" >
+                            </div>
+                          </div>
+                          
+                          <!--<div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">Package Cost <span>*</span></label>
+                              <input type="text" class="form-control" id="packageCost" name="packageCost" placeholder="&#8377; 0" readonly>
+                            </div>
+                          </div>-->
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="" >Total Package Cost <span>*</span></label>
+                              <input type="text" id="totPckgAmt" name="totPckgAmt" class="form-control" placeholder="&#8377; 0" readonly>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">Hospital Incentive</label>
+                              <strong class="d-block sub-head" style="position: absolute; top: 20px; left: 15px;">110%</strong>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="">Remarks </label>
+                              <textarea class="form-control" style="border-radius: .25rem;" id="remarks" name="remarks" ></textarea>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-12">
+                          <form id="admissionDocUpload" name="admissionDocUpload" th:object="${admissionDocUpload}" onsubmit="return checkAddDocAdminssionDetail();" enctype="multipart/form-data">
+                             <div class="table-responsive border-bottom-1">
+                              <table id="addTableRow2" class="table table-document">
+                                <thead>
+                                  <tr>
+                                    <th class="border-top-0" width="40%">Document Name</th>
+                                    <th class="border-top-0" width="40%">Upload</th>
+                                    <th class="border-top-0" width="20%"></th>
+                                  </tr>										 
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <select class="form-control form-control-sm select2 mb-2" id="documentid" name="documentid" style="margin-bottom: 1rem;">
+                                        <option value="">-- Select --</option>           
+                                      </select>
+                                    </td>
+                                    <td><input type="file" id="file" class="custom-btn-sm btn-secondary md-2"></td>
+                                    <td class="text-right">     
+	                                	<button type="button" onclick="addDocAdminssionDetail()" class="btn btn-sm btn-primary btn-floting" style="border-radius: 50%;"><i class="fa fa-plus"></i></button>
+ 	                     	       </td>
+                                  </tr>                        
+                                </tbody>
+                              </table>
+                              <level id="lblError" style="color:red"></level>                                      
+                            </div>
+                          </form>
+                            
+							<div class="table-responsive border-bottom-1">
+	                           <table id="addDocAdminssionDetailData" class="table table-document datatable">
+	                             <thead>
+		                      		<tr>
+		                      			<th>Document Name</th>
+		                      			<th>uploaded File Name</th>
+		                      			<th>Action</th>
+		                      		</tr>
+		                      	</thead>
+		                      </table>
+	                      	</div>                            
+                          </div>
+                        </div>
+                         <div class="error" id="admissionDetailError" ></div>        
+                         <!-- success error div -->
+			             <div id="adminssionsuccmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="adminssionsuccmsg"> </span>   
+				        </div>
+				        <div id="adminssionfailmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="adminssionfailmsg"> </span>
+				        </div>   
+                      <!-- success error div -->
+                      <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                      <button type="button" class="btn btn-primary custom-btn" onclick="preAuthAdmissionDetails()">Save & Next</button>  
+                      </div>
+
+                      <div class="tab-pane text-center py-0 mb-1" id="tab8">
+                      <form id="investigationAttachmentDetail" onsubmit="return checkErupiInvestigationDetail();">
+                        <div class="personalhistory-wrap preauth-in-wrap mb-3">
+                          <div class="row pt-2 pb-1 px-2 justify-content-center">
+                            <div class="col-5">
+                              <div class="form-group custom-form mt-1">
+                              <label>File Name</label>
+	                              <select class="form-control form-control-sm select2 mb-2" id="investid" name="investid" style="margin-bottom: 1rem;">
+	                              </select>
+                              </div>
+                            </div> 
+                            <div class="col-5">
+                              <div class="form-group custom-form">
+                                <input type="file" class="custom-btn-sm btn-secondary" id="invfile">
+                              </div>
+                            </div>
+                            <div class="col-2">
+                              <div class="form-group custom-form">
+                                <a class="btn btn-primary custom-btn custom-flot-btn btn-floting" onclick="erupiInvestigationDetail()" style="border-radius: 50%;"><i class="fa fa-plus"></i></a>
+                              </div>
+                            </div>
+							<level id="investError" style="color:red"></level>                              
+                          </div>
+                          </form>
+                          <div class="table-responsive border-bottom-1">
+	                              <table id="investigationDetailData" class="table table-document datatable">
+	                                	<thead>
+		                      		<tr>
+		                      			<th>Document Name</th>
+		                      			<th>uploaded File Name</th>
+		                      			<th>Action</th>
+		                      		</tr>
+		                      	</thead>
+		                      </table>
+	                      	</div>
+                        </div>
+                          <!-- success error div -->
+			             <div id="investsuccmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="investsuccmsg"></span>   
+				        </div>
+				        <div id="investfailmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="investfailmsg"></span>
+				        </div>   
+                      <!-- success error div -->
+                      
+                      
+                        <a class="btn btn-secondary custom-btn btnPrevious">Previous</a>
+                        <a class="btn btn-primary custom-btn btnNext">Next</a>                       
+                      </div>
+
+                      <div class="tab-pane text-center py-0 mb-1" id="tab10">
+                        <div class="row pt-2 pb-1 px-2">
+                        	<div class="col-12 px-0">
+	                        	<div class="row">
+	                        		<div class="col-12 col-md-6">
+	                        			<div class="p-0" >
+											<div class="col-12 col-md-12 preauth-data text-left">
+												<h5>Primary Daignoses</h5>
+											</div>							
+											<div class="col-12">
+												<div class="mb-2 preview-in-tab" id="primaryDiagnosisMap">
+													<!--primary daignostic data will append here-->
+												</div>
+											</div>
+										</div>
+	                        		</div>
+	                        		<div class="col-12 col-md-6">
+	                        			<div class="p-0" >
+											<div class="col-12 col-md-12 preauth-data text-left">
+												<h5>Secondary Daignoses</h5>
+											</div>							
+											<div class="col-12">
+												<div class="mb-2 preview-in-tab" id="secondaryDiagnosisMap">
+													<!--secondary daignostic data will append here-->
+												</div>
+											</div>
+										</div>		
+                        			</div>
+	                        	</div>
+                        	</div>
+							
+							<div class="p-0">
+								<div class="col-12 col-md-12 preauth-data text-left">
+									<h5>Treatment Protocol</h5>
+								</div>
+								<div class="col-12">
+									<div class="mb-2 preview-in-tab" id="treatmentProtocolMap">
+									<!--Treatment Protocol data will append here-->			
+									</div>
+								</div>
+							</div>
+                        	
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>General Findings</h5>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Temperature (C/F) </span>
+                            <div>
+                            	<strong id="tempretureView"> </strong>/<strong id="tempretureViewC"> </strong> 
+                            </div>                         
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>BP Rt.Arm mm/Hg </span>
+                            <div>
+                            <strong id="bprtViewh"> </strong> </strong> 
+                            </div>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>BMI </span>
+                            <strong id="bmiView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Clubbing Of Fingers/Toes </span>
+                            <strong id="clubbingView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Malnutrition  </span>
+                            <strong id="malnutritionView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Pulse Rate per Minute  </span>
+                            <strong id="pulseView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Height (in Cm)   </span>
+                            <strong id="heightView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Pallor  </span>
+                            <strong id="pallorVIew"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Lymphadenopathy   </span>
+                            <strong id="lymphadenopathyView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span> Dehydration   </span>
+                            <strong id="dehydrationView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>BP Lt.Arm mm/Hg  </span>
+                            <div>
+                            <strong id="btltH"></strong></strong>      
+                            </div>                      
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Weight (in Kg)  </span>
+                            <strong id="weightView"></strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Cyanosis   </span>
+                            <strong id="cyanosisView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Oedema In Feet  </span>
+                            <strong id="oedemaView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Respiration Rate  </span>
+                            <strong id="respirationView"> </strong>                            
+                          </div>
+
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Personal History</h5>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Appetite </span>
+                            <strong id="appetiteView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Diet </span>
+                            <strong id="dietView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Bowels </span>
+                            <strong id="bowelsView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Nutrition </span>
+                            <strong id="nutritionVIew"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Known Allergies </span>
+                            <strong id="knowView"> </strong>                            
+                          </div>
+                           <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Allergic to Medicine </span>
+                            <strong id="AllergiToMedicine"> </strong>                            
+                          </div>
+                           <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Allergic to Substance other than Medicine </span>
+                            <strong id="AllergiToSubtance"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Habits/Addictions </span>
+                            <strong id="habitsView"> </strong>                            
+                          </div>
+                          
+                           <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Alcohol </span>
+                            <strong id="AlcoholView"> </strong>                            
+                          </div>
+                           <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Tobacco </span>
+                            <strong id="tobaccoView"> </strong>                            
+                          </div>
+                           <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Drug Use </span>
+                            <strong id="drugView"> </strong>                            
+                          </div>
+                           <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Betel Nut </span>
+                            <strong id="betalNutView"> </strong>                            
+                          </div>
+						 <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Betel Leaf </span>
+                            <strong id="betalLeafView"> </strong>                            
+                          </div>
+                          
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Past & Family History</h5>                            
+                          </div>
+
+                          <div class="row mb-3">
+                            <div class="col-12 col-md-6">
+                              <div class="row">
+                                <div class="col-12 col-md-12 preauth-data text-left">                            
+                                  <h6>History Of Past Illness</h6>                          
+                                </div>
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="eEndocrineView" ><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Endocrine Diseases</span>
+                                  <span id="eEndocrineView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Endocrine Diseases</span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="pDiabetesView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;" ></i>Diabetes </span>
+                                  <span id="pDiabetesView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Diabetes </span>  
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="pHypertensionView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Hypertension</span>
+                                  <span id="pHypertensionView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Hypertension</span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="pCADView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>CAD </span>
+                                  <span id="pCADView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>CAD </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="pAsthmaView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Asthma </span>
+                                  <span id="pAsthmaView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Asthma </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">
+                                  <span style="display: none;" id="pTuberculosisView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Tuberculosis </span>                            
+                                  <span id="pTuberculosisView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Tuberculosis </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="pStrokeView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Stroke </span>
+                                  <span id="pStrokeView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Stroke </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="pCancersView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Cancers </span>
+                                  <span id="pCancersView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Cancers </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="pbloodView" ><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Blood Transfusion </span>
+                                  <span id="pbloodView2" ><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Blood Transfusion </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="purgeriesView" ><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Surgeries </span>
+                                  <span id="purgeriesView2" ><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Surgeries </span>
+                                </div>
+                                      
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="notappliView" ><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Not Applicable </span>
+                                  <span id="notappliView2" ><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Not Applicable </span>
+                                </div>   
+                                
+                                <div class="form-group custom-form" style="display: none;" id = "otherhist">
+	                              <label for="">Others if any</label>
+	                              <input type="text" id="pastHistoryOthr" class="form-control form-control-sm" readonly>
+	                            </div>   
+                                                                
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                              <div class="row">
+                                <div class="col-12 col-md-12 preauth-data text-left">                            
+                                  <h6>Family History</h6>                          
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="fdiabetesView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Diabetes</span>
+                                  <span id="fdiabetesView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Diabetes</span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="fhipertensionView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Hypertension</span>
+                                  <span id="fhipertensionView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Hypertension</span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="fheartView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Heart Disease </span>
+                                  <span id="fheartView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Heart Disease </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="fStrikeView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Stroke </span>
+                                  <span id="fStrikeView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Stroke </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="fcancersView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Cancers </span>
+                                  <span id="fcancersView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Cancers </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="ftuberculosisView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Tuberculosis </span>
+                                  <span id="ftuberculosisView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Tuberculosis </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="fasthmaView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Asthma </span>
+                                  <span id="fasthmaView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Asthma </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="fanyotherView"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Any Other Hereditary Disease </span>
+                                  <span id="fanyotherView2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Any Other Hereditary Disease </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="fpsychiatristViiw"><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Psychiatrist Illness </span>
+                                  <span id="fpsychiatristViiw2"><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Psychiatrist Illness </span>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 preauth-data text-left">                            
+                                  <span style="display: none;" id="notapplifhView" ><i class="fas fa-check fa-fw mr-1" style="color: #2c2d6e;"></i>Not Applicable </span>
+                                  <span id="notapplifhView2" ><i class="fas fa-times fa-fw mr-1" style="color: #f12b2b;"></i>Not Applicable </span>
+                                </div>   
+                                
+                                <div class="form-group custom-form" style="display: none;" id = "otherhistfh">
+	                              <label for="">Others if any</label>
+	                              <input type="text" id="familyHistoryOthr" class="form-control form-control-sm" readonly>
+	                            </div>  
+                                                                                             
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Admission Details</h5>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Admission Type </span>
+                            <strong id="admissionType"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Proposed Surgery/Treatment Date </span>
+                            <strong id="treatmentDateView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Admission Date </span>
+                            <strong id="admissionDateView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Medico Legal Case, If any </span>
+                            <strong id="medicoView"> </strong>                            
+                          </div>
+                           <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>FIR/LMC No </span>
+                            <strong id="FIRView"> </strong>                            
+                          </div>
+                           <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Police Station Name </span>
+                            <strong id="policeView"> </strong>                            
+                          </div>
+                          <!--<div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Package Cost </span>
+                            <strong id="packageCostView"> </strong>                            
+                          </div>-->
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span >Total Package Cost </span>
+                            <strong id="totaCostView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3  preauth-data text-left">                            
+                            <span>Hospital Incentive </span>
+                            <strong id="incentiveView"> </strong>                            
+                          </div>
+                          <div class="col-12 col-md-3 preauth-data text-left">                            
+                            <span>Remarks </span>
+                            <strong id="remarksView" ></strong>                            
+                          </div>
+
+                          <div class="col-12 col-md-12 preauth-data text-left">       
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Document Name</th>
+                                  <th>uploaded File Name</th>
+                                </tr>
+                              </thead>
+                              <tbody id="admissionDetailDocument">
+                                
+                              </tbody>
+                            </table>
+                          </div>                          
+						  
+						  <div class="col-12 col-md-12 preauth-data text-left">                            
+                            <h5>Investigation Details Documents</h5>                            
+                          </div>
+                          <div class="col-12 col-md-12 preauth-data text-left">       
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Document Name</th>
+                                  <th>uploaded File Name</th>
+                                </tr>
+                              </thead>
+                              <tbody id="investigationDetails">
+                                
+                              </tbody>
+                            </table>
+                          </div>
+                          
+                          
+                        </div>
+                          <input type="hidden" id="txnid" name="txnid">
+                          <input type="hidden" id="loginId" name="loginId" th:value="${session.loginId}">
+                          <input type="hidden" id="userMobile" name="userMobile" th:value="${session.mobileNo}">
+                          <input type="hidden" id="userName" name="userName" th:value="${session.userName}">
+                          <input type="hidden" id="hospitalName" name="hospitalName" th:value="${session.hospitalName}">
+                          <input type="hidden" id="patientId" name="patientId">
+                          <input type="hidden" id="userstate" name="userstate" value="22" >
+                          <!--<input type="hidden" id="userstate" name="userstate" th:value="${session.stateCode}" >-->
+                          <input type="hidden" id="patientState" name="patientState" th:value="${session.stateCode}">
+                          <input type="hidden" id="hospState" name="hospState" th:value="${session.stateCode}">
+                          <input type="hidden" id="caseHospCode" name="caseHospCode" th:value="${session.hospitalId}">
+                          <input type="hidden" id="autoApprovalFlag" name="autoApprovalFlag" value="N" >
+                          <input type="hidden" id="enhFlag" name="enhFlag" value="N" >
+                          <input type="hidden" id="isCovidCase" name="isCovidCase" value="N" >
+                          <input type="hidden" id="crtUsr" name="crtUsr" th:value="${session.userName}" >
+                          <input type="hidden" id="hospGrade" name="hospGrade" value="I" >
+                          <input type="hidden" id="hospitalId" name="hospitalId" th:value="${session.hospitalId}" >
+                          
+                          <input type="hidden" id="activeImplant" name="activeImplant" />
+                          <input type="hidden" id="activeStrat" name="activeStrat" />
+                          <input type="hidden" id="activeErupi" name="activeErupi" />
+                          <input type="hidden" id="activeInvestigation" name="activeInvestigation"  />
+                          
+                        <!-- success error div -->
+			             <div id="finalsuccmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="finalsuccmsg"> </span>   
+				        </div>
+				        <div id="finalfailmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="finalfailmsg"> </span>
+				        </div>   
+                      <!-- success error div -->
+                      <a class="btn btn-primary custom-btn" onclick="preAuthFinalSubmit()">Submit</a>   
+                      </div>
+                      
+                      <div id="register" class="overlay_full" onclick="offRegister()">
+		                     <div class="fancy-spinner">
+				                <div class="ring"></div>
+				                <div class="ring"></div>
+				                <div class="dot"></div>
+				                <span>Loading</span>
+				              </div>         
+		              </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+  </div>
+
+ <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="js/adminlte.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="js/datatable/jquery.dataTables.min.js"></script>
+  <script src="js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.responsive.min.js"></script>
+  <script src="js/datatable/responsive.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.buttons.min.js"></script>
+  <script src="js/datatable/buttons.bootstrap4.min.js"></script>
+  <script src="js/datatable/jszip.min.js"></script>
+  <script src="js/datatable/pdfmake.min.js"></script>
+  <script src="js/datatable/vfs_fonts.js"></script>
+  <script src="js/datatable/buttons.html5.min.js"></script>
+  <script src="js/datatable/buttons.print.min.js"></script>
+  <script src="js/datatable/buttons.colVis.min.js"></script>
+  
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/select2.full.min.js"></script>
+  <script src="js/custom.js"></script>
+  
+  <script src="tms-js/preauth.js" ></script>
+  <script src="tms-js/save-master-data.js" ></script>
+  <script src="tms-js/wallet.js" ></script>
+ 
+  <script>
+   $( document ).ready(function() {
+	var txnid = localStorage.getItem("txnid");
+	$('#txnid').val(txnid);
+	getPreAuthDetailListById();
+	});
+   
+  
+		function onRegister() {
+		  document.getElementById("register").style.display = "flex";
+		}
+		
+		function offRegister() {
+		  document.getElementById("register").style.display = "none";
+		}
+  </script>
+
+</body>
+
+</html>

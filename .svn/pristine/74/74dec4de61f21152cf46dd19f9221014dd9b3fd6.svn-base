@@ -1,0 +1,135 @@
+package com.gov.nha.bis.server.controller;
+
+import java.util.HashMap;
+import java.util.Locale;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gov.nha.bis.server.model.State;
+import com.gov.nha.bis.server.properties.ApplicationConstantConfig;
+import com.gov.nha.bis.server.requestResponse.HospitalSpecialityMapperRequest;
+import com.gov.nha.bis.server.rest.service.MasterDataService;
+import com.gov.nha.bis.server.rest.service.TmsMasterService;
+
+@CrossOrigin
+@Controller
+public class MasterDataController {
+
+	private static final Logger logger = LogManager.getLogger(MasterDataController.class);
+
+	@Autowired
+	public ApplicationConstantConfig applicationConstantConfig;
+
+	@Autowired
+	public TmsMasterService tmsMasterService;
+	
+	@Autowired
+	public MasterDataService masterDataService;
+
+	public static final HashMap<String, String> stateMap = new HashMap<>();
+	
+
+	@RequestMapping(value="/stateMaster",method = RequestMethod.POST)
+	public @ResponseBody String stateMaster(HttpSession session,HttpServletRequest request,@ModelAttribute("stateDetails") State stateDetails,ModelMap model,Locale locale){
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			
+			return  mapper.writeValueAsString(stateMap);
+		} catch (JsonProcessingException e) {
+			logger.info(e.getMessage());
+			return null;
+		}
+	}
+	
+	@RequestMapping(value="/urbanMaster",method = RequestMethod.POST)
+	public @ResponseBody String ruralMasterSearch(HttpSession session,HttpServletRequest request,@ModelAttribute("stateDetails") State stateDetails,ModelMap model,Locale locale){
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String role = (String.valueOf((Integer)session.getAttribute("role")));
+			if(role!=null && (role.equalsIgnoreCase("99") || role.equalsIgnoreCase("98"))) {
+				return "";
+			}else if(role!=null && role.equalsIgnoreCase("97")) {
+				HashMap<String, String> currMap = new HashMap<>();
+				currMap.put(session.getAttribute("loginUserstateCode").toString(), session.getAttribute("loginUserstateName").toString());
+				return mapper.writeValueAsString(currMap);
+			}else if(role!=null &&  role.equalsIgnoreCase("96")) {
+				return  mapper.writeValueAsString(stateMap);
+			}else {
+				return null;
+			}	
+		} catch (JsonProcessingException e) {
+			logger.info(e.getMessage());
+			return null;
+		}
+	}
+
+	@PostConstruct
+	public @ResponseBody String ruralMasterSearch(){
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String response  =tmsMasterService.getStateMaster(); 
+			if(!ObjectUtils.isEmpty(response)) {		
+				JSONObject userJson= new JSONObject(response);
+				if(userJson.getString("status")!=null 
+						&& userJson.getString("status").equalsIgnoreCase("SUCCESS")
+						&&  userJson.getJSONObject("data")!=null) {
+					
+					JSONObject jsonObject = userJson.getJSONObject("data");
+					jsonObject.keySet().forEach(keyStr ->
+				    {
+				        Object keyvalue = jsonObject.get(keyStr);
+				        //System.out.println("key: "+ keyStr + " value: " + keyvalue);
+				        stateMap.put(keyStr,keyvalue.toString());
+				    });
+				}
+			}
+			return  mapper.writeValueAsString(stateMap);
+		} catch (JsonProcessingException e) {
+			logger.info(e.getMessage());
+			return null;
+		}
+	}
+	
+	
+	@PostMapping(value="/getHemMappingList")
+	public @ResponseBody String getHospitalSpecialityMapping(HttpSession session,@RequestParam String hid) {
+		return tmsMasterService.getHospitalSpecialityMapping((String) session.getAttribute("loginToken"),hid);
+	}
+	
+	
+	@PostMapping(value="/getspecialityByHospitalState")
+	public @ResponseBody String getspecialityByHospitalState(HttpSession session,@RequestParam String hid) {
+		return tmsMasterService.getspecialityByHospitalState((String) session.getAttribute("loginToken"),hid);
+	}
+	
+	
+	@PostMapping(value="/savehospitalSpeciality")
+	public @ResponseBody String savehospitalSpeciality(HttpSession session,@ModelAttribute("hospStateMapping") HospitalSpecialityMapperRequest hospStateMapping,ModelMap model,Locale locale) {
+		return masterDataService.savehospitalSpeciality((String) session.getAttribute("loginToken"),hospStateMapping);
+	}
+	
+	
+	@PostMapping(value="/statusChangeHospSpecMapping")
+	public @ResponseBody String statusChangeHospSpecMapping(HttpSession session,@RequestParam String mapid) {
+		return masterDataService.statusChangeHospSpecMapping((String) session.getAttribute("loginToken"),mapid);
+	}
+}

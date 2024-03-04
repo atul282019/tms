@@ -1,0 +1,27 @@
+package com.gov.nha.bis.server.requestResponse;
+
+import java.io.Serializable;
+
+public class ShowStratificationDataReq implements Serializable{
+	
+
+	private static final long serialVersionUID = -5145118965670277166L;
+	
+	private String txnid;
+	private String[] stratCode;
+	
+	public String getTxnid() {
+		return txnid;
+	}
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
+	}
+	public String[] getStratCode() {
+		return stratCode;
+	}
+	public void setStratCode(String[] stratCode) {
+		this.stratCode = stratCode;
+	}
+	
+	
+}

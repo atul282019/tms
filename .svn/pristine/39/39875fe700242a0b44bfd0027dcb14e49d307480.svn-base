@@ -1,0 +1,183 @@
+function getUserHospital() {
+	var hid = $('#sesshosp').val();
+	$.ajax({
+		type: "GET",
+		url: "" + $('#ctx').attr('content') + "/getCurrentHosp",
+		data: {
+			"hid": hid,
+		},
+		success: function(data) {
+			$("#sesshosp option").remove();
+			var x = document.getElementById("sesshosp");
+			var dd = '';
+			for (let i = 0; i < data.length; i++) {
+				var option = document.createElement("option");
+				option.text = data[i].hname;
+				option.value = data[i].hid;
+				x.add(option);
+				if (data[i].selected) {
+					dd = data[i].hid;
+				}
+			}
+			$('select[name^="sesshosp"] option[value="' + dd + '"]').attr("selected", "selected");
+			getMappingList(dd)
+			getSpecialityForHospital(dd)
+		},
+		error: function(e) {
+			alert('API Gateway not respond. Please try again.');
+		}
+	});
+}
+
+
+function getMappingList(dd) {
+	var hid = dd
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/getHemMappingList?hid=" + hid,
+		success: function(data) {
+			var data1 = jQuery.parseJSON(data);
+			if (data1.status == "SUCCESS") {
+				offRegister();
+				var data2 = data1.data;
+				var table = $('#hem').DataTable({
+					"destroy": true, "responsive": true, "lengthChange": true, "autoWidth": false, "pagingType": "full_numbers", "pageLength": 50,
+					"buttons": ["csv", "excel"], "aaSorting": [],
+					"language": { "emptyTable": "No Data available" },
+					"aaData": data2,
+					"aoColumns": [
+						{ "mData": "facility_name" },
+						{ "mData": "specialityname" },
+						{ "mData": "specialitycode" },
+						{ "mData": "statecode" },
+						{ "mData": "created_username" },
+						{ "mData": "created_date" },
+						{ "mData": "status" },
+						{
+							"mData": "id",
+							"render": function(data2, type, row) {
+								return '<button class="btn btn-primary custom-btn" onclick="changeStatus(this)">Edit&nbsp;</button>';
+							}
+						},
+					],
+
+				}).buttons().container().appendTo('#hem_wrapper .col-md-6:eq(0)');
+			} else {
+				offRegister();
+			}
+		},
+		error: function(e) {
+			offRegister();
+			alert('API Gateway not respond. Please try again.');
+		}
+	});
+}
+
+
+function changeStatus(value) {
+	document.getElementById("statuschange").value = value;
+}
+
+
+function locktoChangeStatus() {
+	mapid = document.getElementById("statuschange").value;
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/statusChangeHospSpecMapping",
+		data: {
+			"mapid": mapid,
+		},
+		success: function(data) {
+			offRegister();
+			var data1 = jQuery.parseJSON(data);
+			if (data1.status == "SUCCESS") {
+				getUserHospital();
+			}
+			if (data1.status == "FAILURE") {
+			}
+		},
+		error: function(e) {
+			offRegister();
+		}
+	});
+
+}
+
+function savehospitalSpeciality() {
+	var sesshosp = document.getElementById("sesshosp").value;
+	var specid = document.getElementById("specid").value;
+
+	if (sesshosp == "") {
+		document.getElementById("hospError").innerHTML = "Please Select Scheme";
+		document.getElementById("sesshosp").focus();
+		return false;
+	} else {
+		document.getElementById("hospError").innerHTML = "";
+	}
+
+	if (specid == "") {
+		document.getElementById("specError").innerHTML = "Please Select State";
+		document.getElementById("specid").focus();
+		return false;
+	} else {
+		document.getElementById("specError").innerHTML = "";
+	}
+
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/savehospitalSpeciality",
+		data: {
+			"hospitalid": sesshosp,
+			"specialityid": specid,
+		},
+		success: function(data) {
+			offRegister();
+			var obj = jQuery.parseJSON(data);
+			if (obj.status == "SUCCESS") {
+				document.getElementById("succmsg").innerHTML = "Data Saved Successfully";
+				document.getElementById("succmsgdiv").style.display = "block";
+				$("#specid").val('').trigger('change');
+				getUserHospital();
+			} else if (obj.status == "FAILURE") {
+				document.getElementById("failmsg").innerHTML = obj.message;
+				document.getElementById("failmsgDiv").style.display = "block";
+				$('#failmsgDiv').delay(5000).fadeOut(2000);
+			} else {
+				alert('API Gateway not respond. Please try again.');
+			}
+		},
+		error: function(e) {
+			offRegister();
+			alert('API Gateway not respond. Please try again.');
+		}
+	});
+}
+
+function getSpecialityForHospital(dd) {
+	var hid = dd
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/getspecialityByHospitalState",
+		data: {
+			"hid": hid,
+		},
+		success: function(data) {
+			var data1 = jQuery.parseJSON(data);
+			data1 = data1.data;
+			$("#specid option").remove();
+			var x = document.getElementById("specid");
+			for (let i = 0; i < data1.length; i++) {
+				var option = document.createElement("option");
+				option.text = data1[i].specialityname;
+				option.value = data1[i].specialityid;
+				x.add(option);
+			}
+		},
+		error: function(e) {
+			alert('API Gateway not respond. Please try again.');
+		}
+	});
+}

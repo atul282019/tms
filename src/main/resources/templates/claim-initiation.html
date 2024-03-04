@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+ 
+<body class="home-bg hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    <!-- Navbar -->
+   
+    <header th:insert="fragments/header.html :: header"> </header>
+   
+    <!-- /.navbar -->
+
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+          <!-- Brand Logo -->
+	      <a th:href="@{/registration}" class="brand-link">
+	        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+	      </a>
+
+       <!-- Sidebar -->
+     
+      <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+     
+      <!-- /.sidebar -->
+  
+    </aside>
+
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Claim Initiation</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item">Claim</li>
+                <li class="breadcrumb-item active">Claim Initiation</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Claim Cases For Initiation </h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Case No.</label>
+                        <input type="text" class="form-control" placeholder="Case No.">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Beneficiary Card No.</label>
+                        <input type="text" class="form-control" placeholder="Beneficiary Card No.">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Registered From Date</label>
+                        <input type="text" class="form-control" placeholder="Registered From Date">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Registered To Date</label>
+                        <input type="text" class="form-control" placeholder="Registered To Date">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">State</label>
+                        <select class="form-control">
+                          <option>-- Select --</option>
+                          <option>Delhi</option>
+                          <option>Uttar Pradesh</option>            
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-12 text-center my-2">                  
+                      <button type="reset" class="btn btn-secondary custom-btn">Reset</button>
+                      <button type="submit" class="btn btn-primary custom-btn">Search</button>
+                    </div>
+                    
+                  </div>     
+                   
+                </div>
+              </div>
+
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Claim Cases</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12">
+                      <table id="example1" class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th style="width: 50px;">Sr. No.</th>
+                          <th>Case No.</th>
+                          <th>Claim No.</th>
+                          <th>Patient Name</th>
+                          <th>Case Status</th>    
+                          <th>Hospital Name</th>
+                          <th>Registered Date</th>                      
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td><a th:href="@{/claiminitiationdetail}">CASE/PS2/HOSP6P04621/S132857</a></td>
+                            <td>TRUST/FAR/2020/6062910/1</td>  
+                            <td>Akhil</td>
+                            <td>Discharge date updated by Medco	</td>
+                            <td>Shanti Devi Memorial Hospital	</td>
+                            <td>06/06/2020 </td>
+                          </tr>   
+                          <tr>
+                            <td>2</td>
+                            <td><a th:href="@{/claiminitiationdetail}" >CASE/PS2/HOSP6P04621/S133448</a></td>
+                            <td>TRUST/AMB/2022/5863417/1</td>  
+                            <td>Sheel Kant</td>
+                            <td>Discharge date updated by Medco	</td>
+                            <td>Shanti Devi Memorial Hospital	</td>
+                            <td>27/04/2020 </td>
+                          </tr>                
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+  </div>
+
+ <!-- <div th:replace="fragments/footer.html :: footer"></div>-->
+ <script>
+		$(document).ready(function () {
+			$('#myDIV1').removeClass('active');
+			$('#myDIV2').removeClass('active');
+			$('#myDIV3').addClass('active');
+			$('#myDIV4').removeClass('active');
+		});
+</script>
+    
+<div th:replace="fragments/footerlibs.html :: footerlibs"> </div>
+     
+</body>
+
+</html>

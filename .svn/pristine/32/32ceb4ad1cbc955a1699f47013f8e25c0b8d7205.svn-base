@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+
+<body class="home-bg hold-transition sidebar-mini layout-fixed" onload="getStratificationMasterData(),getPrice(),getStateDataMaster()">
+  <div class="wrapper">
+     <!-- Navbar -->
+
+	 <header th:insert="fragments/header.html :: header"> </header>
+   
+     <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a th:href="@{/registration}" class="brand-link">
+        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+      </a>
+       <!-- Sidebar -->
+     
+      <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+     
+      <!-- /.sidebar -->
+    </aside>
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Add Vital Test Master</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Add Vital Test Master</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+      <section class="content">
+   
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Add Vital Test Master</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <form class="quickForm">
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                  
+                   <!-- <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Scheme </label>
+                         <select class="form-control masterbox" id="schemeid" name="schemeid">
+                          <option value="" >-- Select Scheme--</option>       
+                           <option value="1" >AB-PMJAY</option>       
+                            <option value="2" >NON-PMJAY</option>                                  
+                        </select>
+                        <div class="error" id="schemeidError" ></div> 
+                      </div>
+                    </div>-->
+                    
+                   <!-- 
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">State Code</label>
+                         <select class="form-control masterbox" id="statecode" name="statecode">
+                          <option value="" >-- Select State--</option>       
+                                               
+                        </select>
+                         <div class="error" id="statecodeError" ></div> 
+                      </div>
+                    </div>-->
+                   
+                <!--    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Group</label>
+                        <select class="form-control masterbox" id="groupid" name="groupid">
+                          <option value="" >-- Select Group--</option>       
+                           <option value="1" >Group 1</option>       
+                            <option value="2" >Group 2</option>                                  
+                        </select>
+                         <div class="error" id="groupidError" ></div> 
+                      </div>
+                    </div>-->
+                  <!--  <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Status</label>
+                        <select class="form-control" id="status" name="status">
+                          <option value="" >-- Select Status--</option>       
+                           <option value="1" >Status 1</option>       
+                            <option value="2" >Status 2</option>                                  
+                        </select>
+                      </div>
+                    </div>-->
+                    <!--<div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Price Id</label>
+                         <select class="form-control masterbox" id="pacPrice" name="pacPrice">
+                          <option value="" >-- Select Price--</option>                                  
+                        </select>
+                         <div class="error" id="pacPriceError" ></div> 
+                      </div>
+                    </div>-->
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Height</label>
+                        <input type="text" class="form-control" id="height" name="height" placeholder="Height">
+                         <div class="error" id="heightError" ></div> 
+                      </div>
+                    </div>
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Weight</label>
+                        <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight">
+                     	 <div class="error" id="weightError" ></div> 
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Tempreture</label>
+                        <input type="text" class="form-control" id="tempreture" name="tempreture" placeholder="Tempreture">
+                        <div class="error" id="versionidError" ></div> 
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Alergies</label>
+                        <input type="radio" class="form-control" id="alergies" name="alergies" value="Yes">
+                         <input type="radio" class="form-control" id="alergies1" name="alergies" value="No">
+                        <div class="error" id="alergiesError" ></div> 
+                      </div>
+                    </div>
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Blood Group</label>
+                       <select class="form-control masterbox" id="bloodGroup" name="bloodGroup">
+                          <option value="" >-- Blood Group--</option>       
+                           <option value="1" >A+</option>       
+                            <option value="2" >O+</option>                                  
+                        </select>
+                        <div class="error" id="bloodGroupError" ></div> 
+                      </div>
+                    </div>
+                    
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">ECO</label>
+                        <input type="file" class="form-control" id="eco" name="eco" >
+                        <div class="error" id="ecoError" ></div> 
+                      </div>
+                    </div>
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">ECG</label>
+                        <input type="file" class="form-control" id="ecg" name="ecg" >
+                        <div class="error" id="ecgError" ></div> 
+                      </div>
+                    </div>
+                    
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Covid</label>
+                        <input type="file" class="form-control" id="covid" name="covid" >
+                        <div class="error" id="ecgError" ></div> 
+                      </div>
+                    </div>
+                  
+                      <div id="register" class="overlay_full" onclick="offRegister()">
+	                      <div class="fancy-spinner">
+				                <div class="ring"></div>
+				                <div class="ring"></div>
+				                <div class="dot"></div>
+				                <span></span>
+				           </div>
+                      </div>
+                      
+                    <!-- success error div -->
+		             <div id="succmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+			        	<span id="succmsg"></span>   
+			        </div>
+			        
+			        <div id="failmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+			        	<span id="failmsg"></span>
+			        </div>
+                      
+                      <!-- success error div -->
+                      
+                    <div class="col-12 text-center my-2"> 
+                       <button type="button" class="btn btn-primary custom-btn" >Submit</button>
+                    </div>
+                  </div>     
+                  
+                </div>
+               
+               </form>
+               
+              </div>
+
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Vital Test Details</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12">
+                      <table id="vitalMasterData" class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th style="width: 50px;">Sr. No.</th>
+                          <th>Vital Detail</th>
+                          <th>Height</th>
+                          <th>Weight</th>
+                          <th>Tempreture</th>     
+                          <th>Alergies</th>
+                          <th>Blood Group</th>     
+                          <th>ECO</th>
+                          <th>ECG</th>
+                          <th>Covid</th>                     
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+  </div>
+
+ <!-- <div th:replace="fragments/footer.html :: footer"></div>-->
+    
+     <div th:replace="fragments/footerlibs.html :: footerlibs"> </div>
+   
+    <script src="tms-js/save-master-data.js" ></script> 
+  <script>
+   	function onRegister() {
+		  document.getElementById("register").style.display = "flex";
+		}
+		
+		function offRegister() {
+		  document.getElementById("register").style.display = "none";
+		}
+	</script>
+   
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+ 
+
+<body class="home-bg hold-transition sidebar-mini layout-fixed" onload="getSpecialityMasterData()" >
+  <div class="wrapper">
+      <!-- Navbar -->
+
+		<header th:insert="fragments/header.html :: header"> </header>
+   
+    <!-- /.navbar -->
+
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a th:href="@{/registration}" class="brand-link">
+        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+      </a>
+
+       <!-- Sidebar -->
+     
+      <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+     
+      <!-- /.sidebar -->
+    </aside>
+
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Add Speciality</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Add Speciality</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+      <section class="content">
+     
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Add Speciality</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <form class="quickForm">
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                   
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Speciality Code</label>
+                        <input type="text" class="form-control" id="specialityCode" placeholder="Speciality Code" maxlength="9">
+                        <div class="error" id="specialityCodeError" ></div>
+                      </div>
+                    </div>
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Speciality Name</label>
+                        <input type="text" class="form-control" id="specialityName" name="specialityName" placeholder="Speciality Name">
+                      	<div class="error" id="specialityNameError" ></div>
+                      </div>
+                      
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Version</label>
+                        <input type="text" class="form-control"id="version" name="version" placeholder="Version">
+                        <div class="error" id="versionError" ></div>
+                      </div>
+                      
+                    </div>
+                    
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Speciality Type</label>
+                        <select class="form-control select2" id="specialitytype" name="specialitytype">
+                          <option value="" >-- Select Speciality Type--</option>       
+                           <option value="Surgical" >Surgical</option>       
+                            <option value="Medical" >Medical</option>                                  
+                        </select>
+                       <div class="error" id="specialitytypeError" ></div> 
+                      </div>
+                    </div> 
+                 
+                    <div id="register" class="overlay_full" onclick="offRegister()">
+	                      <div class="fancy-spinner">
+				                <div class="ring"></div>
+				                <div class="ring"></div>
+				                <div class="dot"></div>
+				                <span></span>
+				          </div>
+                      </div>
+                      
+                    <!-- success error div -->
+		             <div id="succmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+			        	<span id="succmsg"></span>   
+			        </div>
+			        
+			        <div id="failmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+			        	<span id="failmsg"></span>
+			        </div>
+                      
+                      <!-- success error div -->
+                      
+                    <div class="col-12 text-center my-2"> 
+                      <button type="button" class="btn btn-primary custom-btn" onclick="saveSpecialityMasterData()">Submit</button>
+                    </div>
+                  </div>     
+                  
+                </div>
+                </form>
+              </div>
+
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Speciality Details</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12">
+                      <table id="SpecialityTable" class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th style="width: 50px;">Sr. No.</th>
+                          <th>Speciality Name</th>
+                          <th>Speciality Code</th>    
+                          <th>Speciality Type</th>     
+                          <th>Version</th>
+                          <!--<th>No. of Procedures</th>
+                          <th>Status</th>-->                
+                          </tr>
+                          </thead>
+                          <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+ <!-- <div th:replace="fragments/footer.html :: footer"></div>-->
+    
+ <!--    <div th:replace="fragments/footerlibs.html :: footerlibs"> </div>-->
+ 
+    <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="js/adminlte.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="js/datatable/jquery.dataTables.min.js"></script>
+  <script src="js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.responsive.min.js"></script>
+  <script src="js/datatable/responsive.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.buttons.min.js"></script>
+  <script src="js/datatable/buttons.bootstrap4.min.js"></script>
+  <script src="js/datatable/jszip.min.js"></script>
+  <script src="js/datatable/pdfmake.min.js"></script>
+  <script src="js/datatable/vfs_fonts.js"></script>
+  <script src="js/datatable/buttons.html5.min.js"></script>
+  <script src="js/datatable/buttons.print.min.js"></script>
+  <script src="js/datatable/buttons.colVis.min.js"></script>
+  
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/select2.full.min.js"></script>
+  <script src="js/custom.js"></script>
+   
+   <script src="tms-js/save-master-data.js" ></script>   
+	<script>
+   	function onRegister() {
+		  document.getElementById("register").style.display = "flex";
+		}
+		
+		function offRegister() {
+		  document.getElementById("register").style.display = "none";
+		}
+	</script>
+   
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class StratificationMasterRequest {
+
+	    private String stratificationdetail;
+	    private String stratificationoptions;
+	    private Integer priceid;
+		private Long price;
+		private String versionid;
+	    private Integer schemeid;
+	    private Integer statecode;
+	    private Integer status;
+	    private String remarks;
+		public String getStratificationdetail() {
+			return stratificationdetail;
+		}
+		public void setStratificationdetail(String stratificationdetail) {
+			this.stratificationdetail = stratificationdetail;
+		}
+		public String getStratificationoptions() {
+			return stratificationoptions;
+		}
+		public void setStratificationoptions(String stratificationoptions) {
+			this.stratificationoptions = stratificationoptions;
+		}
+		public Integer getPriceid() {
+			return priceid;
+		}
+		public void setPriceid(Integer priceid) {
+			this.priceid = priceid;
+		}
+		public Long getPrice() {
+			return price;
+		}
+		public void setPrice(Long price) {
+			this.price = price;
+		}
+		public String getVersionid() {
+			return versionid;
+		}
+		public void setVersionid(String versionid) {
+			this.versionid = versionid;
+		}
+		public Integer getSchemeid() {
+			return schemeid;
+		}
+		public void setSchemeid(Integer schemeid) {
+			this.schemeid = schemeid;
+		}
+		public Integer getStatecode() {
+			return statecode;
+		}
+		public void setStatecode(Integer statecode) {
+			this.statecode = statecode;
+		}
+		public Integer getStatus() {
+			return status;
+		}
+		public void setStatus(Integer status) {
+			this.status = status;
+		}
+		public String getRemarks() {
+			return remarks;
+		}
+		public void setRemarks(String remarks) {
+			this.remarks = remarks;
+		}
+		@Override
+		public String toString() {
+			return "StratificationMasterRequest [stratificationdetail=" + stratificationdetail
+					+ ", stratificationoptions=" + stratificationoptions + ", priceid=" + priceid + ", price=" + price
+					+ ", versionid=" + versionid + ", schemeid=" + schemeid + ", statecode=" + statecode + ", status="
+					+ status + ", remarks=" + remarks + "]";
+		}
+	    
+		
+
+}

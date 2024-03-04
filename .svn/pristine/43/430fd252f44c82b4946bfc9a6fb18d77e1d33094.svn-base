@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+
+<body class="home-bg hold-transition sidebar-mini layout-fixed" onload="getSpeciality(),getVitalTestMaster(),getVitalTestMasterMappingData()">
+  <div class="wrapper">
+      <!-- Navbar -->
+
+		<header th:insert="fragments/header.html :: header"> </header>
+   
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a th:href="@{/registration}" class="brand-link">
+        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+      </a>
+
+       <!-- Sidebar -->
+     
+      <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+     
+      <!-- /.sidebar -->
+    </aside>
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Vitaltest vs Procedure Mapping</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Vitaltest vs Procedure Mapping</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+      <section class="content">
+     
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Add Vitaltest vs Procedure Mapping</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <form class="quickForm" id="vitaltestProcedureMapping">
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                       <div class="col-12 col-md-4 ">
+                            <div class="form-group custom-form">
+                              <label for="speciality">Speciality<span>*</span></label>
+                              <select class="form-control select2" id="speciality" name="speciality" onchange="getPackageMasterBySPecilityCode()">
+                                <option value="">-- Select Speciality --</option>        
+                              </select>
+                              <div class="error" id="specialityError" ></div> 
+                            </div>
+                          </div>
+                          
+                            <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="procedureid" >Package <span>*</span></label>
+                              <select class="form-control select2" id="packageid" name="packageid" onchange="getprocedureCodeNameMasterData()">
+                                <option value="">-- Select Package --</option>                 
+                               </select>
+                               <div class="error" id="packageidError" ></div> 
+                            </div>
+                          </div>
+                          
+                          <div class="col-12 col-md-4">
+                            <div class="form-group custom-form">
+                              <label for="procedureid">Procedure<span>*</span></label>
+                              <select class="form-control select2" id="procedureid" name="procedureid">
+                                <option value="">-- Select Procedure --</option>                 
+                               </select>
+                               <div class="error" id="procedureidError" ></div> 
+                            </div>
+                          </div>
+                    
+                      <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for=""> Vital Test</label>
+                        <select class="form-control select2" id="vitalTest" name="vitalTest">
+                          <option value="" >-- Select Vital Test --</option>                                  
+                          </select>
+                       <div class="error" id="vitalTestError" ></div> 
+                      </div>
+                    </div> 
+                    
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for=""> Mandatory Status</label>
+                        <select class="form-control select2" id="mandatoryStatus" name="mandatoryStatus">
+                          <option value="" >-- Select Mandatory Status --</option>    
+                          <option value="M" >M</option>
+                          <option value="O" >O</option>    
+                           <option value="N" >N</option>                              
+                          </select>
+                       <div class="error" id="mandatoryStatusError" ></div> 
+                      </div>
+                    </div> 
+                 
+                    <div id="register" class="overlay_full" onclick="offRegister()">
+	                      <div class="fancy-spinner">
+				                <div class="ring"></div>
+				                <div class="ring"></div>
+				                <div class="dot"></div>
+				                <span></span>
+				          </div>
+                      </div>
+                      
+                      <!-- success error div -->
+			             <div id="succmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+				        	<span id="succmsg"></span>   
+				        </div>
+				        
+				        <div id="failmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+				        	<span id="failmsg"></span>
+				        </div>
+	                      
+                      <!-- success error div -->
+                      
+                    <div class="col-12 text-center my-2"> 
+                    	<input type="hidden" id="userstate" name="userstate" value="22" >
+                    	<!--<input type="hidden" id="userstate" name="userstate" th:value="${session.stateCode}" >-->
+	                    <button type="button" class="btn btn-primary custom-btn" onclick="saveVitalTestMasterProcedureMap()" >Submit</button>
+                    </div>
+                  </div>     
+                  
+                </div>
+                </form>
+              </div>
+
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Vitaltest vs Procedure Mapping </h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12">
+                      <table id="vitaltestProcedureMappingData" class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th style="width: 50px;">Sr. No.</th>
+                          <th>Speciality</th>
+                          <th>Package</th>   
+                          <th>Procedure</th>   
+                          <th>Vital Test</th> 
+                          <th>Mandatory Status</th>               
+                        </tr>
+                        </thead>
+                        <tbody>
+                         
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+  </div>
+
+ <div th:replace="fragments/footer.html :: footer"></div>
+    
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="js/adminlte.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="js/datatable/jquery.dataTables.min.js"></script>
+  <script src="js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.responsive.min.js"></script>
+  <script src="js/datatable/responsive.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.buttons.min.js"></script>
+  <script src="js/datatable/buttons.bootstrap4.min.js"></script>
+  <script src="js/datatable/jszip.min.js"></script>
+  <script src="js/datatable/pdfmake.min.js"></script>
+  <script src="js/datatable/vfs_fonts.js"></script>
+  <script src="js/datatable/buttons.html5.min.js"></script>
+  <script src="js/datatable/buttons.print.min.js"></script>
+  <script src="js/datatable/buttons.colVis.min.js"></script>
+  
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/select2.full.min.js"></script>
+  <script src="js/custom.js"></script>
+  
+  <script src="tms-js/save-master-data.js" ></script> 
+ 
+  <script>
+   	function onRegister() {
+		  document.getElementById("register").style.display = "flex";
+		}
+		
+		function offRegister() {
+		  document.getElementById("register").style.display = "none";
+		}
+	</script>
+   
+</body>
+
+</html>

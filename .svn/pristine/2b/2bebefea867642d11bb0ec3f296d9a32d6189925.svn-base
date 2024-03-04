@@ -1,0 +1,157 @@
+<div th:fragment="sidevav">
+		
+		 <!-- Sidebar -->
+      <div class="sidebar">
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Registration
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a th:href="@{/registration}" class="nav-link active">
+                    <i class="fa fa-check-circle-o nav-icon"></i>
+                    <p>Patient Registration</p>
+                  </a>
+                </li>
+               <!-- <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fa fa-check-circle-o nav-icon"></i>
+                    <p>Non AB-PMJAY</p>
+                  </a>
+                </li>-->
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/connectRdMobile}" class="nav-link">
+                <i class="nav-icon fa fa-mobile"></i>
+                <p>Pair Device </p>
+              </a>
+            </li> 
+            
+              <li class="nav-item">
+              <a th:href="@{/claininitiation}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Claim Initiation </p>
+              </a>
+            </li> 
+               <li class="nav-item">
+              <a th:href="@{/claiminitiationdetail}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Claim Initiation Details </p>
+              </a>
+            </li> 
+                <li class="nav-item">
+              <a th:href="@{/speciality}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Speciality Master </p>
+              </a>
+            </li> 
+            
+          
+             <li class="nav-item">
+              <a th:href="@{/packageCategory}" class="nav-link">
+                 <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Package Category Master </p>
+              </a>
+            </li> 
+            
+            <li class="nav-item">
+              <a th:href="@{/price}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Price Master </p>
+              </a>
+            </li> 
+   			<li class="nav-item">
+              <a th:href="@{/lavelMaster}" class="nav-link">
+                 <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Procedure Level Master</p>
+              </a>
+            </li> 
+            
+      		<li class="nav-item">
+              <a th:href="@{/masterPackage}" class="nav-link">
+                 <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Package Master </p>
+              </a>
+            </li> 
+            
+            <li class="nav-item">
+              <a th:href="@{/procedure}" class="nav-link">
+                 <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Procedure Master </p>
+              </a>
+            </li> 
+            
+            
+            <li class="nav-item">
+              <a th:href="@{/document}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Document Master </p>
+              </a>
+            </li> 
+            
+            <li class="nav-item">
+              <a th:href="@{/implant}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Implant Master </p>
+              </a>
+            </li> 
+            
+            <li class="nav-item">
+              <a th:href="@{/stratification}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Stratification Master</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a th:href="@{/vitaltestmaster}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Vital Test Master</p>
+              </a>
+            </li>
+             <li class="nav-item">
+              <a th:href="@{/investigationmaster}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Investigation Master</p>
+              </a>
+            </li>
+             <li class="nav-item">
+              <a th:href="@{/investigationprceduremap}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Investigation VS Procedure Mapp</p>
+              </a>
+            </li>
+           
+            <li class="nav-item">
+              <a th:href="@{/vitaltestnprceduremap}" class="nav-link">
+                <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Vitaltest VS Procedure Mapp</p>
+              </a>
+            </li>
+           
+             <!--<li class="nav-item">
+              <a th:href="@{/scheme}" class="nav-link">
+                 <i class="fa fa-check-circle-o nav-icon"></i>
+                <p>Scheme Master</p>
+              </a>
+            </li> -->
+         
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+           
+    </div>
+    
+  

@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block>
+
+</head>
+
+<body class="home-bg hold-transition sidebar-mini layout-fixed" onload="createSessionRemote()">
+	<div class="wrapper">
+		<!-- Navbar -->
+
+		<header th:insert="fragments/header.html :: header"> </header>
+
+		<!-- /.navbar -->
+
+
+		<!-- Main Sidebar Container -->
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+			<!-- Brand Logo -->
+			<a th:href="@{/registration}" class="brand-link">
+				<img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+			</a>
+
+			<!-- Sidebar -->
+			<header th:insert="fragments/sidenav.html :: sidevav"> </header>
+			<!-- /.sidebar -->
+		</aside>
+
+
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0 sub-head">Pair Device</h1>
+						</div><!-- /.col -->
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active">Pair Device</li>
+							</ol>
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.container-fluid -->
+			</div>
+
+			<section class="content rdconfiguration-section">
+				<div class="container-fluid">
+					<div class="row justify-content-center">
+						<div class="col-lg-8 col-12 text-left">
+							<h4 style="color: green;">Pair Your Mobile for Face Auth</h4>
+						</div>
+						<div class="col-lg-8 col-12">
+							<div class="rdconfiguration-wrap card p-3">
+								<div class="row">
+									<div class="col-12 col-sm-4 col-md-3 col-lg-3">
+										<img id="face_id" name="face_id" src="images/qr.png"
+											class="img-thumbnail rounded mx-auto d-block" alt="">
+										<p class="mt-2">Barcode will Expires in 53 seconds</p>
+									</div>
+									<div class="col-12 col-sm-8 col-md-9 col-lg-9">
+										<div class="rdconfiguration-wrap-text">
+											<h4>To Use Aadhaar RD Service in your Mobile</h4>
+											<ul>
+												<li><strong>1. </strong>Scan the QR Code with NHA Remote Interface APK.
+												</li>
+												<li><strong>2. </strong>Accept the request on your computer to pair with
+													your mobile.</li>
+												<li><strong>3. </strong>After Successful Pairing, You can do the Face
+													Auth through mobile.</li>
+											</ul>
+										</div>
+
+										<div class="col-12">
+											<div id="errorOtp" style="display:none;"
+												class="alert alert-danger text-center py-2"></div>
+											<div id="infoOtp" style="display:none;"
+												class="alert alert-success text-center py-2"></div>
+										</div>
+
+									</div>
+									<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+										<a class="btn custom-btn-sm btn-primary" th:href="@{/registration}">Go Home </a>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</section>
+		</div>
+
+
+	</div>
+	<div th:replace="fragments/footerlibs.html :: footerlibs"> </div>
+
+	<script src="js/custom.js"></script>
+	<script src="tms-js/biometric.js"></script>
+	<!--   <script src="tms-js/biometricAuth.js" ></script>-->
+	<!-- <script src="tms-js/biometricFamily.js" ></script>-->
+	<script src="tms-js/Verhoeff.js"></script>
+	<script src="tms-js/connect-rd-service.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$('#myDIV2').addClass('active');
+			$('#myDIV1').removeClass('active');
+			$('#myDIV3').removeClass('active');
+			$('#myDIV4').removeClass('active');
+			
+		});
+	</script>
+
+</body>
+
+</html>

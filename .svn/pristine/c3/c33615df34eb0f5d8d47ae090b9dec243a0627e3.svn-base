@@ -1,0 +1,223 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class ProcedureMasterRequest {
+	
+	private Integer statecode;
+    private Integer schemeid;
+	private String specialtycode;
+	private String packagecode;
+    private String ICHIProcedureICD_Code;
+	/*
+	 * private String nabh_price; private String non_nabh_price;
+	 */
+    private String stratificationStatus;
+    private String noofStratificationBooked;
+	private String implantStaus;
+    private String moreThanOneImplantStatus;
+    private String specialConditionsStatus;
+    private String reservationPublicHospitalsStaus;
+    private String reservationTertiaryHospitalsStatus;
+    private String levelofCare;
+	private String los;
+    private String autoApprovedStatus;
+    private String procedureLabelName;
+   // private String procedureLabelPrice;
+    private String specialConditionPopUpStatus;
+    private String specialConditionsRuleStatus;
+    private String enhancementApplicableStatus;
+    private String medicalorSurgical;
+    private String dayCareStatus;
+  //  private String investigationCode;
+    private String remarks;
+	private String procedurecode;
+    private String procedurename;
+    private String ichiprocedureicd_code;
+    private String erupistatus;
+    private String medicalorsurgical_code;
+    private String procedurelabelname_code;
+    
+   	public String getErupistatus() {
+   		return erupistatus;
+   	}
+   	public void setErupistatus(String erupistatus) {
+   		this.erupistatus = erupistatus;
+   	}
+    public String getProcedurecode() {
+		return procedurecode;
+	}
+	public void setProcedurecode(String procedurecode) {
+		this.procedurecode = procedurecode;
+	}
+	public String getProcedurename() {
+		return procedurename;
+	}
+	public void setProcedurename(String procedurename) {
+		this.procedurename = procedurename;
+	}
+	public String getIchiprocedureicd_code() {
+		return ichiprocedureicd_code;
+	}
+	public void setIchiprocedureicd_code(String ichiprocedureicd_code) {
+		this.ichiprocedureicd_code = ichiprocedureicd_code;
+	}
+
+	public Integer getStatecode() {
+		return statecode;
+	}
+	public void setStatecode(Integer statecode) {
+		this.statecode = statecode;
+	}
+	public Integer getSchemeid() {
+		return schemeid;
+	}
+	public void setSchemeid(Integer schemeid) {
+		this.schemeid = schemeid;
+	}
+	public String getICHIProcedureICD_Code() {
+		return ICHIProcedureICD_Code;
+	}
+	public void setICHIProcedureICD_Code(String iCHIProcedureICD_Code) {
+		ICHIProcedureICD_Code = iCHIProcedureICD_Code;
+	}
+	
+	public String getStratificationStatus() {
+		return stratificationStatus;
+	}
+	public void setStratificationStatus(String stratificationStatus) {
+		this.stratificationStatus = stratificationStatus;
+	}
+	public String getNoofStratificationBooked() {
+		return noofStratificationBooked;
+	}
+	public void setNoofStratificationBooked(String noofStratificationBooked) {
+		this.noofStratificationBooked = noofStratificationBooked;
+	}
+	public String getImplantStaus() {
+		return implantStaus;
+	}
+	public void setImplantStaus(String implantStaus) {
+		this.implantStaus = implantStaus;
+	}
+	public String getMoreThanOneImplantStatus() {
+		return moreThanOneImplantStatus;
+	}
+	public void setMoreThanOneImplantStatus(String moreThanOneImplantStatus) {
+		this.moreThanOneImplantStatus = moreThanOneImplantStatus;
+	}
+	public String getSpecialConditionsStatus() {
+		return specialConditionsStatus;
+	}
+	public void setSpecialConditionsStatus(String specialConditionsStatus) {
+		this.specialConditionsStatus = specialConditionsStatus;
+	}
+	public String getReservationPublicHospitalsStaus() {
+		return reservationPublicHospitalsStaus;
+	}
+	public void setReservationPublicHospitalsStaus(String reservationPublicHospitalsStaus) {
+		this.reservationPublicHospitalsStaus = reservationPublicHospitalsStaus;
+	}
+	public String getReservationTertiaryHospitalsStatus() {
+		return reservationTertiaryHospitalsStatus;
+	}
+	public void setReservationTertiaryHospitalsStatus(String reservationTertiaryHospitalsStatus) {
+		this.reservationTertiaryHospitalsStatus = reservationTertiaryHospitalsStatus;
+	}
+	public String getLevelofCare() {
+		return levelofCare;
+	}
+	public void setLevelofCare(String levelofCare) {
+		this.levelofCare = levelofCare;
+	}
+	public String getLos() {
+		return los;
+	}
+	public void setLos(String los) {
+		this.los = los;
+	}
+	public String getAutoApprovedStatus() {
+		return autoApprovedStatus;
+	}
+	public void setAutoApprovedStatus(String autoApprovedStatus) {
+		this.autoApprovedStatus = autoApprovedStatus;
+	}
+	public String getProcedureLabelName() {
+		return procedureLabelName;
+	}
+	public void setProcedureLabelName(String procedureLabelName) {
+		this.procedureLabelName = procedureLabelName;
+	}
+
+	/*
+	 * public String getProcedureLabelPrice() { return procedureLabelPrice; } public
+	 * void setProcedureLabelPrice(String procedureLabelPrice) {
+	 * this.procedureLabelPrice = procedureLabelPrice; }
+	 */
+	public String getSpecialConditionPopUpStatus() {
+		return specialConditionPopUpStatus;
+	}
+	public void setSpecialConditionPopUpStatus(String specialConditionPopUpStatus) {
+		this.specialConditionPopUpStatus = specialConditionPopUpStatus;
+	}
+	public String getSpecialConditionsRuleStatus() {
+		return specialConditionsRuleStatus;
+	}
+	public void setSpecialConditionsRuleStatus(String specialConditionsRuleStatus) {
+		this.specialConditionsRuleStatus = specialConditionsRuleStatus;
+	}
+	public String getEnhancementApplicableStatus() {
+		return enhancementApplicableStatus;
+	}
+	public void setEnhancementApplicableStatus(String enhancementApplicableStatus) {
+		this.enhancementApplicableStatus = enhancementApplicableStatus;
+	}
+	public String getMedicalorSurgical() {
+		return medicalorSurgical;
+	}
+	public void setMedicalorSurgical(String medicalorSurgical) {
+		this.medicalorSurgical = medicalorSurgical;
+	}
+	public String getDayCareStatus() {
+		return dayCareStatus;
+	}
+	public void setDayCareStatus(String dayCareStatus) {
+		this.dayCareStatus = dayCareStatus;
+	}
+
+	/*
+	 * public String getInvestigationCode() { return investigationCode; } public
+	 * void setInvestigationCode(String investigationCode) { this.investigationCode
+	 * = investigationCode; }
+	 */
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	public String getSpecialtycode() {
+		return specialtycode;
+	}
+	public void setSpecialtycode(String specialtycode) {
+		this.specialtycode = specialtycode;
+	}
+	public String getPackagecode() {
+		return packagecode;
+	}
+	public void setPackagecode(String packagecode) {
+		this.packagecode = packagecode;
+	}
+	public String getMedicalorsurgical_code() {
+		return medicalorsurgical_code;
+	}
+	public void setMedicalorsurgical_code(String medicalorsurgical_code) {
+		this.medicalorsurgical_code = medicalorsurgical_code;
+	}
+	public String getProcedurelabelname_code() {
+		return procedurelabelname_code;
+	}
+	public void setProcedurelabelname_code(String procedurelabelname_code) {
+		this.procedurelabelname_code = procedurelabelname_code;
+	}
+	
+
+}

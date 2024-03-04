@@ -1,0 +1,26 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class TestMasterRequest {
+	
+ private String testname;
+	 
+	 private String procedureid;
+
+
+	public String getTestname() {
+		return testname;
+	}
+
+	public void setTestname(String testname) {
+		this.testname = testname;
+	}
+
+	public String getProcedureid() {
+		return procedureid;
+	}
+
+	public void setProcedureid(String procedureid) {
+		this.procedureid = procedureid;
+	}
+
+}

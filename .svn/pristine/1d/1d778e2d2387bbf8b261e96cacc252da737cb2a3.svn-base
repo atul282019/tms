@@ -1,0 +1,145 @@
+server.port=8090
+
+spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
+server.error.whitelabel.enabled=false
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates
+    spring.thymeleaf.suffix=.html
+spring.mvc.view.prefix:/templates/
+spring.mvc.view.suffix:.html
+spring.web.resources.add-mappings=true
+server.servlet.session.timeout=45m
+
+NHA_TMS_USER_AUTHENTICATION_URL = https://apis-prd.pmjay.gov.in/OneTMS/v0.1/mobileApis/authenticateUser
+NHA_TMS_USER_AUTHENTICATION_Client_ID=d2117ece
+NHA_TMS_USER_AUTHENTICATION_Client_Secret=af5aa74280a714bf709d822a111e0c7c
+NHA_TMS_USER_AUTHENTICATION_Token_URL=https://apis-prd.pmjay.gov.in/auth/realms/Mobile-app/protocol/openid-connect/token
+
+USER_REGISTER_AUTHENTICATION_URL=https://apis-prd.pmjay.gov.in/OneTMS/v0.1/mobileApis/registerPatient
+USER_REGISTER_AUTHENTICATION_Client_ID=80f9ff25
+USER_REGISTER_AUTHENTICATION_Client_Secret=7a4d8e9bc4d994f297daf1ff65c4709b
+USER_REGISTER_AUTHENTICATION_Token_URL=https://apis-prd.pmjay.gov.in/auth/realms/Mobile-app/protocol/openid-connect/token
+
+USER_LOGIN_GOLDEN_API_URL = https://apis-prd.pmjay.gov.in/externalapi_poc/goldenverification
+
+NHA_TMS_WALLET_Token_URL= https://apis-prd.pmjay.gov.in/auth/realms/3scale-sso/protocol/openid-connect/token
+NHA_TMS_WALLET_Client_ID= 0612196b 
+NHA_TMS_WALLET_Secret_ID= c1035ab3db6026d91c616974e1ad654b
+NHA_TMS_WALLET_URL= https://apis-prd.pmjay.gov.in/nhpmapi/api/v1/wallet
+
+#bis API
+FACE_THIRD_PARTY_URL=https://setu.pmjay.gov.in/CoWinRdServer/webresources/Cowin/
+FACE_CURL=https://setu.pmjay.gov.in/CoWinRdServer/webresources/Cowin/
+FACE_STIMEOUT=635000
+FACE_HOSTID=14.143.232.40
+FACE_SUID=2BF315BE80E842B92E6CA26AF4A5F3CF
+FACE_USERID=8484848455
+FACE_PASSCODE=1234
+FACE_APIKEY=454535fgh555dfg#$%453dff445v%%
+
+APP_AADHAAR_AUTH_HISTORY_URL=https://stagingbis.pmjay.gov.in/txnapi/bis/app/auth/txn/1.0
+
+RD.PIDOPTIONS.VER=2.0 
+RD.OPTS.PIDVER=2.0
+RD.OPTS.ENV=P
+
+NHA_BIS_FINGER_WADH_KEY=RZ+k4w9ySTzOibQdDHPzCFqrKScZ74b3EibKYy1WyGw=
+NHA_BIS_OTP_WADH_KEY=DEL9Vn2tNcxY/T3g9Jf6F/0Ne43ufdO6AaBClCWkCiQ=
+NHA_BIS_IRIS_WADH_KEY=T9nIfCslZnsX4pR6o1CzBDHp7MUiYne6QySOZvmB3Rk=
+NHA_BIS_FACE_WADH_KEY=HzHcM1lgshaAElEgZPz8LrzBeugY9KQ/NMuunxOxtSE=
+
+BIO_KYC_URL=https://stagingbis.pmjay.gov.in/aadhaarapi_bis_2_nah_prod/bis/kyc/bio/2.5
+
+STATE_MASTER_RURAL_URL= https://stagingbis.pmjay.gov.in/stmapi/bis/urban/master/1.0
+
+#tms local servies API
+SAVE_REGISTER_PATIENT_SERVICE = https://stagingbis.pmjay.gov.in/TmsService/api/save/patient/register/1.0
+
+GET_ALL_REGISTERED_PATIENT_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/patient/registered/getData/1.0
+
+GET_PATIENT_DATA_BY_ID = https://stagingbis.pmjay.gov.in/TmsService/api/get/patientDetail/By/Id/1.0
+
+GET_PATIENT_DATA_COUNT_TOTAL_TODAY = https://stagingbis.pmjay.gov.in/TmsService/api/get/registered/patient/count/1.0
+
+#master API
+SAVE_PRICE_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/price/1.0
+
+GET_PRICE_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/price/1.0
+
+SAVE_SPACILITY_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/speciality/1.0
+
+GET_SPACILITY_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/speciality/1.0
+
+SAVE_PACKAGE_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/package/1.0
+
+GET_PACKAGE_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/package/1.0
+
+SAVE_CATEGORY_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/category/1.0
+
+GET_CATEGORY_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/category/1.0
+
+SAVE_PROCEDURE_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/procedure/1.0
+
+GET_PROCEDURE_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/procedure/1.0
+
+SAVE_LBL_PROCEDURE_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/procedure_lbl/1.0
+
+GET_LBL_PROCEDURE_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/procedure_lbl/1.0
+
+SAVE_STRATIFICATION_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/stratification/1.0
+
+GET_STRATIFICATION_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/stratification/1.0
+
+SAVE_IMPLANT_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/implant/1.0
+
+GET_IMPLANT_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/implant/1.0
+
+SAVE_DUCUMENT_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/documentMasterRequest/1.0
+
+GET_DOCUMENT_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/documentMasterRequest/1.0
+
+SAVE_TEST_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/testMasterRequest/1.0
+
+GET_TEST_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/testMasterRequest/1.0
+
+SAVE_PREAUTHORIZATION_REQUEST= https://stagingbis.pmjay.gov.in/TmsService/api/save/preauthorization/data/1.0
+
+GET_TEST_MASTER_DATA_BY_SPECILITY_ID = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/procedure/bySpecilityId/1.0
+
+GET_SCHEME_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/SchemeMasterRequest/1.0
+
+GET_ID_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/IdMasterRequest/1.0
+
+GET_LOGIN_USER=https://stagingbis.pmjay.gov.in/TmsService/api/tms/user/login/1.0
+
+GET_PACKAGE_MASTER_BY_SPECILITY_CODE=https://stagingbis.pmjay.gov.in/TmsService/api/get/master/packageMaster/bySpecilityCode/1.0
+
+GET_PROCEDURE_MASTER_BY_SPECILITY_CODE_PACKAGE_CODE = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/procedureMaster/bySpecilityAndPacageCode/1.0
+
+GET_INVESTIGATION_MASTER_BY_PACKAGE_CODE_AND_PROCEDURE_CODE = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/investigationMaster/byPackageAndProcedure/1.0
+
+GET_STRATIFICATION_MASTER_BY_STATE_CODE = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/stratificationMaster/byStatecode/1.0
+
+GET_IMPLANT_MASTER_BY_STATE_CODE = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/implantMasterDataPreAuth/byStatecode/1.0
+
+GET_DOCUMENT_PRE_AUTH_DATA_BY_SPEC_PACK_PROC_CODE = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/perAuthDOcument/SpecPackProcCode/byStatecode/1.0
+
+GET_PACKAGE_COST = https://stagingbis.pmjay.gov.in/TmsService/api/get/package/Cost/byPackageScheme/Statecode/1.0
+
+GET_STRATIFICATION_DETAIL_STRATIFICATION_CODE = https://stagingbis.pmjay.gov.in/TmsService/api/get/stratificationDetail/bystatificationcode/Statecode/1.0
+
+GET_IMPLANT_DETAIL_BY_ID = https://stagingbis.pmjay.gov.in/TmsService/api/get/implantDetail/by/implantid/1.0
+
+SAVE_INVESTIGATION_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/saveinvestigationmaster/1.0
+
+GET_INVESTIGATION_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/get/master/getInvestigationmaster/1.0
+
+SAVE_VITAL_TEST_MASTER_DATA = https://stagingbis.pmjay.gov.in/TmsService/api/save/master/savevitaltestmaster/1.0
+GET_VITALTEST_MASTER_DATA =  https://stagingbis.pmjay.gov.in/TmsService/api/get/master/vitaltestmasterdata/1.0
+
+
+
+
+

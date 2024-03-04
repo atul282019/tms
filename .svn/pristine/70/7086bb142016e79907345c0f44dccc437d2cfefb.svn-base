@@ -1,0 +1,196 @@
+<div th:fragment="sidevav">
+
+	<!-- Sidebar -->
+	<div class="sidebar">
+
+		<!-- Sidebar Menu -->
+		<nav class="mt-2">
+			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" session.role="menu"
+				data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+				<li class="nav-item menu-open" th:if="${session.role} eq '98' or ${session.role} eq '99'">
+					<a href="#" class="nav-link active">
+						<i class="nav-icon fas fa-user"></i>
+						<p>
+							Registration
+							<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item" th:if="${session.role} eq '98' or ${session.role} eq '99'">
+							<a id="myDIV1" th:href="@{/registration}" class="nav-link active">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Patient Registration</p>
+							</a>
+						</li>
+						<li class="nav-item" th:if="${session.role} eq '98' or ${session.role} eq '99'">
+							<a id="myDIV2" th:href="@{/connectRdMobile}" class="nav-link">
+								<i class="nav-icon fa fa-mobile"></i>
+								<p>Pair Device </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '98'">
+							<a id="myDIV3" th:href="@{/claininitiation}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Claim Initiation </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '98'">
+							<a id="myDIV4" th:href="@{/claiminitiationdetail}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Claim Initiation Details </p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="nav-item menu" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+					<a href="#" class="nav-link active">
+						<i class="nav-icon fas fa-user"></i>
+						<p>
+							Master
+							<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV5" th:href="@{/speciality}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Speciality Master </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV6" th:href="@{/masterPackage}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Package Master </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV7" th:href="@{/packageCategory}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Package Category Master </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV8" th:href="@{/lavelMaster}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Procedure Label Master</p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV9" th:href="@{/procedure}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Procedure Master </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV10" th:href="@{/price}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Price Master </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV11" th:href="@{/document}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Document Master </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV12" th:href="@{/implant}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Implant Master </p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV14" th:href="@{/stratification}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Stratification Master</p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV16" th:href="@{/investigationmaster}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Investigation Master</p>
+							</a>
+						</li>
+
+					</ul>
+				</li>
+
+
+
+
+				<li class="nav-item menu" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+					<a href="#" class="nav-link active">
+						<i class="nav-icon fas fa-user"></i>
+						<p>
+							Master Reference
+							<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV13" th:href="@{/impvspromapping}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Implant VS procedure Mapp</p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV15" th:href="@{/stratvsprocmapping}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Stratification VS procedure Mapp</p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV17" th:href="@{/investigationprceduremap}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Investigation VS Procedure Mapp</p>
+							</a>
+						</li>
+
+						<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV18" th:href="@{/vitaltestnprceduremap}" class="nav-link">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Vitaltest VS Procedure Mapp</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="nav-item menu" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+					<a href="#" class="nav-link active">
+						<i class="nav-icon fas fa-user"></i>
+						<p>
+							Hospital Reference
+							<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<!--<li class="nav-item" th:if="${session.role} eq '96' or ${session.role} eq '97'">
+							<a id="myDIV1" th:href="@{/registration}" class="nav-link active">
+								<i class="fa fa-check-circle-o nav-icon"></i>
+								<p>Patient Registration</p>
+							</a>
+						</li>-->
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		<!-- /.sidebar-menu -->
+	</div>
+	<!-- /.sidebar -->
+</div>

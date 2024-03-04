@@ -1,0 +1,47 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class InvestigationMasterRequest {
+
+	    private String statecode;
+	    private String schemeid;
+	    private String investigationcode;
+	    private String investigationname;
+		public String getStatecode() {
+			return statecode;
+		}
+		public void setStatecode(String statecode) {
+			this.statecode = statecode;
+		}
+		public String getSchemeid() {
+			return schemeid;
+		}
+		public void setSchemeid(String schemeid) {
+			this.schemeid = schemeid;
+		}
+		public String getInvestigationcode() {
+			return investigationcode;
+		}
+		
+		public void setInvestigationcode(String investigationcode) {
+			this.investigationcode = investigationcode;
+		}
+		public String getInvestigationname() {
+			return investigationname;
+		}
+		public void setInvestigationname(String investigationname) {
+			this.investigationname = investigationname;
+		}
+	 
+		@Override
+		public String toString() {
+			return "InvestigationMasterRequest [statecode=" + statecode + ", schemeid=" + schemeid
+					+ ", investigationcode=" + investigationcode + ", investigationname=" + investigationname
+					+ ", getStatecode()=" + getStatecode() + ", getSchemeid()=" + getSchemeid()
+					+ ", getInvestigationcode()=" + getInvestigationcode() + ", getInvestigationname()="
+					+ getInvestigationname() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+					+ ", toString()=" + super.toString() + "]";
+		}
+		
+
+
+}

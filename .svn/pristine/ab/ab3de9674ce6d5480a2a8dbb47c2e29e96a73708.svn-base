@@ -1,0 +1,26 @@
+package com.gov.nha.bis.server.requestResponse;
+
+import java.io.Serializable;
+
+public class ShowImplantDataReq implements Serializable{
+	
+
+	private static final long serialVersionUID = -5145118965670277166L;
+	
+	private String txnid;
+	private String[] implantCode;
+	
+	public String getTxnid() {
+		return txnid;
+	}
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
+	}
+	public String[] getImplantCode() {
+		return implantCode;
+	}
+	public void setImplantCode(String[] implantCode) {
+		this.implantCode = implantCode;
+	}
+	
+}

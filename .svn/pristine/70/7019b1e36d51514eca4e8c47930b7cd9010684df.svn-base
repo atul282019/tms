@@ -1,0 +1,87 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class PriceMasterRequest {
+	
+
+private Integer priceid;
+	
+	private String specialitycode;
+	private String packagecode;
+	private String procedurecode;
+	private String price;
+	private String tier1price;
+	private String tier2price;
+	private String tier3price;
+	private String  statecode;
+	private Integer schemeid;
+	private Integer status;
+	
+	public Integer getPriceid() {
+		return priceid;
+	}
+	public void setPriceid(Integer priceid) {
+		this.priceid = priceid;
+	}
+	public String getSpecialitycode() {
+		return specialitycode;
+	}
+	public void setSpecialitycode(String specialitycode) {
+		this.specialitycode = specialitycode;
+	}
+	public String getPackagecode() {
+		return packagecode;
+	}
+	public void setPackagecode(String packagecode) {
+		this.packagecode = packagecode;
+	}
+	public String getProcedurecode() {
+		return procedurecode;
+	}
+	public void setProcedurecode(String procedurecode) {
+		this.procedurecode = procedurecode;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getTier1price() {
+		return tier1price;
+	}
+	public void setTier1price(String tier1price) {
+		this.tier1price = tier1price;
+	}
+	public String getTier2price() {
+		return tier2price;
+	}
+	public void setTier2price(String tier2price) {
+		this.tier2price = tier2price;
+	}
+	public String getTier3price() {
+		return tier3price;
+	}
+	public void setTier3price(String tier3price) {
+		this.tier3price = tier3price;
+	}
+	public String getStatecode() {
+		return statecode;
+	}
+	public void setStatecode(String statecode) {
+		this.statecode = statecode;
+	}
+	public Integer getSchemeid() {
+		return schemeid;
+	}
+	public void setSchemeid(Integer schemeid) {
+		this.schemeid = schemeid;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+
+}

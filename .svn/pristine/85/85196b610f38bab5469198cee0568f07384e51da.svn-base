@@ -1,0 +1,32 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class InvestigationProcedureMappingRequest {
+
+	 
+    private String investigationcode;
+    private String procedurecode;
+    
+	public String getInvestigationcode() {
+		return investigationcode;
+	}
+	public void setInvestigationcode(String investigationcode) {
+		this.investigationcode = investigationcode;
+	}
+	public String getProcedurecode() {
+		return procedurecode;
+	}
+	public void setProcedurecode(String procedurecode) {
+		this.procedurecode = procedurecode;
+	}
+	
+	@Override
+	public String toString() {
+		return "InvestigationProcedureMappingRequest [investigationcode=" + investigationcode + ", procedurecode="
+				+ procedurecode + ", getInvestigationcode()=" + getInvestigationcode() + ", getProcedurecode()="
+				+ getProcedurecode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}   
+
+
+
+}

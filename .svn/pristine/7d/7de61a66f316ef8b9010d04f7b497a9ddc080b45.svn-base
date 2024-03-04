@@ -1,0 +1,49 @@
+
+<head th:fragment="headerlibs">
+       
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta id="ctx" name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
+  <title>TMS | Patient Register </title>
+
+ <script src="js/jquery-3.6.0.min.js"></script>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="icon" type="image/ico" sizes="16x16" href="img/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="sass/bootstrap.min.css" rel="stylesheet">
+  <!-- all.min CSS -->
+  <link href="sass/all.min.css" rel="stylesheet">
+  <!-- adminlte min CSS -->
+  <link href="sass/adminlte.min.css" rel="stylesheet">
+  <!-- custom CSS -->
+  <link href="sass/font-awesome.css" rel="stylesheet">
+  
+  <link href="sass/select2.min.css" rel="stylesheet">
+  <link href="sass/select2-bootstrap4.min.css" rel="stylesheet">  
+  
+ <!-- DataTables -->
+ <link rel="stylesheet" href="sass/datatable/dataTables.bootstrap4.min.css">
+ <link rel="stylesheet" href="sass/datatable/responsive.bootstrap4.min.css">
+ <link rel="stylesheet" href="sass/datatable/buttons.bootstrap4.min.css">
+
+  <!-- custom CSS -->
+  <link href="sass/custom.css" rel="stylesheet">
+  <style>
+	.green {  
+	  color: #f12b2b;
+	 
+	}
+	.red {
+	  color: #2c2d6e;
+	 
+	}
+  </style>
+
+</head>
+	

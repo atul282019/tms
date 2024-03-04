@@ -1,0 +1,156 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class ProcedureMasterRequest {
+	
+private Integer specialityid;
+    
+	private Integer packageid;
+	
+    private String procedurename;
+	
+    private Long price;
+	
+    private Integer procedure_lbl_id;
+	
+    private String stratificationid;
+    
+	private String implantid;
+	
+    private Integer incentivesper;
+	
+    private String procedurecode;
+	
+    private Integer noofimplant;
+	
+    private String vitaltestid;
+	
+    private Integer docid;
+	
+    private Integer statecode;
+	
+    private Integer schemeid;
+	
+    private Integer priceid;
+
+	public Integer getSpecialityid() {
+		return specialityid;
+	}
+
+	public void setSpecialityid(Integer specialityid) {
+		this.specialityid = specialityid;
+	}
+
+	public Integer getPackageid() {
+		return packageid;
+	}
+
+	public void setPackageid(Integer packageid) {
+		this.packageid = packageid;
+	}
+
+	public String getProcedurename() {
+		return procedurename;
+	}
+
+	public void setProcedurename(String procedurename) {
+		this.procedurename = procedurename;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+
+	public Integer getProcedure_lbl_id() {
+		return procedure_lbl_id;
+	}
+
+	public void setProcedure_lbl_id(Integer procedure_lbl_id) {
+		this.procedure_lbl_id = procedure_lbl_id;
+	}
+
+	public String getStratificationid() {
+		return stratificationid;
+	}
+
+	public void setStratificationid(String stratificationid) {
+		this.stratificationid = stratificationid;
+	}
+
+	public String getImplantid() {
+		return implantid;
+	}
+
+	public void setImplantid(String implantid) {
+		this.implantid = implantid;
+	}
+
+	public Integer getIncentivesper() {
+		return incentivesper;
+	}
+
+	public void setIncentivesper(Integer incentivesper) {
+		this.incentivesper = incentivesper;
+	}
+
+	public String getProcedurecode() {
+		return procedurecode;
+	}
+
+	public void setProcedurecode(String procedurecode) {
+		this.procedurecode = procedurecode;
+	}
+
+	public Integer getNoofimplant() {
+		return noofimplant;
+	}
+
+	public void setNoofimplant(Integer noofimplant) {
+		this.noofimplant = noofimplant;
+	}
+
+	public String getVitaltestid() {
+		return vitaltestid;
+	}
+
+	public void setVitaltestid(String vitaltestid) {
+		this.vitaltestid = vitaltestid;
+	}
+
+	public Integer getDocid() {
+		return docid;
+	}
+
+	public void setDocid(Integer docid) {
+		this.docid = docid;
+	}
+
+	public Integer getStatecode() {
+		return statecode;
+	}
+
+	public void setStatecode(Integer statecode) {
+		this.statecode = statecode;
+	}
+
+	public Integer getSchemeid() {
+		return schemeid;
+	}
+
+	public void setSchemeid(Integer schemeid) {
+		this.schemeid = schemeid;
+	}
+
+	public Integer getPriceid() {
+		return priceid;
+	}
+
+	public void setPriceid(Integer priceid) {
+		this.priceid = priceid;
+	}
+
+
+}

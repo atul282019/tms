@@ -1,0 +1,81 @@
+function getUserHospital() {
+	var hid = $('#sesshosp').val();
+	$.ajax({
+		type: "GET",
+		url: "" + $('#ctx').attr('content') + "/getCurrentHosp",
+		data: {
+			"hid": hid,
+		},
+		success: function(data) {
+			$("#sesshosp option").remove();
+			var x = document.getElementById("sesshosp");
+			var dd = '';
+			for (let i = 0; i < data.length; i++) {
+				var option = document.createElement("option");
+				option.text = data[i].hname;
+				option.value = data[i].hid;
+				x.add(option);
+				if (data[i].selected) {
+					dd = data[i].hid;
+				}
+			}
+			$('select[name^="sesshosp"] option[value="' + dd + '"]').attr("selected", "selected");
+			getMappingList(dd)
+		},
+		error: function(e) {
+			alert('Error: ' + e);
+		}
+	});
+}
+
+
+function getMappingList(dd) {
+	var hid = dd
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/getHemMappingList?hid="+hid,
+		success: function(data) {
+			var data1 = jQuery.parseJSON(data);
+			if (data1.status == "SUCCESS") {
+				offRegister();
+				var data2 = data1.data;
+				var table = $('#hem').DataTable({
+					"destroy": true, "responsive": true, "lengthChange": true, "autoWidth": false, "pagingType": "full_numbers", "pageLength": 50,
+					"buttons": ["csv", "excel"], "aaSorting": [],
+					"language": { "emptyTable": "No Data available" },
+					"aaData": data2,
+					"aoColumns": [
+						{ "mData": "specialityid" },
+						{ "mData": "specialityname" },
+						{ "mData": "specialitycode" },
+
+						{ "mData": "scheme_name" },
+						{ "mData": "state_name" },
+						{ "mData": "status" },
+						{ "mData": "approvalstatus" },
+						{
+							"mData": "specialityid",
+							"render": function(data2, type, row) {
+								return '<button  id="editspeciality" class="btn btn-primary custom-btn" onclick="editSpeciality(this)">Edit&nbsp;</button>';
+							}
+						},
+					],
+
+				}).buttons().container().appendTo('#SpecialityTable_wrapper .col-md-6:eq(0)');
+			} else {
+				var table = $('#hem').DataTable({
+				}).buttons().container().appendTo('#SpecialityTable_wrapper .col-md-6:eq(0)');
+			}
+		},
+		error: function(e) {
+			offRegister();
+			alert('Error: ' + e);
+		}
+	});
+}
+
+function getSpecialityForHospital() {
+
+
+}

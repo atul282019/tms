@@ -1,0 +1,533 @@
+package com.gov.nha.bis.server.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Component
+@CrossOrigin(origins = "", allowedHeaders = "")
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class NhaTmsAdminFilter implements Filter, WebMvcConfigurer{
+
+	Logger logger = LoggerFactory.getLogger(NhaTmsAdminFilter.class);
+	
+	FilterConfig filterConfig = null;
+
+	public void init(FilterConfig filterConfig){
+		this.filterConfig = filterConfig;
+	}
+
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
+		 
+		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
+		String requestURI = httpServletRequest.getRequestURI();
+		
+		boolean isStaticResourceFonts = httpServletRequest.getRequestURI().contains("fonts/");
+		boolean isStaticResourceImg = httpServletRequest.getRequestURI().contains("images/");
+		boolean isStaticResourceJs = httpServletRequest.getRequestURI().contains("js/");
+		boolean isStaticResourceSass = httpServletRequest.getRequestURI().contains("sass/");
+		HttpSession session = httpServletRequest.getSession(false);
+		
+		HttpServletResponse res = (HttpServletResponse) response;
+		//logger.info("inside cors filter method == "+httpServletRequest.getMethod()+" || "+httpServletRequest.getRequestURI());
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers , Authorization,Access-Control-Allow-Origin");
+
+        if ("OPTIONS".equalsIgnoreCase(httpServletRequest.getMethod())) {
+        	res.setStatus(HttpServletResponse.SC_OK);
+        	res.setContentType("application/json");
+        } 
+		if (session == null) {
+			session = httpServletRequest.getSession(true);
+		}
+		String login = (String) session.getAttribute("erupi");
+		//String login = (String) session.getAttribute("Bis_Login");
+		//logger.info("login"+login);
+		//logger.info("request uri-------------"+requestURI);
+		if(login==null){	
+			if(isStaticResourceFonts || isStaticResourceImg || isStaticResourceJs || isStaticResourceSass) {
+						chain.doFilter(request, response);
+			}else if(requestURI.contains("/index")){
+				RequestDispatcher rd = request.getRequestDispatcher("index");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/registration")){
+				RequestDispatcher rd = request.getRequestDispatcher("registration");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/claininitiation")){
+				RequestDispatcher rd = request.getRequestDispatcher("claininitiation");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/claiminitiationdetail")){
+				RequestDispatcher rd = request.getRequestDispatcher("claiminitiationdetail");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/preauth")){
+				RequestDispatcher rd = request.getRequestDispatcher("preauth");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/login")){
+				RequestDispatcher rd = request.getRequestDispatcher("login");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/urbanMaster")){
+				RequestDispatcher rd = request.getRequestDispatcher("urbanMaster");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/usrHome")){
+				RequestDispatcher rd = request.getRequestDispatcher("usrHome");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/connectRdMobile")){
+				RequestDispatcher rd = request.getRequestDispatcher("/connectRdMobile");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/sessionExpire")){
+				RequestDispatcher rd = request.getRequestDispatcher("sessionExpire");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/investigationprceduremap")){
+				RequestDispatcher rd = request.getRequestDispatcher("investigationprceduremap");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/createSession")){
+				RequestDispatcher rd = request.getRequestDispatcher("createSession");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/waitForAck")){
+				RequestDispatcher rd = request.getRequestDispatcher("waitForAck");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/sendAckConf")){
+				RequestDispatcher rd = request.getRequestDispatcher("sendAckConf");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/faceCaptureReq")){
+				RequestDispatcher rd = request.getRequestDispatcher("faceCaptureReq");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/bioBasedKyc")){
+				RequestDispatcher rd = request.getRequestDispatcher("bioBasedKyc");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/registerUser")){
+				RequestDispatcher rd = request.getRequestDispatcher("registerUser");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/captcha")){
+				RequestDispatcher rd = request.getRequestDispatcher("captcha");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getRegisteredPatient")){
+				RequestDispatcher rd = request.getRequestDispatcher("getRegisteredPatient");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getWalletBalance")){
+				RequestDispatcher rd = request.getRequestDispatcher("getWalletBalance");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientDetailById")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientDetailById");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientCountTodatAndTotal")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientCountTodatAndTotal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientCountTodatAndTotal")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientCountTodatAndTotal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientCountTodatAndTotal")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientCountTodatAndTotal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientCountTodatAndTotal")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientCountTodatAndTotal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientCountTodatAndTotal")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientCountTodatAndTotal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientCountTodatAndTotal")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientCountTodatAndTotal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientCountTodatAndTotal")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientCountTodatAndTotal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPatientCountTodatAndTotal")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPatientCountTodatAndTotal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/speciality")){
+				RequestDispatcher rd = request.getRequestDispatcher("speciality");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/masterPackage")){
+				RequestDispatcher rd = request.getRequestDispatcher("masterPackage");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/packageCategory")){
+				RequestDispatcher rd = request.getRequestDispatcher("packageCategory");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/price")){
+				RequestDispatcher rd = request.getRequestDispatcher("price");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/procedure")){
+				RequestDispatcher rd = request.getRequestDispatcher("procedure");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/lavelMaster")){
+				RequestDispatcher rd = request.getRequestDispatcher("lavelMaster");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/stratification")){
+				RequestDispatcher rd = request.getRequestDispatcher("stratification");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/implant")){
+				RequestDispatcher rd = request.getRequestDispatcher("implant");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/document")){
+				RequestDispatcher rd = request.getRequestDispatcher("document");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/scheme")){
+				RequestDispatcher rd = request.getRequestDispatcher("/scheme");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/savePriceMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("savePriceMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveSpecialityMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("saveSpecialityMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/savePackageMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("savePackageMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/savePackageCategoryMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("savePackageCategoryMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveProcedureMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("saveProcedureMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveProcedureLabelMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("saveProcedureLabelMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveDocumentMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("saveDocumentMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveImplantIDMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("saveImplantIDMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveStratificationMasterRequestData")){
+				RequestDispatcher rd = request.getRequestDispatcher("saveStratificationMasterRequestData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPriceMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPriceMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPackageMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPackageMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPackageCategoryMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getPackageCategoryMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getProcedureMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getProcedureMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getProcedureLabelMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getProcedureLabelMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getDocumentMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getDocumentMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getImplantIDMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getImplantIDMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getStratificationMasterRequestData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getStratificationMasterRequestData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getSpecialityMasterData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getSpecialityMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/savePatientPreauth")){
+				RequestDispatcher rd = request.getRequestDispatcher("/savePatientPreauth");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchPreAuthData")){
+				RequestDispatcher rd = request.getRequestDispatcher("catchPreAuthData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchPreAuthPersonalHistory")){
+				RequestDispatcher rd = request.getRequestDispatcher("catchPreAuthPersonalHistory");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchPastFamilyHistory")){
+				RequestDispatcher rd = request.getRequestDispatcher("catchPastFamilyHistory");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchPreAuthAdmissionDetail")){
+				RequestDispatcher rd = request.getRequestDispatcher("catchPreAuthAdmissionDetail");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchPreAuthTreatmentProtocal")){
+				RequestDispatcher rd = request.getRequestDispatcher("catchPreAuthTreatmentProtocal");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/finalSubmitPreAuth")){
+				RequestDispatcher rd = request.getRequestDispatcher("finalSubmitPreAuth");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getProcedureBySpecilityId")){
+				RequestDispatcher rd = request.getRequestDispatcher("getProcedureBySpecilityId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getSchemeRequestData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getSchemeRequestData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchStratificationDetail")){
+				RequestDispatcher rd = request.getRequestDispatcher("catchStratificationDetail");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getCatchStratificationData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getCatchStratificationData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteCatchStratificationData")){
+				RequestDispatcher rd = request.getRequestDispatcher("deleteCatchStratificationData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchImplantDetail")){
+				RequestDispatcher rd = request.getRequestDispatcher("catchImplantDetail");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getImplantDetailData")){
+				RequestDispatcher rd = request.getRequestDispatcher("getImplantDetailData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteCacheImplantData")){
+				RequestDispatcher rd = request.getRequestDispatcher("deleteCacheImplantData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchErupiDetail")){
+				RequestDispatcher rd = request.getRequestDispatcher("catchErupiDetail");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchInvestigationDetail")) {
+				RequestDispatcher rd = request.getRequestDispatcher("catchInvestigationDetail");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getIdMasterData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getIdMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPackageMasterBySpecilityCode")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getPackageMasterBySpecilityCode");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getprocedureMasterBySpecilityCodeAndPackageCodeByState")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getprocedureMasterBySpecilityCodeAndPackageCodeByState");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getInvestigationMasterBydPackageAndProcedureCode")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getInvestigationMasterBydPackageAndProcedureCode");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getStratificationMasterDataPreAuth")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getStratificationMasterDataPreAuth");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getImplantMasterDataPreAuth")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getImplantMasterDataPreAuth");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPreAuthDocumentMasterData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getPreAuthDocumentMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getCostByPackage")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getCostByPackage");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getStratificationDetailByStatificationCode")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getStratificationDetailByStatificationCode");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getImplantDetailByImplantCode")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getImplantDetailByImplantCode");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/catchPrimaryDiagnosis")) {
+				RequestDispatcher rd = request.getRequestDispatcher("catchPrimaryDiagnosis");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deletePrimaryDaignoseData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deletePrimaryDaignoseData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPrimaryDaignoseData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getPrimaryDaignoseData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getprotoColData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getprotoColData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteprotoColData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteprotoColData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getProcedureForStratification")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getProcedureForStratification");
+				rd.forward(request, response);	
+			}else if(requestURI.contains("/getProcedureForImplant")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getProcedureForImplant");
+				rd.forward(request, response);	
+			}else if(requestURI.contains("/getProcedureForErupi")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getProcedureForErupi");
+				rd.forward(request, response);	
+			}else if(requestURI.contains("/getPackageTotalCost")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getPackageTotalCost");
+				rd.forward(request, response);	
+			}else if(requestURI.contains("/catchSecondaryDiagnosis")) {
+				RequestDispatcher rd = request.getRequestDispatcher("catchSecondaryDiagnosis");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getSecondaryDaignoseData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getSecondaryDaignoseData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteSecondaryDaignoseData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteSecondaryDaignoseData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/vitaltestmaster")) {
+				RequestDispatcher rd = request.getRequestDispatcher("vitaltestmaster");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/investigation")) {
+				RequestDispatcher rd = request.getRequestDispatcher("investigation");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveInvestigationMasterData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("saveInvestigationMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getDataInvestigationMaster")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getDataInvestigationMaster");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/checkForStratificationAndImplant")) {
+				RequestDispatcher rd = request.getRequestDispatcher("checkForStratificationAndImplant");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/admission_upload_and_process")) {
+				RequestDispatcher rd = request.getRequestDispatcher("admission_upload_and_process");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveVitalTestMasterData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("saveVitalTestMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getVitalTestMasterData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getVitalTestMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getAdmissionFileData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getAdmissionFileData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteAdmissionFileData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteAdmissionFileData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getInvestigationFileData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getInvestigationFileData");
+				rd.forward(request, response);	
+			}else if(requestURI.contains("/deleteInvestigationFileData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteInvestigationFileData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getInvestigationDocumentForProcedures")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getInvestigationDocumentForProcedures");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveInvestigationProcedureMapping")) {
+				RequestDispatcher rd = request.getRequestDispatcher("saveInvestigationProcedureMapping");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getInvestigationProcedureMappingData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getInvestigationProcedureMappingData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/vitaltestnprceduremap")) {
+				RequestDispatcher rd = request.getRequestDispatcher("vitaltestnprceduremap");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/perview")) {
+				RequestDispatcher rd = request.getRequestDispatcher("perview");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getVitalTestMasterData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getVitalTestMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveVitaltestProcedureMapping")) {
+				RequestDispatcher rd = request.getRequestDispatcher("saveVitaltestProcedureMapping");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getVitaltestProcedureMappingData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getVitaltestProcedureMappingData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/impvspromapping")) {
+				RequestDispatcher rd = request.getRequestDispatcher("impvspromapping");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/stratvsprocmapping")) {
+				RequestDispatcher rd = request.getRequestDispatcher("stratvsprocmapping");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getCurrentHosp")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getCurrentHosp");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getImplantForProcedureMapByState")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getImplantForProcedureMapByState");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveImpProcMapping")) {
+				RequestDispatcher rd = request.getRequestDispatcher("saveImpProcMapping");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getImpProcMapppingTableData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getImpProcMapppingTableData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getStratificationForProcedureMapByState")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getStratificationForProcedureMapByState");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/saveStratProcMapping")) {
+				RequestDispatcher rd = request.getRequestDispatcher("saveStratProcMapping");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getStratProcMapppingTableData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getStratProcMapppingTableData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getInvestigationMasterForProcMappingData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getInvestigationMasterForProcMappingData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getSpecialityBySchemeCoceAndStateCode")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getSpecialityBySchemeCoceAndStateCode");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getprocedureList")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getprocedureList");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getSpecialityDetailBySpecialityId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getSpecialityDetailBySpecialityId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteSpecialityDetailBySpecialityId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteSpecialityDetailBySpecialityId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPackageDetailByPackageId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getPackageDetailByPackageId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deletePackageDetailBypackageId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deletePackageDetailBypackageId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPackCategoryDetailByCategoryId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getPackCategoryDetailByCategoryId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deletePackCategoryDetailByCategoryId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deletePackCategoryDetailByCategoryId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getForPreAuthSpecialityMasterData")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getForPreAuthSpecialityMasterData");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getProcedureLabelDetailByProcedureLabelId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getProcedureLabelDetailByProcedureLabelId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteProcedureLabelDetailByProcedureLabelId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteProcedureLabelDetailByProcedureLabelId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getProcMasterForEditByProcId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getProcMasterForEditByProcId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteProcMasterByProcId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteProcMasterByProcId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getPriceMasterDetailForEditByPriceId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getPriceMasterDetailForEditByPriceId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deletePriceMasterByPriceId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deletePriceMasterByPriceId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getDocumetMasterDetailForEditByDocumentId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getDocumetMasterDetailForEditByDocumentId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteDocumentMasterByDocumentId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteDocumentMasterByDocumentId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getImplantMasterDetailForEditByImplantId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getImplantMasterDetailForEditByImplantId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteImplantMasterByImplantId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteImplantMasterByImplantId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getStratificationMasterDetailByStratificationId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getStratificationMasterDetailByStratificationId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteStratificationMasterByStratificationId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteStratificationMasterByStratificationId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/getInvestigationMasterDetailByInvestigationId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("getInvestigationMasterDetailByInvestigationId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/deleteInvestigationMasterByInvestigationId")) {
+				RequestDispatcher rd = request.getRequestDispatcher("deleteInvestigationMasterByInvestigationId");
+				rd.forward(request, response);
+			}else if(requestURI.contains("/stateMaster")) {
+				RequestDispatcher rd = request.getRequestDispatcher("stateMaster");
+				rd.forward(request, response);
+			}
+			
+			else{
+				RequestDispatcher rd = request.getRequestDispatcher("index");
+				rd.forward(request, response);
+			}
+		}else{
+			chain.doFilter(request, response);
+		} 
+	}
+	
+	public void destroy() {
+		
+	}
+	
+}

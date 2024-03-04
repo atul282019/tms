@@ -1,0 +1,118 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class PackageMasterRequest {
+
+	
+	private Integer spacilityid;
+	
+	private String packagename;
+	
+	private String  issurgical;
+	
+	private Integer status;
+	
+	private Integer numberofdocuments;
+	
+	private Integer packagecatid;
+	
+	private Integer priceid;
+	
+	private Long price;
+	
+	private String packagecode;
+	
+	private Integer state_code;
+	
+	private Integer schemeid;
+
+
+	public Integer getSpacilityid() {
+		return spacilityid;
+	}
+
+	public void setSpacilityid(Integer spacilityid) {
+		this.spacilityid = spacilityid;
+	}
+
+	public String getPackagename() {
+		return packagename;
+	}
+
+	public void setPackagename(String packagename) {
+		this.packagename = packagename;
+	}
+
+	public String getIssurgical() {
+		return issurgical;
+	}
+
+	public void setIssurgical(String issurgical) {
+		this.issurgical = issurgical;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getNumberofdocuments() {
+		return numberofdocuments;
+	}
+
+	public void setNumberofdocuments(Integer numberofdocuments) {
+		this.numberofdocuments = numberofdocuments;
+	}
+
+	public Integer getPackagecatid() {
+		return packagecatid;
+	}
+
+	public void setPackagecatid(Integer packagecatid) {
+		this.packagecatid = packagecatid;
+	}
+
+	public Integer getPriceid() {
+		return priceid;
+	}
+
+	public void setPriceid(Integer priceid) {
+		this.priceid = priceid;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+
+	
+
+	public Integer getState_code() {
+		return state_code;
+	}
+
+	public void setState_code(Integer state_code) {
+		this.state_code = state_code;
+	}
+
+	public Integer getSchemeid() {
+		return schemeid;
+	}
+
+	public void setSchemeid(Integer schemeid) {
+		this.schemeid = schemeid;
+	}
+
+	public String getPackagecode() {
+		return packagecode;
+	}
+
+	public void setPackagecode(String packagecode) {
+		this.packagecode = packagecode;
+	}
+}

@@ -1,0 +1,84 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class PackageMasterRequest {
+
+
+private Long packageid;
+	
+	private String spacilitycode;
+	
+	private String packagecode;
+	
+	private String state_code;
+	
+	private Integer schemeid;
+	
+	private Integer status;
+	
+	private String packagename;
+
+
+	public String getPackagename() {
+		return packagename;
+	}
+
+	public void setPackagename(String packagename) {
+		this.packagename = packagename;
+	}
+
+	public Long getPackageid() {
+		return packageid;
+	}
+
+	public void setPackageid(Long packageid) {
+		this.packageid = packageid;
+	}
+
+	public String getSpacilitycode() {
+		return spacilitycode;
+	}
+
+	public void setSpacilitycode(String spacilitycode) {
+		this.spacilitycode = spacilitycode;
+	}
+
+	public String getPackagecode() {
+		return packagecode;
+	}
+
+	public void setPackagecode(String packagecode) {
+		this.packagecode = packagecode;
+	}
+
+	public String getState_code() {
+		return state_code;
+	}
+
+	public void setState_code(String state_code) {
+		this.state_code = state_code;
+	}
+
+	public Integer getSchemeid() {
+		return schemeid;
+	}
+
+	public void setSchemeid(Integer schemeid) {
+		this.schemeid = schemeid;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "PackageMasterRequest [packageid=" + packageid + ", spacilitycode=" + spacilitycode + ", packagecode="
+				+ packagecode + ", state_code=" + state_code + ", schemeid=" + schemeid + ", status=" + status + "]";
+	}
+	
+	
+}

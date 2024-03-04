@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta id="ctx" name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
+	<meta id="ctxsession" name="ctxsession" th:content="${session.captchaStr}" />
+	<title>TMS | Login </title>
+
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="icon" type="image/ico" sizes="16x16" href="img/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+	<!-- Bootstrap CSS -->
+	<link href="sass/bootstrap.min.css" rel="stylesheet">
+	<!-- all.min CSS -->
+	<link href="sass/all.min.css" rel="stylesheet">
+	<!-- adminlte min CSS -->
+	<link href="sass/adminlte.min.css" rel="stylesheet">
+	<!-- custom CSS -->
+	<link href="sass/font-awesome.css" rel="stylesheet">
+	<!-- custom CSS -->
+	<link href="sass/custom.css" rel="stylesheet">
+
+</head>
+
+<body class="home-bg" onload="getStateDataUrban()">
+	<div class="header-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="login-header">
+						<div class="left-logo"><a href="#"><img class="img-fluid" src="images/PMJAY-logo-eng.png"
+									alt=""></a></div>
+						<div class="mid-logo"><img class="img-fluid" src="images/abnhpm.png" alt=""></div>
+						<div class="right-logo"><a href="#"><img class="img-fluid" src="images/nha-logo.png" alt=""></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="login-form">
+		<div class="mx-auto col-12 col-md-5">
+			<div class="login-form-card">
+
+				<div class="left-login-form">
+					<h2 class="card-title w-100">Login</h2>
+
+					<form class="quickForm">
+						<div class="card-body p-0">
+							<div class="form-group mt-3">
+								<label for="loginId" class="mb-0">User ID</label>
+								<input type="loginId" name="loginId" class="form-control" id="loginId"
+									placeholder="Enter User ID" value="9860214501" maxlength="10"
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+							</div>
+							<div class="form-group">
+								<label for="password" class="mb-0">Password</label>
+								<input type="password" name="password" class="form-control" id="password"
+									placeholder="Enter Password" maxlength="8">
+							</div>
+							<div class="form-group">
+								<label for="state" class="mb-0">State</label>
+								<select class="form-control" style="width: 100%;" id="userState" name="userState">
+									<!-- <option value="0" selected="selected">Select State</option>-->
+								</select>
+							</div>
+
+							<div class="row mb-2">
+
+								<div class="col-12 col-md-7">
+									<div class="form-group">
+										<label for="exampleInputCaptcha1" class="mb-0">Enter Captcha</label>
+										<input type="text" maxlength="6" class="form-control" path="captcha"
+											id="captcha" placeholder="Captcha" aria-label="Captcha"
+											aria-describedby="basic-addon1" />
+									</div>
+								</div>
+
+								<div class="col-12 col-md-5">
+									<div class="captcha-wrap pt-2">
+										<img id="captcha_id" name="captcha_id" alt="Captcha" th:src="@{/captcha}">
+										<button style="position: relative; left:5px; border: none; background: none;"
+											type="button" onclick="reCaptcha()">
+											<img src="images/refresh.png"> </button>
+
+									</div>
+								</div>
+
+								<div class="col-12">
+									<div id="errorUpdate" style="color: red;" class="error-text"> </div>
+									<div id="infoUpdate" style="color: green;" class="error-text"> </div>
+									<div id="erroMessage" style="color: red;" class="error-text" th:text="${message}">
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-group mb-0 pl-2">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
+									<label class="custom-control-label" for="exampleCheck1">By selecting this checkbox,
+										you agree to our Terms, <a href="#">Eligibility Criteria & Data
+											Policy</a>.</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-footer text-center p-0 mt-4" style="background: none;">
+							<button type="reset" class="btn btn-secondary custom-btn">Reset</button>
+							<button type="button" class="btn btn-primary custom-btn" onclick="signIn()">Submit</button>
+						</div>
+
+						<div id="login" class="overlay_full" onclick="offLogin()">
+							<div class="fancy-spinner">
+								<div class="ring"></div>
+								<div class="ring"></div>
+								<div class="dot"></div>
+								<span>Login</span>
+							</div>
+						</div>
+
+					</form>
+				</div>
+
+				<div class="right-login-form">
+					<div class="login-heading">
+						<strong>AB-PMJAY</strong>
+						<span>Transaction Management System</span>
+					</div>
+					<div class="check-docs"> <a th:href="@{/imagecontetread}" class="btn btn-primary custom-btn">Check Document</a></div>
+				</div>
+			</div>
+
+		</div>
+		
+		<div style="display: block; text-align: center;">
+			<br>Temporary Note: 9860214501 for registration and PRE-AUTH , 9867699298 for access master Screen (STATE-ADMIN -DELHI) <br>
+			9423744488 for access master Screen (STATE-ADMIN - CHATTISGARH) , 9825390123 for access master Screen (NATIONAL-ADMIN) <br>
+			7574877718 for access HOSPITAL MANAGEMENT Screen
+		</div>
+		
+	</section>
+	
+	<div class="copyright-wrap">
+		This Website belongs to National Health Authority, Ministry of Health and Family Welfare, Government of India
+	</div>
+
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/adminlte.js"></script>
+	<script src="tms-js/login.js"></script>
+	<script>
+
+		function onLogin() {
+			document.getElementById("login").style.display = "flex";
+		}
+
+		function offLogin() {
+			document.getElementById("login").style.display = "none";
+		}
+
+	</script>
+	<script>
+		$(function () {
+			$.validator.setDefaults({
+				submitHandler: function () {
+					alert("Form successful submitted!");
+				}
+			});
+			$('#quickForm').validate({
+				rules: {
+					email: {
+						required: true,
+						email: true,
+					},
+					password: {
+						required: true,
+						minlength: 5
+					},
+					text: {
+						required: true,
+						text: true,
+					},
+					terms: {
+						required: true
+					},
+				},
+				messages: {
+					email: {
+						required: "Please enter a email address",
+						email: "Please enter a valid email address"
+					},
+					password: {
+						required: "Please provide a password",
+						minlength: "Your password must be at least 5 characters long"
+					},
+					text: {
+						required: "Please enter a captcha",
+						text: "Please enter a valid captcha"
+					},
+					terms: "Please accept our terms"
+				},
+				errorElement: 'span',
+				errorPlacement: function (error, element) {
+					error.addClass('invalid-feedback');
+					element.closest('.form-group').append(error);
+				},
+				highlight: function (element, errorClass, validClass) {
+					$(element).addClass('is-invalid');
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$(element).removeClass('is-invalid');
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

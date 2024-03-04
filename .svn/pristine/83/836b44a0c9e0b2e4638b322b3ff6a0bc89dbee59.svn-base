@@ -1,0 +1,239 @@
+
+/*function schemeChange() {
+	$("#statecode").val('').trigger('change');
+	$("#specialitytype").val('').trigger('change');
+	$("#version").val('').trigger('change');
+	document.getElementById("specialityCode").value = "";
+	document.getElementById("specialityName").value = "";
+}*/
+
+function savePackageMasterData() {
+
+	var schemeid = document.getElementById("scheme").value;
+	var state_code = document.getElementById("statecode").value;
+	var spacilityid = document.getElementById("speciality").value;
+	var packagecode = document.getElementById("packagecode").value;
+	var packagename = document.getElementById("packageName").value;
+
+	var alphanumeric = /^[a-z0-9\s]+$/i; // alpha number with space only
+	var onlySpace = /^$|.\S+./; // only space
+	
+	if (schemeid == "") {
+		document.getElementById("pacSchemeError").innerHTML = "Please Select Scheme";
+		document.getElementById("pacScheme").focus();
+		return false;
+	}else {
+		document.getElementById("pacSchemeError").innerHTML = "";
+	}
+	
+	if (state_code == "") {
+		document.getElementById("pacStateError").innerHTML = "Please Select State";
+		document.getElementById("pacState").focus();
+		return false;
+	}else {
+		document.getElementById("pacStateError").innerHTML = "";
+	}
+
+	if (spacilityid == "") {
+		document.getElementById("specialityError").innerHTML = "Please Select Speciality";
+		document.getElementById("speciality").focus();
+		return false;
+	}else {
+		document.getElementById("specialityError").innerHTML = "";
+	}
+	
+	if (packagecode == "") {
+		document.getElementById("packagecodeError").innerHTML = "Please Enter Package Code";
+		document.getElementById("packagecode").focus();
+		return false;
+	}else if(!packagecode.match(alphanumeric) || !packagecode.match(onlySpace)){
+		document.getElementById("packagecodeError").innerHTML="Package Code Consist Special Character";
+		document.getElementById("packagecode").focus();
+		return false;
+	}else {
+		document.getElementById("packagecodeError").innerHTML = "";
+	}
+	
+	if (packagename == "") {
+		document.getElementById("packageNameError").innerHTML = "Please Enter Package Name";
+		document.getElementById("packageName").focus();
+		return false;
+	}else if(!packagename.match(alphanumeric) || !packagename.match(onlySpace)){
+		document.getElementById("packageNameError").innerHTML="Package Name Consist Special Character";
+		document.getElementById("packageName").focus();
+		return false;
+	}else {
+		document.getElementById("packageNameError").innerHTML = "";
+	}
+
+	onRegister();
+	$.ajax({
+		type: "POST",
+		url: "" + $('#ctx').attr('content') + "/savePackageMasterData",
+		data: {
+			"state_code": state_code,
+			"schemeid": schemeid,
+			"spacilitycode": spacilityid,
+			"packagecode": packagecode,
+			"packagename": packagename,
+		},
+		success: function(data) {
+			// console.log(data);
+			offRegister();
+			var obj = jQuery.parseJSON(data);
+			if (obj.status == "SUCCESS") {
+				document.getElementById("succmsg").innerHTML = "Data Saved Successfully";
+				document.getElementById("succmsgdiv").style.display = "block";
+				$('#succmsgdiv').delay(5000).fadeOut(1000);
+				document.getElementById("packageName").value = "";
+				document.getElementById("packagecode").value = "";
+				$("#scheme").val('').trigger('change');
+				$("#statecode").val('').trigger('change');
+				$("#speciality").val('').trigger('change');
+			}else if (obj.status == "FAILURE") {
+				document.getElementById("failmsg").innerHTML = obj.message;
+				document.getElementById("failmsgDiv").style.display = "block";
+				$('#failmsgDiv').delay(5000).fadeOut(2000);
+			}else {
+				offRegister();
+				alert('API Gateway not respond. Please try again.');
+			}
+		},
+		error: function(e) {
+			offRegister();
+			alert('API Gateway not respond. Please try again.');
+		}
+	});
+}
+
+
+function editPackage(value){
+	
+	  var row = jQuery(value).closest('tr')
+      var packageid = row[0].children[0].innerHTML;
+   
+     onRegister();
+      $.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPackageDetailBySpecialityId",
+		 data: {
+			"packageid":packageid,
+		},
+           success: function(data){
+			console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+            console.log("data--"+data1.data);
+            console.log("data--"+data1.data.packagecode);
+			if(data1.status=="SUCCESS"){
+			$("#scheme").select2().val(data1.data.schemeid).trigger("change");
+			$("#statecode").select2().val(data1.data.state_code).trigger("change");
+			$("#speciality").select2().val(data1.data.spacilitycode).trigger("change");
+
+			document.getElementById("packagecode").value=data1.data.packagecode;
+			document.getElementById("packageName").value=data1.data.packagename;
+			document.getElementById("packageid").value=data1.data.packageid;
+			
+			document.getElementById("radiodiv").style.display="block";
+			if(data1.data.status===1){
+				$("#one").prop("checked", true);
+			}else{
+				$("#zero").prop("checked", true);
+			}
+			
+			
+			$("#btnSave").html("Update");
+			offRegister();
+      		}
+      		if(data1.status=="FAILURE"){
+			offRegister();
+			}
+        },
+        error: function(e){
+	      offRegister();
+         }
+    });
+  }
+  
+  function getPackageMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPackageMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#packageTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			//{"mData": null, render: function(){return i++;}   },
+	 			{ "mData": "pkgid"},
+	 			{ "mData": "specialtycode"},
+				{ "mData": "packagecode"},
+      		    { "mData": "packagename"},
+      		    { "mData": "state_name"},
+      		    { "mData": "scheme_name"},
+      		    { "mData": "pkgid", render: function (data2, type, row) {
+                             return '<button  id="editPackage" value="'+data2+'" class="btn btn-primary custom-btn" onclick="editPackage(this)">Edit&nbsp;</button>';
+                        }
+                      },
+                      { "mData": "pkgid", render: function (data2, type, row) {
+                    	return '<button  id="deletePackage" value="'+data2+'" class="btn btn-primary custom-btn" data-toggle="modal" data-target="#modal-sm" onclick="FillPackageDialog(this.value)">Delete&nbsp;</button>';
+               		}},
+      		      
+				],
+				
+      		}).buttons().container().appendTo('#packageTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#packageTable').DataTable( {	
+      		}).buttons().container().appendTo('#packageTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	        offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+  
+  function FillDialog(value){
+	document.getElementById("deleteid").value=value;
+}
+   function deletePackage() {
+     packageid  = document.getElementById("deleteid").value;
+      onRegister();
+      $.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/deletePackageDetailBySpecialityId",
+		 data: {
+			"packageid":packageid,
+		},
+           success: function(data){
+	 		offRegister();
+			console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+            console.log("data--"+data1.data);
+            console.log("data--"+data1.data.specialitycode);
+			if(data1.status=="SUCCESS"){
+				
+			getSpecialityMasterData();
+			
+      		}
+      		if(data1.status=="FAILURE"){
+		
+			}
+        },
+        error: function(e){
+	      offRegister();
+         }
+    });
+      
+}

@@ -1,0 +1,2432 @@
+
+
+ function getStateDataMaster() {
+	var vartype = "S";
+  	$.ajax({
+		type: "POST",
+        url: ""+$('#ctx').attr('content')+"/urbanMaster",
+        data: {"modeFlag": vartype    	
+       		 },
+       		  beforeSend : function(xhr) {
+		//		$("#gentablebody").empty();
+			//	xhr.setRequestHeader(header, token);
+			},
+           success: function(data){
+
+            newData = data;
+            console.log(newData);
+			$("#statecode option").remove();
+            var obj = jQuery.parseJSON( data );
+        	 var count=0;
+         	for (var key in obj) {
+
+             var values =  obj[key];
+             var x = document.getElementById("statecode");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select State";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values;
+             option.value = key;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ function saveInvestigation(){
+	
+	  var investigationCode = document.getElementById("investigationCode").value;
+      var investigationName = document.getElementById("investigationName").value;
+      var statecode = document.getElementById("statecode").value;
+      var schemeid = document.getElementById("schemeid").value;
+      var version = document.getElementById("version").value;
+	  
+	  if (schemeid=="") {
+		document.getElementById("schemeidError").innerHTML="Please Select Scheme";
+		document.getElementById("schemeid").focus();
+		return false;
+	  }else{
+		document.getElementById("schemeidError").innerHTML="";
+	  }
+	    if (statecode=="") {
+		document.getElementById("statecodeError").innerHTML="Please Select State";
+		document.getElementById("statecode").focus();
+		return false;
+	  }else{
+		document.getElementById("statecodeError").innerHTML="";
+	  }
+ 	  if (investigationName=="") {
+		document.getElementById("investigationNameError").innerHTML="Please Enter Investigation Name";
+		document.getElementById("investigationName").focus();
+		return false;
+	  }else{
+		document.getElementById("investigationNameError").innerHTML="";
+	  }
+	  
+	    if (investigationCode=="") {
+		document.getElementById("investigationCodeError").innerHTML="Please Enter Investigation Code";
+		document.getElementById("investigationCode").focus();
+		return false;
+	  }else{
+		document.getElementById("investigationCodeError").innerHTML="";
+	  }
+	  
+	    if (version=="") {
+		document.getElementById("versionError").innerHTML="Please Enter Version";
+		document.getElementById("version").focus();
+		return false;
+	  }else{
+		document.getElementById("versionError").innerHTML="";
+	  }
+	  
+	   onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/saveInvestigationMasterData",
+      
+        data: {
+          "schemeid": schemeid,
+          "statecode": statecode,
+          "investigationname": investigationName,
+          "investigationcode": investigationCode,
+           "version": version,
+        },
+        success: function (data) {
+          //console.log(data);
+         offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+			 document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+			 
+             document.getElementById("price").value="";
+      		 document.getElementById("state").value="";
+      		 document.getElementById("scheme").value="";
+          }
+            else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+          
+           else {
+	        offRegister();
+            alert('API Gateway not respond. Please try again.');
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+
+function getInvestigationMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getDataInvestigationMaster",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#InvestigationMasterData').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "investigationname"},
+				{ "mData": "investigationcode"},
+      		    { "mData": "scheme_name"},
+      		    { "mData": "version"},
+      		    
+				],
+				
+      		}).buttons().container().appendTo('#InvestigationMasterData_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#SpecialityTable').DataTable( {	
+      		}).buttons().container().appendTo('#InvestigationMasterData_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	      offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+ 
+
+function savePriceMasterData() {
+      var price = document.getElementById("price").value;
+     // var status = document.getElementById("status").value;
+      var state = document.getElementById("statecode").value;
+      var scheme = document.getElementById("scheme").value;
+ 	  
+ 	  if (scheme=="") {
+		document.getElementById("schemeError").innerHTML="Please Select Scheme";
+		document.getElementById("scheme").focus();
+		return false;
+	  }else{
+		document.getElementById("schemeError").innerHTML="";
+	  }
+	    if (state=="") {
+		document.getElementById("stateError").innerHTML="Please Select State";
+		document.getElementById("state").focus();
+		return false;
+	  }else{
+		document.getElementById("stateError").innerHTML="";
+	  }
+ 	  	   if (price=="") {
+		document.getElementById("priceError").innerHTML="Please Enter Price";
+		document.getElementById("price").focus();
+		return false;
+	  }else{
+		document.getElementById("priceError").innerHTML="";
+	  }
+ 	  
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/savePriceMasterData",
+      
+        data: {
+          "price": price,
+          //"status": status,
+          "statecode": state,
+          "schemeid": scheme,
+        },
+        success: function (data) {
+          //console.log(data);
+         offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+			 document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+			 
+             document.getElementById("price").value="";
+      		// document.getElementById("status").value="";
+      		 document.getElementById("state").value="";
+      		 document.getElementById("scheme").value="";
+          }
+            else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+          
+           else {
+	        offRegister();
+            alert('API Gateway not respond. Please try again.');
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+
+function saveSpecialityMasterData() {
+      var specialityname = document.getElementById("specialityName").value;
+      var version = document.getElementById("version").value;
+    //  var status = document.getElementById("status").value;
+      var numberofpackage = document.getElementById("noofPackage").value;
+	  var numberofprocedures = document.getElementById("noofProcedure").value;
+	  var specialitycode = document.getElementById("specialityCode").value;
+	  
+	 if (specialityname=="") {
+		document.getElementById("specialityNameError").innerHTML="Please Enter Speciality";
+		document.getElementById("specialityName").focus();
+		return false;
+	 }else{
+		document.getElementById("specialityNameError").innerHTML="";
+	 }
+	  if(specialitycode ==""){
+		document.getElementById("specialityCodeError").innerHTML="Please Enter Specility Code";
+		document.getElementById("specialityCode").focus();
+		return false;
+	}
+	else{
+		document.getElementById("specialityCodeError").innerHTML="";
+	}
+	 if(version ==""){
+		document.getElementById("versionError").innerHTML="Please Enter Version";
+		document.getElementById("version").focus();
+		return false;
+	}
+	else{
+		document.getElementById("versionError").innerHTML="";
+	}
+	 if(numberofpackage ==""){
+		document.getElementById("noofPackageError").innerHTML="Please Enter No of Package";
+		document.getElementById("noofPackage").focus();
+		return false;
+	}
+	else{
+		document.getElementById("noofPackageError").innerHTML="";
+	}
+	 if(numberofprocedures ==""){
+		document.getElementById("noofProcedureError").innerHTML="Please Enter No of Procedure";
+		document.getElementById("noofProcedure").focus();
+		return false;
+	}
+	else{
+		document.getElementById("noofProcedureError").innerHTML="";
+	}
+	
+	
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/saveSpecialityMasterData",
+      
+        data: {
+          "specialityname": specialityname,
+          "version": version,
+       //   "status": status,
+          "numberofpackage": numberofpackage,
+          "numberofprocedures": numberofprocedures,
+          "specialitycode": specialitycode,
+        },
+        success: function (data) {
+         // console.log(data);
+         offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+            
+             document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+			 
+             document.getElementById("specialityName").value="";
+		     document.getElementById("version").value="";
+		    // document.getElementById("status").value="";
+		     document.getElementById("noofPackage").value="";
+			 document.getElementById("noofProcedure").value="";
+			 document.getElementById("specialityCode").value="";
+             window.location.reload();
+          }
+          else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+          
+           else {
+	        offRegister();
+	        alert('API Gateway not respond. Please try again.');
+        
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+
+function savePackageMasterData() {
+      var spacilityid = document.getElementById("speciality").value;
+      var packagename = document.getElementById("packageName").value;
+      var issurgical = document.getElementById("issurgical").value;
+      //var status = document.getElementById("status").value;
+	  var numberofdocuments = document.getElementById("noofDocument").value;
+	  var packagecatid = document.getElementById("pacCategory").value;
+	  var packagecode = document.getElementById("packageCode").value;
+	  var priceid = document.getElementById("pacPrice").value;
+	  var price = document.getElementById("price").value;
+	  var state_code = document.getElementById("statecode").value;
+	  var schemeid = document.getElementById("pacScheme").value;
+	  
+	  if(schemeid ==""){
+		document.getElementById("pacSchemeError").innerHTML="Please Select Scheme";
+		document.getElementById("pacScheme").focus();
+		return false;
+		}
+		else{
+			document.getElementById("pacSchemeError").innerHTML="";
+		}
+		if(state_code ==""){
+		document.getElementById("pacStateError").innerHTML="Please Select State";
+		document.getElementById("pacState").focus();
+		return false;
+		}
+		else{
+			document.getElementById("pacStateError").innerHTML="";
+		}
+		
+	   if(spacilityid ==""){
+		document.getElementById("specialityError").innerHTML="Please Select Speciality";
+		document.getElementById("speciality").focus();
+		return false;
+		}
+		else{
+			document.getElementById("specialityError").innerHTML="";
+		}
+		
+	   if(packagename ==""){
+		document.getElementById("packageNameError").innerHTML="Please Enter Package Name";
+		document.getElementById("packageName").focus();
+		return false;
+		}
+		else{
+			document.getElementById("packageNameError").innerHTML="";
+		}
+	    if(issurgical ==""){
+		document.getElementById("issurgicalError").innerHTML="Please Enter Issurgical";
+		document.getElementById("issurgical").focus();
+		return false;
+		}
+		else{
+			document.getElementById("issurgicalError").innerHTML="";
+		}
+	  if(numberofdocuments ==""){
+		document.getElementById("noofDocumentError").innerHTML="Please Enter No of Document";
+		document.getElementById("noofDocument").focus();
+		return false;
+		}
+		else{
+			document.getElementById("noofDocumentError").innerHTML="";
+		}
+		
+	   if(packagecatid ==""){
+		document.getElementById("pacCategoryError").innerHTML="Please Select Category";
+		document.getElementById("pacCategory").focus();
+		return false;
+		}
+		else{
+			document.getElementById("pacCategoryError").innerHTML="";
+		}
+		
+		if(packagecode ==""){
+		document.getElementById("packageCodeError").innerHTML="Please Enter Package Code";
+		document.getElementById("packageCode").focus();
+		return false;
+		}
+		else{
+			document.getElementById("packageCodeError").innerHTML="";
+		}
+		
+		
+		if(priceid ==""){
+		document.getElementById("pacPriceError").innerHTML="Please Select Price";
+		document.getElementById("pacPrice").focus();
+		return false;
+		}
+		else{
+			document.getElementById("pacPriceError").innerHTML="";
+		}
+		
+		if(price ==""){
+		document.getElementById("priceError").innerHTML="Please Enter Price";
+		document.getElementById("price").focus();
+		return false;
+		}
+		else{
+			document.getElementById("priceError").innerHTML="";
+		}
+		
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/savePackageMasterData",
+      
+        data: {
+          "spacilityid": spacilityid,
+          "packagename": packagename,
+          "issurgical": issurgical,
+          //  "status": status,
+          "numberofdocuments": numberofdocuments,
+          "packagecatid": packagecatid,
+          "packagecode": packagecode,
+          "priceid": priceid,
+          "price": price,
+          "state_code": state_code,
+          "schemeid": schemeid,
+        },
+        success: function (data) {
+         // console.log(data);
+          offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+	
+             document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+            
+             document.getElementById("speciality").value="";
+		     document.getElementById("packageName").value="";
+		     document.getElementById("issurgical").value="";
+		     // document.getElementById("status").value="";
+			 document.getElementById("noofDocument").value="";
+			 document.getElementById("pacCategory").value="";
+			 document.getElementById("packageCode").value="";
+			 document.getElementById("price").value="";
+			 document.getElementById("pacPrice").value="";
+			 document.getElementById("pacState").value="";
+			 document.getElementById("pacScheme").value="";
+        
+          } 
+           else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+          else {
+	         offRegister();
+	         alert('API Gateway not respond. Please try again.');
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+
+function savePackageCategoryMasterData() {
+      var packagename = document.getElementById("categoryName").value;
+      var version = document.getElementById("version").value;
+      //var status = document.getElementById("status").value;
+       if(packagename ==""){
+		document.getElementById("categoryNameError").innerHTML="Please Enter Category";
+		document.getElementById("categoryName").focus();
+		return false;
+	}
+	else{
+		document.getElementById("categoryNameError").innerHTML="";
+	}
+	 if(version ==""){
+		document.getElementById("versionError").innerHTML="Please Enter Version";
+		document.getElementById("version").focus();
+		return false;
+	}
+	else{
+		document.getElementById("versionError").innerHTML="";
+	}
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/savePackageCategoryMasterData",
+      
+        data: {
+          "packagename": packagename,
+          "version": version,
+         // "status": status,
+         
+        },
+        success: function (data) {
+         // console.log(data);
+          offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+	
+             document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+            
+             document.getElementById("categoryName").value="";
+    		 document.getElementById("version").value="";
+     		 document.getElementById("status").value="";
+        
+          }
+          else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+           else {
+	        offRegister();
+	        alert('API Gateway not respond. Please try again.');
+        
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+function saveProcedureMasterData() {
+      var specialityid = document.getElementById("speciality").value;
+      var packageid = document.getElementById("packageid").value;
+      var procedurename = document.getElementById("procedurename").value;
+      var procedure_lbl_id = document.getElementById("procedure_lbl_id").value;
+      var priceid = document.getElementById("pacPrice").value;
+      var price = document.getElementById("price").value;
+      var stratification = document.getElementById("stratification").value;
+      var implantid = document.getElementById("implantid").value;
+      var incentivesper = document.getElementById("incentivesper").value;
+      var procedurecode = document.getElementById("procedurecode").value;
+      var noofimplant = document.getElementById("noofimplant").value;
+      var vitaltestid = document.getElementById("vitaltestid").value;
+      var docid = document.getElementById("docid").value;   
+      var statecode = document.getElementById("statecode").value;
+      var schemeid = document.getElementById("schemeid").value;
+       
+       if(schemeid ==""){
+		document.getElementById("schemeidError").innerHTML="Please Select Scheme";
+		document.getElementById("schemeid").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("schemeidError").innerHTML=""; 
+			}   
+	if(statecode ==""){
+		document.getElementById("statecodeError").innerHTML="Please Select State";
+		document.getElementById("statecode").focus();
+		return false;
+	 } 
+	 
+	 else{
+			document.getElementById("statecodeError").innerHTML=""; 
+			}   
+      if(specialityid ==""){
+		document.getElementById("specialityError").innerHTML="Please Select Speciality";
+		document.getElementById("speciality").focus();
+		return false;
+	 } else{
+			document.getElementById("specialityError").innerHTML="";
+			 }    
+	  if(packageid ==""){
+		document.getElementById("packageidError").innerHTML="Please Select Package";
+		document.getElementById("packageid").focus();
+		return false;
+	 }
+	  else{	
+		document.getElementById("packageidError").innerHTML=""; 
+		}    
+		 if(procedure_lbl_id ==""){
+		document.getElementById("procedure_lbl_idError").innerHTML="Please Select Procedure LBL";
+		document.getElementById("procedure_lbl_id").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("procedure_lbl_idError").innerHTML=""; 
+			} 
+	  if(priceid ==""){
+		document.getElementById("pacPriceError").innerHTML="Please Select Price";
+		document.getElementById("pacPrice").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("pacPriceError").innerHTML=""; 
+			} 
+			
+		 if(price ==""){
+		document.getElementById("priceError").innerHTML="Please Enter Price";
+		document.getElementById("price").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("priceError").innerHTML=""; 
+			}   
+			
+	  if(procedurename ==""){
+		document.getElementById("procedurenameError").innerHTML="Please Enter Procedure";
+		document.getElementById("procedurename").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("procedurenameError").innerHTML=""; 
+			} 
+	
+	
+	    
+	  if(stratification ==""){
+		document.getElementById("stratificationError").innerHTML="Please Enter Stratification";
+		document.getElementById("stratification").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("stratificationError").innerHTML=""; 
+			}    
+	if(implantid ==""){
+		document.getElementById("implantidError").innerHTML="Please Enter Implant";
+		document.getElementById("implantid").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("implantidError").innerHTML=""; 
+			}    
+	if(incentivesper ==""){
+		document.getElementById("incentivesperError").innerHTML="Please Enter Incentive %";
+		document.getElementById("incentivesper").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("incentivesperError").innerHTML=""; 
+			} 
+	if(procedurecode ==""){
+		document.getElementById("procedurecodeError").innerHTML="Please Enter Procedure Code";
+		document.getElementById("procedurecode").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("procedurecodeError").innerHTML=""; 
+			}
+	if(noofimplant ==""){
+		document.getElementById("noofimplantError").innerHTML="Please Enter No of Implant";
+		document.getElementById("noofimplant").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("noofimplantError").innerHTML=""; 
+			}  
+	if(vitaltestid ==""){
+		document.getElementById("vitaltestidError").innerHTML="Please Enter Vital Test Id";
+		document.getElementById("vitaltestid").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("vitaltestidError").innerHTML=""; 
+			}  
+	if(docid ==""){
+		document.getElementById("docidError").innerHTML="Please Enter Doc Id";
+		document.getElementById("docid").focus();
+		return false;
+	 } 
+	 else{
+			document.getElementById("docidError").innerHTML=""; 
+			}
+	
+	     		 		 
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/saveProcedureMasterData",
+      
+        data: {
+          "specialityid": specialityid,
+          "packageid": packageid,
+          "procedurename": procedurename,
+          "price": price,
+          "procedure_lbl_id": procedure_lbl_id,
+          "stratification": stratification,
+          "implantid": implantid,
+          "incentivesper": incentivesper,
+          "procedurecode": procedurecode,
+          "noofimplant": noofimplant,
+          "vitaltestid": vitaltestid,
+          "docid": docid,
+          "statecode": statecode,
+          "schemeid": schemeid,
+          "priceid": priceid,
+         
+        },
+        success: function (data) {
+         // console.log(data);
+          offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+              document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			  document.getElementById("succmsgdiv").style.display="block";
+			  $('#succmsgdiv').delay(5000).fadeOut(400);
+              document.getElementById("speciality").value="";
+      		  document.getElementById("packageid").value="";
+		      document.getElementById("procedurename").value="";
+		      document.getElementById("price").value="";
+		      document.getElementById("procedure_lbl_id").value="";
+		      document.getElementById("stratification").value="";
+		      document.getElementById("implantid").value="";
+		      document.getElementById("incentivesper").value="";
+		      document.getElementById("procedurecode").value="";
+		      document.getElementById("noofimplant").value="";
+		      document.getElementById("vitaltestid").value="";
+		      document.getElementById("docid").value="";   
+		      document.getElementById("statecode").value="";
+		      document.getElementById("schemeid").value="";
+		      document.getElementById("pacPrice").value="";
+        
+          }
+           else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+           else {
+	        offRegister();
+	        alert('API Gateway not respond. Please try again.');
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+
+function saveProcedureLblMasterData() {
+      var procedure_label_name = document.getElementById("procedure_label_name").value;
+      var reimbursementpercentage = document.getElementById("reimbursementpercentage").value;
+        
+      if(procedure_label_name ==""){
+		document.getElementById("procedure_label_nameError").innerHTML="Please Enter Procedure Level";
+		document.getElementById("procedure_label_name").focus();
+		return false;
+		}
+		else{
+			document.getElementById("procedure_label_nameError").innerHTML="";
+		}
+	   if(reimbursementpercentage ==""){
+		document.getElementById("reimbursementpercentageError").innerHTML="Please Enter Reimbursement %";
+		document.getElementById("reimbursementpercentage").focus();
+		return false;
+		}
+		else{
+			document.getElementById("reimbursementpercentageError").innerHTML="";
+		}
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/saveProcedureLabelMasterData",
+        data: {
+          "procedure_label_name": procedure_label_name,
+          "reimbursementpercentage": reimbursementpercentage,
+        },
+        success: function (data) {
+         // console.log(data);
+          offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+	
+             document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+             document.getElementById("reimbursementpercentage").value="";
+      		 document.getElementById("reimbursementpercentage").value="";
+		     
+          }
+          else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+           else {
+	        offRegister();
+	        alert('API Gateway not respond. Please try again.');
+        
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+function saveDocumentMasterData() {
+      
+      var speciality = document.getElementById("speciality").value;
+      var packageid = document.getElementById("packageid").value;
+      var procedureid = document.getElementById("procedureid").value;
+      var preauthdoc = document.getElementById("preauthdoc").value;
+      var claimprocessingdoc = document.getElementById("claimprocessingdoc").value;
+      var schemeid = document.getElementById("schemeid").value;
+      var statecode = document.getElementById("statecode").value;
+      var version = document.getElementById("version").value;
+       
+      if(schemeid ==""){
+		document.getElementById("schemeidError").innerHTML="Please Select Scheme";
+		document.getElementById("schemeid").focus();
+		return false;
+		}
+		else{
+			document.getElementById("schemeidError").innerHTML="";
+		}
+		if(statecode ==""){
+		document.getElementById("statecodeError").innerHTML="Please Select State";
+		document.getElementById("statecode").focus();
+		return false;
+		}
+		
+		else{
+			document.getElementById("statecodeError").innerHTML="";
+		}
+		
+		if(speciality ==""){
+		document.getElementById("specialityError").innerHTML="Please Select Speciality";
+		document.getElementById("speciality").focus();
+		return false;
+		}
+		else{
+			document.getElementById("specialityError").innerHTML="";
+		}
+		
+		if(packageid ==""){
+		document.getElementById("packageidError").innerHTML="Please Select Package";
+		document.getElementById("packageid").focus();
+		return false;
+		}
+		else{
+			document.getElementById("packageidError").innerHTML="";
+		}
+		
+		if(procedureid ==""){
+		document.getElementById("procedureidError").innerHTML="Please Select Procedure";
+		document.getElementById("procedureid").focus();
+		return false;
+		}
+		else{
+			document.getElementById("procedureidError").innerHTML="";
+		}
+		
+       if(preauthdoc ==""){
+		document.getElementById("preauthdocError").innerHTML="Please Enter Pre Auth Document Name";
+		document.getElementById("preauthdoc").focus();
+		return false;
+		}
+		else{
+			document.getElementById("preauthdocError").innerHTML="";
+		}
+		 if(claimprocessingdoc ==""){
+		document.getElementById("claimprocessingdocError").innerHTML="Please Enter Claim Processing Document Name";
+		document.getElementById("claimprocessingdoc").focus();
+		return false;
+		}
+		else{
+			document.getElementById("claimprocessingdocError").innerHTML="";
+		}
+		 if(version ==""){
+		document.getElementById("versionError").innerHTML="Please Enter Version";
+		document.getElementById("version").focus();
+		return false;
+		}
+		else{
+			document.getElementById("versionError").innerHTML="";
+		}
+			  	  
+		 
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/saveDocumentMasterData",
+        data: {
+          "procedurecode": procedureid,
+          "schemeid": schemeid,
+          "statecode": statecode,
+          "version":version,
+          "claimprocessingdoc":claimprocessingdoc,
+          "preauthdoc":preauthdoc,
+          "packagecode":packageid,
+          "specialitycode":speciality,
+        },
+        
+        success: function (data) {
+         // console.log(data);
+          offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+        	 document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+			 
+             document.getElementById("documentname").value="";
+		     document.getElementById("procedureid").value="";
+		     document.getElementById("schemeid").value="";
+		     document.getElementById("statecode").value="";
+			  window.location.reload(); 
+        
+          }
+          else if(obj.data=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+		}
+           else {
+	          offRegister();
+              document.getElementById("failmsgDiv").style.display="none";
+              document.getElementById("succmsgdiv").style.display="none"; 
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+
+function saveImplantMasterData() {
+      var implantname = document.getElementById("implantname").value;
+      var priceid = document.getElementById("pacPrice").value;
+      var price = document.getElementById("price").value;
+      //var status = document.getElementById("status").value;
+      var versionid = document.getElementById("versionid").value;
+      var statecode = document.getElementById("statecode").value;
+      var schemeid = document.getElementById("schemeid").value;
+     
+      if(schemeid ==""){
+		document.getElementById("schemeidError").innerHTML="Please Select Scheme";
+		document.getElementById("schemeid").focus();
+		return false;
+		}
+		else{
+			document.getElementById("schemeidError").innerHTML="";
+		} 	
+		 if(statecode ==""){
+		document.getElementById("statecodeError").innerHTML="Please Select State";
+		document.getElementById("statecode").focus();
+		return false;
+		}
+		else{
+			document.getElementById("statecodeError").innerHTML="";
+		}
+	
+	
+		 if(priceid ==""){
+		document.getElementById("pacPriceError").innerHTML="Please Select Price";
+		document.getElementById("pacPrice").focus();
+		return false;
+		}
+		else{
+			document.getElementById("pacPriceError").innerHTML="";
+		}
+		
+		 if(price ==""){
+		document.getElementById("priceError").innerHTML="Please Enter Price";
+		document.getElementById("price").focus();
+		return false;
+		}
+		else{
+			document.getElementById("priceError").innerHTML="";
+		}
+			
+      if(implantname ==""){
+		document.getElementById("implantnameError").innerHTML="Please Enter Implant Name";
+		document.getElementById("implantname").focus();
+		return false;
+		}
+		else{
+			document.getElementById("implantnameError").innerHTML="";
+		}
+		
+		
+		 if(versionid ==""){
+		document.getElementById("versionidError").innerHTML="Please Enter Version";
+		document.getElementById("versionid").focus();
+		return false;
+		}
+		else{
+			document.getElementById("versionidError").innerHTML="";
+		}
+		
+		
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/saveImplantIDMasterData",
+        data: {
+          "implantname": implantname,
+          "priceid": priceid,
+          "price": price,
+          // "status": status,
+          "versionid": versionid,
+          "schemeid": schemeid,
+          "statecode": statecode,
+         
+        },
+        
+        success: function (data) {
+         // console.log(data);
+          offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+	
+             $('#infoOtp').html("Data Saved successfully");
+             document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+			 
+             document.getElementById("implantname").value="";
+		     document.getElementById("priceid").value="";
+		     document.getElementById("price").value="";
+		    // document.getElementById("status").value="";
+		     document.getElementById("versionid").value="";
+		     document.getElementById("schemeid").value="";
+		     document.getElementById("statecode").value="";
+				
+          } 
+          if (obj.data == "SUCCESS") {
+				 offRegister();
+		 		 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+          else {
+	        offRegister();
+	          document.getElementById("failmsgDiv").style.display="none";
+              document.getElementById("succmsgdiv").style.display="none";
+              alert('API Gateway not respond. Please try again.');
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+function saveStratificationMasterData() {
+	
+      var stratification_detail = document.getElementById("stratification_detail").value;
+      var stratification_options = document.getElementById("stratification_options").value;
+     // var status = document.getElementById("status").value;
+      var priceid = document.getElementById("pacPrice").value;
+      var price = document.getElementById("price").value;
+      var versionid = document.getElementById("versionid").value;
+      var schemeid = document.getElementById("schemeid").value;
+      var statecode = document.getElementById("statecode").value;
+      var remarks = document.getElementById("remarks").value;
+      
+		if(schemeid ==""){
+		document.getElementById("schemeidError").innerHTML="Please Select Scheme";
+		document.getElementById("schemeid").focus();
+		return false;
+		}
+		else{
+			document.getElementById("schemeidError").innerHTML="";
+		}
+		if(statecode ==""){
+		document.getElementById("statecodeError").innerHTML="Please Select State";
+		document.getElementById("statecode").focus();
+		return false;
+		}
+		else{
+			document.getElementById("statecodeError").innerHTML="";
+		} 
+		if(priceid ==""){
+		document.getElementById("pacPriceError").innerHTML="Please Select Price";
+		document.getElementById("pacPrice").focus();
+		return false;
+		}
+		else{
+			document.getElementById("pacPriceError").innerHTML="";
+		}
+		
+		if(price ==""){
+		document.getElementById("priceError").innerHTML="Please Enter Price";
+		document.getElementById("price").focus();
+		return false;
+		}
+		else{
+			document.getElementById("priceError").innerHTML="";
+		}
+	
+		if(stratification_detail ==""){
+		document.getElementById("stratification_detailError").innerHTML="Please Enter Stratification Detail";
+		document.getElementById("stratification_detail").focus();
+		return false;
+		}
+		else{
+			document.getElementById("stratification_detailError").innerHTML="";
+		}
+		if(stratification_options ==""){
+		document.getElementById("stratification_optionsError").innerHTML="Please Enter Stratification Options";
+		document.getElementById("stratification_options").focus();
+		return false;
+		}
+		else{
+			document.getElementById("stratification_optionsError").innerHTML="";
+		}
+		if(versionid ==""){
+		document.getElementById("versionidError").innerHTML="Please Enter Version";
+		document.getElementById("versionid").focus();
+		return false;
+		}
+		else{
+			document.getElementById("versionidError").innerHTML="";
+		}
+			if(remarks ==""){
+		document.getElementById("remarksError").innerHTML="Please Select Remarks";
+		document.getElementById("remarks").focus();
+		return false;
+		}
+		else{
+			document.getElementById("remarksError").innerHTML="";
+		}
+      onRegister();
+      $.ajax({
+        type: "POST",
+        url: ""+$('#ctx').attr('content')+"/saveStratificationMasterRequestData",
+        data: {
+          "stratificationdetail": stratification_detail,
+          "stratificationoptions": stratification_options,
+          "priceid": priceid,
+          "price": price,
+          "versionid": versionid,
+          "schemeid": schemeid,
+          "statecode": statecode,
+          "remarks":remarks,
+         
+        },
+        
+        success: function (data) {
+          //console.log(data);
+          offRegister();
+          var obj = jQuery.parseJSON(data);
+          if (obj.data == "SUCCESS") {
+	
+             $('#infoOtp').html("Data Saved successfully");
+              document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+			 document.getElementById("succmsgdiv").style.display="block";
+			 $('#succmsgdiv').delay(5000).fadeOut(400);
+			 
+             document.getElementById("stratification_name").value="";
+		     document.getElementById("groupid").value="";
+		     //  document.getElementById("status").value="";
+		     document.getElementById("pacPrice").value="";
+		     document.getElementById("price").value="";
+		     document.getElementById("versionid").value="";
+		     document.getElementById("schemeid").value="";
+		     document.getElementById("statecode").value="";
+				 
+          } 
+          if (obj.data == "SUCCESS") {
+				 offRegister();
+		 		 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+				 window.location.reload();
+			}
+          else {
+	        offRegister();
+	        alert('API Gateway not respond. Please try again.');
+        
+          }
+        },
+        error: function (e) {
+			offRegister();
+         	alert('API Gateway not respond. Please try again.');
+        }
+
+      });
+}
+
+function getPriceMasterData() {
+	 onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPriceMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#priceTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "price"},
+      		    { "mData": "scheme_name"},
+      		    { "mData": "statecode"},
+      		   /* { "mData": "status"},*/
+      		    
+				],
+				
+      		}).buttons().container().appendTo('#priceTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#priceTable').DataTable( {	
+      		}).buttons().container().appendTo('#priceTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	        offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+ 
+function getSpecialityMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getSpecialityMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#SpecialityTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "specialityname"},
+				{ "mData": "specialitycode"},
+      		    { "mData": "version"},
+      		    { "mData": "numberofpackage"},
+      		    { "mData": "numberofprocedures"},
+      		   
+      		     // { "mData": "status"},
+				],
+				
+      		}).buttons().container().appendTo('#SpecialityTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#SpecialityTable').DataTable( {	
+      		}).buttons().container().appendTo('#SpecialityTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	      offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+ 
+ function getPackageMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPackageMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#packageTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "packagename"},
+      		    { "mData": "issurgical"},
+      		    { "mData": "specialityname"},
+      		    { "mData": "numberofdocuments"},
+      		    { "mData": "price"},
+      		    { "mData": "packagecode"},
+      		      /*{ "mData": "status"},*/
+				],
+				
+      		}).buttons().container().appendTo('#packageTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#packageTable').DataTable( {	
+      		}).buttons().container().appendTo('#packageTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	        offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+
+function getCategoryMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPackageCategoryMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#categoryTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "packagename"},
+      		    { "mData": "version"},
+      		    /*{ "mData": "status"},*/
+				],
+				
+      		}).buttons().container().appendTo('#categoryTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#categoryTable').DataTable( {	
+      		}).buttons().container().appendTo('#categoryTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	        offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+
+function getProcedureMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getProcedureMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			
+			if(data1.status=="SUCCESS"){
+		     offRegister();
+			var data2 = data1.data;
+			console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#procedureTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "procedurename"},
+      		    { "mData": "specialityname"},
+      		    { "mData": "packagename"},
+      		    { "mData": "stratificationid"},
+      		    { "mData": "implantid"},
+      		    { "mData": "procedurecode"},
+      		    { "mData": "scheme_name"},
+      		    { "mData": "pricename"},
+      		    { "mData": "price"},
+      		  /*  { "mData": "procedureid"},*/
+      		     { "mData": "vitaltestid"},
+				],
+				
+      		}).buttons().container().appendTo('#procedureTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#procedureTable').DataTable( {	
+      		}).buttons().container().appendTo('#procedureTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	 		offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+ 
+function getProcedureLavelMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getProcedureLabelMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			offRegister();
+			if(data1.status=="SUCCESS"){
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#procedureLavelTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "procedure_label_name"},
+      		    { "mData": "reimbursement_percentage"},
+      		    
+				],
+				
+      		}).buttons().container().appendTo('#procedureLavelTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#procedureLavelTable').DataTable( {	
+      		}).buttons().container().appendTo('#procedureLavelTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+			offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+
+function getDocumentMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getDocumentMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			offRegister();
+			if(data1.status=="SUCCESS"){
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#docTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "preauthdoc"},
+      		    { "mData": "claimprocessingdoc"},
+      		    { "mData": "specialityname"},
+      		    { "mData": "packagename"},
+      		    { "mData": "procedurename"},
+      		    { "mData": "version"},
+      		    { "mData": "scheme_name"},
+      		   
+				],
+				
+      		}).buttons().container().appendTo('#docTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#docTable').DataTable( {	
+      		}).buttons().container().appendTo('#docTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+			offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+
+function getImplantMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getImplantIDMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#implantTable').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "implantname"},
+      		    { "mData": "versionid"},
+      		    { "mData": "pricename"},
+      		    { "mData": "price"},
+      		   /* { "mData": "status"},*/
+      		    { "mData": "scheme_name"},
+      		    { "mData": "statecode"},
+      		  
+				],
+				
+      		}).buttons().container().appendTo('#implantTable_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#implantTable').DataTable( {	
+      		}).buttons().container().appendTo('#implantTable_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+			offRegister();	
+            alert('Error: ' + e);
+         }
+    });
+} 
+
+
+function getStratificationAllMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getStratificationMasterRequestData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#stratificationMasterData').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+	 			{ "mData": "stratificationoptions"},
+				{ "mData": "stratificationdetail"},
+				{ "mData": "pricename"},
+      		    { "mData": "price"},
+      		    { "mData": "versionid"},
+      		    { "mData": "scheme_name"},
+      		    { "mData": "remarks"},
+				],
+				
+      		}).buttons().container().appendTo('#stratificationMasterData_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#stratificationMasterData').DataTable( {	
+      		}).buttons().container().appendTo('#stratificationMasterData_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	         offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+
+function getSpeciality() {
+  	$.ajax({
+		type: "POST",
+        url:""+$('#ctx').attr('content')+"/getSpecialityMasterData",
+        data: {    	
+       		 },
+       		  beforeSend : function(xhr) {
+		//		$("#gentablebody").empty();
+			//	xhr.setRequestHeader(header, token);
+			},
+           success: function(data){
+
+            newData = data;
+            //console.log(newData);
+			$("#speciality option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+             //console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+
+             var values =  obj[key];
+             var x = document.getElementById("speciality");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Speciality";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.specialityname;
+             option.value = values.specialitycode;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ function getPackageCategory() {
+
+  	$.ajax({
+		type: "POST",
+         url:""+$('#ctx').attr('content')+"/getPackageCategoryMasterData",
+        data: {    	
+       		 },
+       		  beforeSend : function(xhr) {
+		//		$("#gentablebody").empty();
+			//	xhr.setRequestHeader(header, token);
+			},
+           success: function(data){
+            newData = data;
+            //console.log(newData);
+			$("#pacCategory option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+             //console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+
+             var values =  obj[key];
+             var x = document.getElementById("pacCategory");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Category";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.packagename;
+             option.value = values.packagecatid;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ function getPrice() {
+
+  	$.ajax({
+		type: "POST",
+        url:""+$('#ctx').attr('content')+"/getPriceMasterData",
+        data: {    	
+       		 },
+       		  beforeSend : function(xhr) {
+			//	$("#gentablebody").empty();
+			//	xhr.setRequestHeader(header, token);
+			},
+           success: function(data){
+            newData = data;
+            //console.log(newData);
+			$("#pacPrice option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+            // console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+
+             var values =  obj[key];
+             var x = document.getElementById("pacPrice");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Price";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.price;
+             option.value = values.priceid;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ 
+ function getProcedureLBL() {
+
+  	$.ajax({
+		type: "POST",
+		url:""+$('#ctx').attr('content')+"/getProcedureLabelMasterData",
+        data: {    	
+       		 },
+       		  beforeSend : function(xhr) {
+			//	$("#gentablebody").empty();
+			//	xhr.setRequestHeader(header, token);
+			},
+           success: function(data){
+            newData = data;
+           // console.log(newData);
+			$("#procedure_lbl_id option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+           //  console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+
+             var values =  obj[key];
+             var x = document.getElementById("procedure_lbl_id");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Procedure LBL";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.procedure_label_name;
+             option.value = values.procedurelblid;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+
+function getPacakageMaster() {
+  	$.ajax({
+		type: "POST",
+		url:""+$('#ctx').attr('content')+"/getPackageMasterData",
+        data: {    	
+       		 },
+       		  beforeSend : function(xhr) {
+			//	$("#gentablebody").empty();
+			//	xhr.setRequestHeader(header, token);
+			},
+           success: function(data){
+
+            newData = data;
+            //console.log(newData);
+			$("#packageid option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+            // console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+
+             var values =  obj[key];
+             var x = document.getElementById("packageid");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Package";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.packagename;
+             option.value = values.packageid;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ 
+ function getProcedureMaster() {
+
+  	$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getProcedureMasterData",
+         data: {    	
+       		 },
+       		  beforeSend : function(xhr) {
+			//	$("#gentablebody").empty();
+			//	xhr.setRequestHeader(header, token);
+			},
+           success: function(data){
+            newData = data;
+            //console.log(newData);
+			$("#procedureid option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+            // console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+             var values =  obj[key];
+             var x = document.getElementById("procedureid");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Package";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.procedurename;
+             option.value = values.procedureid;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ function getProcedureMasterBySpecilityId() {
+		var specilityid  = document.getElementById("speciality").value;
+		//var packageid  = document.getElementById("packageid").value;
+		//var userstate = document.getElementById("userstate").value;
+	
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getProcedureBySpecilityId",
+         data: {    
+				"specilitycode":specilityid,
+			//	"packagecode":packageid,
+			//	"statecode":userstate,
+       		 },
+       		  beforeSend : function(xhr) {
+			//	$("#gentablebody").empty();
+			//	xhr.setRequestHeader(header, token);
+			},
+           success: function(data){
+            newData = data;
+            //console.log(newData);
+			$("#procedureid option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+            // console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+             var values =  obj[key];
+             var x = document.getElementById("procedureid");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Procedure";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.procedurename;
+             option.value = values.procedurecodehbp2;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ function getPackageMasterBySPecilityCode() {
+	var specilityid  = document.getElementById("speciality").value;
+		var userstate = document.getElementById("userstate").value;
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPackageMasterBySpecilityCode",
+         data: {    
+				"specilitycode":specilityid,
+				"statecode":userstate,
+       		 },
+           success: function(data){
+            newData = data;
+            //console.log(newData);
+			$("#packageid option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+            // console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+             var values =  obj[key];
+             var x = document.getElementById("packageid");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Package";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.packagename;
+             option.value = values.packagecode;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ 
+ function getProcedureMasterBySpecilityAndPackageCode() {
+		var specilityid  = document.getElementById("speciality").value;
+		var packageid  = document.getElementById("packageid").value;
+		var userstate = document.getElementById("userstate").value;
+		
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getprocedureMasterBySpecilityCodeAndPackageCodeByState",
+         data: {    
+				"specilitycode":specilityid,
+				"packagecode":packageid,
+				"statecode":userstate,
+       		 },
+           success: function(data){
+			//getPackageCost();
+            newData = data;
+            //console.log(newData);
+			$("#procedureid option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+            // console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in obj) {
+             var values =  obj[key];
+             var x = document.getElementById("procedureid");
+             if(count==0){
+             var option = document.createElement("option");
+             option.text ="Select Procedure";
+             option.value = "";
+             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.procedurename;
+             option.value = values.procedurecodehbp2;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+         
+    });
+ } 
+ 
+ function  getPackageCost(txnid){
+		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPackageTotalCost",
+		 data: {    
+				"txnid":txnid
+       		 },
+         success: function(data){
+           	document.getElementById("packageCost").value=data.data.nabhPrice;
+           	document.getElementById("totPckgAmt").value=data.data.nonNabhPrice;
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+	
+}
+
+function showStratificationAndImplant(){
+	var procedureid  = document.getElementById("procedureid").value;
+	var packageid  = document.getElementById("packageid").value;	
+	var specilityid  = document.getElementById("speciality").value;
+
+	$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/checkForStratificationAndImplant",
+         data: {    
+				"procedurecode":procedureid,
+				"packagecode":packageid,
+				"specialityCode":specilityid
+       		 },
+           success: function(data){
+            newData = data;
+            console.log(newData);
+            if(newData.data.implantstatus=="Yes"){
+				document.getElementById("implantdiv").style.display = "block";
+			}else{
+				document.getElementById("implantdiv").style.display = "none";
+			}
+            
+            if(newData.data.stratificationstatus=="Yes"){
+				document.getElementById("stratdiv").style.display = "block";
+			}else{
+				document.getElementById("stratdiv").style.display = "none";
+			}
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });	
+	
+}
+  function getInvestigationByPackageAndProcedureCode() {
+		var procedureid  = document.getElementById("procedureid").value;
+		var packageid  = document.getElementById("packageid").value;
+		var userstate = document.getElementById("userstate").value;
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getInvestigationMasterBydPackageAndProcedureCode",
+         data: {    
+				"procedurecode":procedureid,
+				"packagecode":packageid,
+				"statecode":userstate,
+       		 },
+           success: function(data){
+				//getPackageCost();
+	            newData = data;
+	            //console.log(newData);
+				$("#investigationActive option").remove();
+	            var obj = jQuery.parseJSON( data );
+	            obj = obj.data;
+	            // console.log("-------"+obj);
+	         	var x = document.getElementById("investigationActive");
+	         	for (var key in obj) {
+		             var values =  obj[key];
+		             var option = document.createElement("option");
+		             option.text = values.investigationname;
+		             option.value = values.investigation_code;
+		             x.add(option);
+	            }   
+	             
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+ /*function getStratificationDetailByStratificationCode() {
+	
+		var stratificationcode  = document.getElementById("stratCode").value;
+		var userstate = document.getElementById("userstate").value;
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getStratificationDetailByStatificationCode",
+         data: {    
+				"stratificationcode":stratificationcode,
+       		 },
+           success: function(data){
+              newData = data;
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+           	document.getElementById("packageCost").value=obj[0].nabh_price;
+           	document.getElementById("totPckgAmt").value=obj[0].nabh_price;
+            document.getElementById("stratDtls").value=obj[0].stratification_details;
+            document.getElementById("stratName").value=obj[0].stratification_options;
+            document.getElementById("stratCost").value=obj[0].override_procedure_price;
+            document.getElementById("totalStratCost").value=obj[0].override_procedure_price;
+			
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } */
+ 
+  function getImplantMasterDataByState() {
+	
+		var userstate = document.getElementById("userstate").value;
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getImplantMasterDataPreAuth",
+         data: {    
+				"statecode":userstate,
+       		 },
+       		  beforeSend : function(xhr) {
+			
+			},
+           success: function(data){
+            newData = data;
+			$("#implantCode option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+    
+         	for (var key in obj) {
+	             var values =  obj[key];
+	             var x = document.getElementById("implantCode");
+	             var option = document.createElement("option");
+	             option.text = values.implantdetails;
+	             option.value = values.implantid;
+	             x.add(option);
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } 
+ 
+  /*function getImplantDetailByImplantId() {
+		var implantCode = document.getElementById("implantCode").value;
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getImplantDetailByImplantCode",
+         data: {  
+				"implantid":implantCode,
+       		 },
+           success: function(data){
+            newData = data;
+			$("#implantCode option").remove();
+            var obj = jQuery.parseJSON( data );
+            obj = obj.data;
+            
+            document.getElementById("implantName").value=obj[0].implantdetails;
+            document.getElementById("implantCost").value=obj[0].override_procedure_price;
+            document.getElementById("totalImplantCost").value=obj[0].override_procedure_price;
+              	
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+ } */
+ 
+ 
+ function getDocumentMasterDataBySpecPackProcCode(){
+		var txnid = document.getElementById("txnid").value;
+  		$.ajax({
+		 type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getPreAuthDocumentMasterData",
+         data: {    
+				"txnid":txnid
+       		 },
+           success: function(data){
+            //newData = data;
+			$("#documentid option").remove();
+            //var obj = jQuery.parseJSON( data );
+            //obj = obj.data;
+            // console.log("-------"+obj);
+        	 var count=0;
+         	for (var key in data.data) {
+             var values =  data.data[key];
+             var x = document.getElementById("documentid");
+             if(count==0){
+	             var option = document.createElement("option");
+	             option.text ="Select document";
+	             option.value = "";
+	             x.add(option);
+             }
+             var option = document.createElement("option");
+             option.text = values.preauthdoc;
+             option.value = values.docid;
+             x.add(option);
+
+             count++;
+             }   
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });
+    
+}
+
+function saveVitalTestMaster(){
+   var height = document.getElementById("height").value;
+   var weight = document.getElementById("weight").value;
+   var tempreture = document.getElementById("tempreture").value;
+   var alergies = document.getElementById("alergies1").value;
+   var bloodgroup = document.getElementById("bloodgroup").value;
+   
+   if(alergies =="Yes")
+   {
+	alergies="Yes";
+	}
+	else{
+		alergies="No";
+	}
+   if(height==""){
+	document.getElementById("heightError").innerHTML="Please Enter Height";
+	document.getElementById("height").focus();
+	return false;
+	}
+	   else{
+		document.getElementById("heightError").innerHTML="";
+	}
+	
+	
+	if (height < 50) {
+                $('#heightError').html('Please Enter Height between 50-200');
+                document.getElementById("height").value="50";
+            } else if (height > 200) {
+                $('#heightError').html('Please Enter Height between 50-200');
+               document.getElementById("height").value="200";
+            } else {
+                $('#heightError').html('');
+                document.getElementById("height").value=height;
+            }
+	
+	
+	
+	
+	 if(weight==""){
+	document.getElementById("weightError").innerHTML="Please Enter Weigth";
+	document.getElementById("weight").focus();
+	return false;
+	}
+	   else{
+		document.getElementById("weightError").innerHTML="";
+	}
+	
+	if (weight < 1) {
+                $('#weightError').html('Please Enter Weight between 1-200');
+                document.getElementById("weight").value="1";
+            } else if (weight > 200) {
+                $('#weightError').html('Please Enter Weight between 1-200');
+               document.getElementById("weight").value="200";
+            } else {
+                $('#weightError').html('');
+                document.getElementById("weight").value=height;
+            }
+            
+	if(tempreture==""){
+	document.getElementById("tempretureError").innerHTML="Please Enter Tempreture";
+	document.getElementById("tempreture").focus();
+	return false;
+	}
+	   else{
+		document.getElementById("tempretureError").innerHTML="";
+	}
+	
+	if (tempreture < 90) {
+                $('#tempretureError').html('Please Enter Tempreture between 90-110');
+                document.getElementById("tempreture").value="90";
+            } else if (tempreture > 110) {
+                $('#tempretureError').html('Please Enter Tempreture between 90-110');
+               document.getElementById("tempreture").value="110";
+            } else {
+                $('#tempretureError').html('');
+                document.getElementById("tempreture").value=height;
+            }
+            
+	if(alergies1==""){
+	document.getElementById("alergiesError").innerHTML="Please Select  Alergies";
+	document.getElementById("alergies").focus();
+	return false;
+	}
+	   else{
+		document.getElementById("alergiesError").innerHTML="";
+	}
+	
+	var option=document.getElementsByName('alergies');
+     
+	if (!(option[0].checked || option[1].checked)) {
+	    document.getElementById("alergiesError").innerHTML="Please Select  Alergies";
+		document.getElementById("alergies").focus();
+	    return false;
+	}
+	else{
+		  document.getElementById("alergiesError").innerHTML="";
+	}
+	if(bloodgroup==""){
+	document.getElementById("bloodgroupError").innerHTML="Please Select Blood Group";
+	document.getElementById("bloodgroup").focus();
+	return false;
+	}
+	   else{
+		document.getElementById("bloodgroupError").innerHTML="";
+	}
+	
+	var formData = new FormData(vitalTestMaster);
+	 	$.ajax({
+		type: "POST",
+	     url:""+$('#ctx').attr('content')+"/saveVitalTestMasterData",
+         data: formData,
+         processData: false,
+         contentType: false,       		 
+            success: function(data){
+            newData = data;
+			var data1 = jQuery.parseJSON(newData);
+			console.log(data1)
+			if(data1.status=="SUCCESS"){
+				 document.getElementById("succmsg").innerHTML="Data Saved Successfully";
+				 document.getElementById("succmsgdiv").style.display="block";
+				 document.getElementById("filelable").innerHTML="";
+				 document.getElementById("saveorg").reset();
+				 $('#succmsgdiv').delay(5000).fadeOut(400);
+			}else if(data1.status=="FAILURE"){
+				 document.getElementById("failmsg").innerHTML=data1.message;
+				 document.getElementById("failmsgDiv").style.display="block";
+				 $('#failmsgDiv').delay(5000).fadeOut(400);
+			}else{
+				 document.getElementById("failmsgDiv").style.display="none";
+				 document.getElementById("succmsgdiv").style.display="none";
+				 document.getElementById("FailedError").innerHTML="API Gateway not respond. Please try again.";
+			}
+         },
+         error: function(e){
+             alert('Error: ' + e);
+         }
+    });				
+}
+
+
+function getVitalTestMasterData() {
+	onRegister();
+  	$.ajax({
+		type: "POST",
+		 url:""+$('#ctx').attr('content')+"/getVitalTestMasterData",
+           success: function(data){
+			//console.log("data--"+data)
+            var data1 = jQuery.parseJSON( data );
+			if(data1.status=="SUCCESS"){
+			offRegister();
+			var data2 = data1.data;
+			//console.log("Data "+ data2);
+			 var i=1;
+             var table = $('#vitalMasterData').DataTable( {	
+			 "responsive": true, "lengthChange": true, "autoWidth": false,"pagingType": "full_numbers","pageLength": 50,
+             "buttons": [ "csv", "excel"],
+             "language": {"emptyTable": "No Data available"  },
+	         "aaData": data2,
+      		  "aoColumns": [ 
+	 			{"mData": null, render: function(){return i++;}   },
+				{ "mData": "height"},
+				{ "mData": "weigth"},
+      		    { "mData": "tempreture"},
+      		    { "mData": "alergies"},
+      		     { "mData": "bloodgroup"},
+      		    
+				],
+				
+      		}).buttons().container().appendTo('#vitalMasterData_wrapper .col-md-6:eq(0)');
+      		}
+      		else{
+			 var table = $('#SpecialityTable').DataTable( {	
+      		}).buttons().container().appendTo('#vitalMasterData_wrapper .col-md-6:eq(0)');
+			}
+        },
+        error: function(e){
+	      offRegister();
+            alert('Error: ' + e);
+         }
+    });
+} 
+
+
+
+
+
+
+

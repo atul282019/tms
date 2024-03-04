@@ -1,0 +1,271 @@
+package com.gov.nha.bis.server.rest.service;
+
+import java.util.HashMap;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
+
+public class MasterDataService {
+
+	private static final Logger logger = LogManager.getLogger(MasterDataService.class);
+
+	public static HashMap<String,String> getStateList(String stateCode, String districtCode,String blockCode,
+			String villageCode,String townCode,String type,String url){
+
+		HashMap<String,String> stateMap = new HashMap<String,String>();
+
+
+		String strData=null;
+		MasterDataService stateDataService=	new MasterDataService();
+		if(type.equalsIgnoreCase("S")){
+			strData=stateDataService.getStateData(getStateRequestJson(type),url);
+			
+			JSONObject obj= new JSONObject(strData);
+
+			if(Boolean.valueOf(obj.getString("status"))){
+				JSONArray content = obj.getJSONArray("stateData");
+
+				for (Object objData : content) {
+					JSONObject jsonLineItem = (JSONObject) objData;
+					stateMap.put(String.valueOf(jsonLineItem.getBigInteger("state_code")), jsonLineItem.getString("state_name_english").trim());
+				}  
+
+			}
+			
+		}else if(type.equalsIgnoreCase("D")){
+			strData=stateDataService.getStateData(getDistrictRequestJson(stateCode, type),url);
+			JSONObject obj= new JSONObject(strData);
+
+			if(Boolean.valueOf(obj.getString("status"))){
+				JSONArray content = obj.getJSONArray("stateData");
+
+				for (Object objData : content) {
+					JSONObject jsonLineItem = (JSONObject) objData;
+					stateMap.put(String.valueOf(jsonLineItem.getBigInteger("district_code")), jsonLineItem.getString("district_name_english").trim());
+				}  
+
+			}
+
+			
+		}else if(type.equalsIgnoreCase("B")){
+			strData=stateDataService.getStateData(getBlockRequestJson(stateCode, districtCode, type),url);
+			
+			JSONObject obj= new JSONObject(strData);
+
+			if(Boolean.valueOf(obj.getString("status"))){
+				JSONArray content = obj.getJSONArray("stateData");
+
+				for (Object objData : content) {
+					JSONObject jsonLineItem = (JSONObject) objData;
+					stateMap.put(String.valueOf(jsonLineItem.getInt("block_code")), jsonLineItem.getString("block_name_english").trim());
+				}  
+
+			}
+			
+		}else if(type.equalsIgnoreCase("V")){
+			strData=stateDataService.getStateData(getVillageRequestJson(stateCode, districtCode, blockCode, type),url);
+		
+			JSONObject obj= new JSONObject(strData);
+
+			if(Boolean.valueOf(obj.getString("status"))){
+				JSONArray content = obj.getJSONArray("stateData");
+
+				for (Object objData : content) {
+					JSONObject jsonLineItem = (JSONObject) objData;
+					stateMap.put(String.valueOf(jsonLineItem.getInt("village_code")), jsonLineItem.getString("village_name_english").trim());
+				}  
+
+			}
+
+			
+		}	else if(type.equalsIgnoreCase("T")){
+			strData=stateDataService.getStateData(getTownRequestJson(stateCode, districtCode, type),url);
+			JSONObject obj= new JSONObject(strData);
+
+			if(Boolean.valueOf(obj.getString("status"))){
+				JSONArray content = obj.getJSONArray("stateData");
+
+				for (Object objData : content) {
+					JSONObject jsonLineItem = (JSONObject) objData;
+					stateMap.put(jsonLineItem.getString("town_code"), jsonLineItem.getString("town_name"));
+				}  
+
+			}
+
+			
+		}else if(type.equalsIgnoreCase("W")){
+			strData=stateDataService.getStateData(getWardRequestJson(stateCode, districtCode, townCode, type),url);
+			JSONObject obj= new JSONObject(strData);
+
+			if(Boolean.valueOf(obj.getString("status"))){
+				JSONArray content = obj.getJSONArray("stateData");
+
+				for (Object objData : content) {
+					JSONObject jsonLineItem = (JSONObject) objData;
+					stateMap.put(jsonLineItem.getString("ward_code"), jsonLineItem.getString("ward_name"));
+				}  
+
+			}
+			
+		}
+		logger.info(strData);
+
+
+		return stateMap;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "LoadDataService [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	} 
+
+
+
+
+	public  String getStateData(String requestJson,String url){
+		String returnStr=null;
+		RestTemplate restTemplate = new RestTemplate();
+		try{
+
+			HttpHeaders headers = new HttpHeaders();
+
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
+
+			returnStr = restTemplate.postForObject(url, entity, String.class);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+
+		return returnStr;
+	}
+
+
+	public static String getStateRequestJson(String type){
+
+		JSONObject data= new JSONObject();
+		data.put("type", type);
+		logger.info("Get State Request JSON==="+data.toString());
+		return data.toString();
+	}
+	
+	public static String getDistrictRequestJson(String stateCode,String type){
+
+		JSONObject data= new JSONObject();
+		data.put("stateCode", stateCode);
+		data.put("type", type);
+		logger.info("Get District Request JSON==="+data.toString());
+		return data.toString();
+	}
+	
+	public static String getBlockRequestJson(String stateCode,String districtCode,String type){
+
+		JSONObject data= new JSONObject();
+		data.put("stateCode", stateCode);
+		data.put("districtCode", districtCode);
+		data.put("type", type);
+		logger.info("Get Block Request JSON==="+data.toString());
+		return data.toString();
+	}
+	
+	public static String getVillageRequestJson(String stateCode,String districtCode,String blockCode,String type){
+
+		JSONObject data= new JSONObject();
+		data.put("stateCode", stateCode);
+		data.put("districtCode", districtCode);
+		data.put("blockCode", blockCode);
+		data.put("type", type);
+		logger.info("Get Village Request JSON==="+data.toString());
+		return data.toString();
+	}
+	public static String getTownRequestJson(String stateCode,String districtCode,String type){
+
+		JSONObject data= new JSONObject();
+		data.put("stateCode", stateCode);
+		data.put("districtCode", districtCode);
+		data.put("type", type);
+		logger.info("Get Town Request JSON==="+data.toString());
+		return data.toString();
+	}
+	public static String getWardRequestJson(String stateCode,String districtCode,String townCode,String type){
+
+		JSONObject data= new JSONObject();
+		data.put("stateCode", stateCode);
+		data.put("districtCode", districtCode);
+		data.put("townCode", townCode);
+		data.put("type", type);
+		logger.info("Get Ward Request JSON==="+data.toString());
+		return data.toString();
+	}
+
+	
+	public static HashMap<String,String> getBankList(String url){
+
+		HashMap<String,String> stateMap = new HashMap<String,String>();
+
+
+		String strData=null;
+		MasterDataService stateDataService=	new MasterDataService();
+		
+			strData=stateDataService.getBankData(url);
+			
+			JSONObject obj= new JSONObject(strData);
+
+			if(obj.getString("status") != null){
+				JSONArray content = obj.getJSONArray("data");
+
+				for (Object objData : content) {
+					JSONObject jsonLineItem = (JSONObject) objData;
+					stateMap.put(String.valueOf(jsonLineItem.getBigInteger("id")), jsonLineItem.getString("bankname").trim());
+				}  
+
+			}
+			
+		
+		logger.info("Bank List Data==="+strData);
+
+
+		return stateMap;
+	}
+
+	public  String getBankData(String url){
+		String returnStr=null;
+		RestTemplate restTemplate = new RestTemplate();
+		try{
+
+			HttpHeaders headers = new HttpHeaders();
+
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			HttpEntity<String> entity = new HttpEntity<String>(headers);
+			 returnStr = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
+			//returnStr = restTemplate.postForObject(url, entity, String.class);
+			 
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+
+		return returnStr;
+	}
+
+	
+	// TMS Master Service
+	
+	
+}

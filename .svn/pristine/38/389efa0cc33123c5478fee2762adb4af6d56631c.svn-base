@@ -1,0 +1,91 @@
+package com.gov.nha.bis.server.rest.service;
+
+import com.gov.nha.bis.server.requestResponse.DocumentMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ImplantIDMasterRequest;
+import com.gov.nha.bis.server.requestResponse.InvestigationMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PackageCategoryMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PackageMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PriceMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ProcedureLabelMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ProcedureMasterRequest;
+import com.gov.nha.bis.server.requestResponse.SpecialityMasterRequest;
+import com.gov.nha.bis.server.requestResponse.StratificationMasterRequest;
+import com.gov.nha.bis.server.requestResponse.VitalTestMasterRequest;
+
+
+public interface TmsMasterService {
+
+	String savePriceMaster(PriceMasterRequest priceMasterRequest);
+
+	String saveDocumentMaster(DocumentMasterRequest documentMasterRequest);
+
+	String saveImplantIDMasterRequestData(ImplantIDMasterRequest implantIDMasterRequest);
+
+	String savePackageCategoryMaster(PackageCategoryMasterRequest packageCategoryMasterRequest);
+
+	String savePackageMasterData(PackageMasterRequest packageMasterRequest);
+
+	String saveProcedureLabelMaster(ProcedureLabelMasterRequest procedureLabelMasterRequest);
+
+	String saveProcedureMasterData(ProcedureMasterRequest procedureMasterRequest);
+
+	String saveSpecialityMasterData(SpecialityMasterRequest specialityMasterRequest);
+
+	String saveStratificationMasterData(StratificationMasterRequest stratificationMasterRequest);
+
+	String getPriceMasterData();
+
+	String getSpecialityMasterData();
+
+	String getPackageMasterData();
+
+	String getPackageCategoryMasterData();
+
+	String getProcedureMasterData();
+
+	String getProcedureLabelMasterData();
+
+	String getDocumentMasterData();
+
+	String getImplantIDMasterData();
+
+	String getStratificationMasterRequestData();
+
+	String getProcedureBySpecilityId(String specilityid);
+
+	String getSchemeRequestData();
+
+	String getIdMasterData();
+
+	String getPackageMasterBySpecilityCode(String specilitycode,String stateCode);
+
+	String getprocedureMasterBySpecilityCodeAndPackageCodeByState(String specilitycode, String packagecode,
+			String statecode);
+
+	String getInvestigationMasterBydPackageAndProcedureCode(String packagecode, String procedurecode, String statecode);
+
+	String getStratificationMasterDataPreAuth(String statecode);
+
+	String getImplantMasterDataPreAuthByState(String statecode);
+
+	String getDocumentPreAuthBySpecPackProcState(String specilitycode, String packagecode, String procedurecode,
+			String statecode);
+
+	String getCostByPackage(String packagecode, String procedurecode,String statecode,String specialityCode);
+
+	String getStratificationDetailByStatificationCode(String stratificationcode);
+
+	String getImplantDetailByImplantId(String implantid);
+
+	String saveInvestigationMaster(InvestigationMasterRequest investigationMasterRequest);
+
+	String getInvestigationMasterData();
+
+	String saveVitalTestMasterData(VitalTestMasterRequest vitalTestMasterRequest);
+
+	String getVitalTestMasterData();
+
+	String getInvestigationDocumentForProcedures(String procedureid);
+
+	
+}

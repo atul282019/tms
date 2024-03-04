@@ -1,0 +1,201 @@
+package com.gov.nha.bis.server.rest.service;
+
+import com.gov.nha.bis.server.requestResponse.DocumentMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ImplantIDMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ImplantProcedureMappingRequest;
+import com.gov.nha.bis.server.requestResponse.InvestigationMasterRequest;
+import com.gov.nha.bis.server.requestResponse.InvestigationProcedureMappingRequest;
+import com.gov.nha.bis.server.requestResponse.PackageCategoryMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PackageMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PriceMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ProcedureLabelMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ProcedureMasterRequest;
+import com.gov.nha.bis.server.requestResponse.SpecialityMasterRequest;
+import com.gov.nha.bis.server.requestResponse.StratificationMasterRequest;
+import com.gov.nha.bis.server.requestResponse.StratificationProcedureMappingRequest;
+import com.gov.nha.bis.server.requestResponse.VitalStatsProcedureMappingRequest;
+import com.gov.nha.bis.server.requestResponse.VitalTestMasterRequest;
+
+
+public interface TmsMasterService {
+
+	String savePriceMaster(PriceMasterRequest priceMasterRequest,String session);
+
+	String saveDocumentMaster(DocumentMasterRequest documentMasterRequest,String session);
+
+	String saveImplantIDMasterRequestData(ImplantIDMasterRequest implantIDMasterRequest,String session);
+
+	String savePackageCategoryMaster(PackageCategoryMasterRequest packageCategoryMasterRequest,String session);
+
+	String savePackageMasterData(PackageMasterRequest packageMasterRequest,String session);
+
+	String saveProcedureLabelMaster(ProcedureLabelMasterRequest procedureLabelMasterRequest,String session);
+
+	String saveProcedureMasterData(ProcedureMasterRequest procedureMasterRequest,String session);
+
+	String saveSpecialityMasterData(SpecialityMasterRequest specialityMasterRequest,String session);
+
+	String saveStratificationMasterData(StratificationMasterRequest stratificationMasterRequest,String session);
+
+	String getPriceMasterData(String session);
+
+	String getSpecialityMasterData(String session);
+
+	String getPackageMasterData(String session);
+
+	String getPackageCategoryMasterData(String session);
+
+	String getProcedureMasterData(String session);
+
+	String getProcedureLabelMasterData(String session);
+
+	String getDocumentMasterData(String session);
+
+	String getImplantIDMasterData(String session);
+
+	String getStratificationMasterRequestData(String session);
+
+	String getProcedureBySpecilityId(String specilityid,String session);
+
+	String getSchemeRequestData(String session);
+
+	String getIdMasterData(String session);
+
+	String getPackageMasterBySpecilityCode(String specilitycode,String statecode,String session,Integer scheme);
+
+	String getprocedureMasterBySpecilityCodeAndPackageCodeByState(String specilitycode, String packagecode,String statecode,String session,Integer scheme);
+
+	String getInvestigationMasterBydPackageAndProcedureCode(String statecode, String procedurecode,String session);
+
+	String getStratificationMasterDataPreAuth(String statecode,String session);
+
+	String getImplantMasterDataPreAuthByState(String statecode,String session);
+
+	String getDocumentPreAuthBySpecPackProcState(String specilitycode, String packagecode, String procedurecode,
+			String statecode,String session);
+
+	String getCostByPackage(String packagecode, String procedurecode,String statecode,String specialityCode,String procedureLbl, String procedureType,String session);
+
+	String getStratificationDetailByStatificationCode(String stratificationcode,String session);
+
+	String getImplantDetailByImplantId(String implantid,String session);
+
+	String saveInvestigationMaster(InvestigationMasterRequest investigationMasterRequest,String session);
+
+	String getInvestigationMasterData(String session);
+
+	String saveVitalTestMasterData(VitalTestMasterRequest vitalTestMasterRequest,String session);
+
+	String getVitalTestMasterData(String session);
+
+	String getInvestigationDocumentForProcedures(String procedureid, String stateCode,String session);
+
+	String getProcedureByprocedureId(String procedureid,String session);
+
+	String getInvestigationByInvestigationId(String fileName,String session);
+
+	String saveInvestigationProcedureMapping(InvestigationProcedureMappingRequest investigationProcedureMappingRequest,String session);
+
+	String getInvestigationProcedureMappingData(String session);
+
+	String saveVitaltestProcedureMapping(VitalStatsProcedureMappingRequest vitalTestProcedureMappingRequest,String session);
+
+	String getVitaltestProcedureMappingData(String session);
+
+	String getImplantForProcedureMapByState(String schemeid, String statecode,String session);
+
+	String saveImpProcMapping(ImplantProcedureMappingRequest implantProcedureMappingRequest,String session);
+
+	String getImpProcMapppingTableData(String session);
+
+	String getStratificationForProcedureMapByState(String schemeid, String statecode,String session);
+
+	String saveStratProcMapping(StratificationProcedureMappingRequest stratificationProcedureMappingRequest,String session);
+
+	String getStratProcMapppingTableData(String session);
+
+	String getInvestigationMasterForProcMappingData(String schemeid, String statecode,String session);
+
+	String getSpecialityBySchemeCoceAndStateCode(Integer schemeid, String statecode,String session);
+
+	String getprocedureList(String session);
+	
+	String getSpecialityDetailBySpecialityId(Integer specilityid,String session);
+
+	String deleteSpecialityDetailBySpecialityId(Integer specilityid,String session);
+
+	String getPackageDetailByPackageId(Long packageid,String session);
+
+	String deletePackageDetailByPackageId(Long packageid,String session);
+
+	String getPackCategoryDetailByCategoryId(Integer packagecatid,String session);
+
+	String deletePackCategoryDetailByCategoryId(Integer packagecatid,String session);
+
+	String getProcedureLabelDetailByProcedureLabelId(Integer procedurelblid,String session);
+
+	String deleteProcedureLabelDetailByProcedureLabelId(Integer procedurelblid,String session);
+
+	String getProcMasterForEditByProcId(Long procedureid,String session);
+
+	String deleteProcMasterByProcId(Long procedureid,String session);
+
+	String getPriceMasterDetailForEditByPriceId(Integer priceid,String session);
+
+	String deletePriceDetailMasterByPriceId(Integer priceid,String session);
+
+	String getDocumetMasterDetailForEditByDocumentId(Long documentid,String session);
+
+	String deleteDocumentMasterByDocumentId(Long documentid,String session);
+
+	String getImplantMasterDetailForEditByImplantId(Integer implantid,String session);
+
+	String deleteImplantMasterByImplantId(Integer implantid,String session);
+
+	String getStateMaster();
+
+	String deleteStratificationMasterByStratificationId(Long stratificationid);
+
+	String getStratificationMasterDetailByStratificationId(Long stratificationid);
+
+	String getInvestigationMasterDetailByInvestigationId(Long investigationid);
+
+	String deleteInvestigationMasterByInvestigationId(Integer investigationid);
+
+	String getSpecialityMasterApproval(String attribute);
+
+	String approveSpecialityMasterData(String session,Integer specialityid);
+
+	String getPackageMasterApproval(String attribute);
+
+	String approvePackageMasterData(String attribute, Long packageid);
+
+	String getHospitalSpecialityMapping(String session,String hospitalid);
+
+	String getspecialityByHospitalState(String session, String hid);
+
+	String getProcedureMasterApproval(String session);
+
+	String approveProcedureMasterData(String session, Integer id);
+
+	String getPriceMasterApproval(String session);
+
+	String approvePriceMasterData(String session, Integer id);
+
+	String getDocumentMasterApproval(String session);
+
+	String approveDocumentMasterData(String session, Integer id);
+
+	String getImplantMasterApproval(String session);
+
+	String approveImplantMasterData(String session, Integer id);
+
+	String getStratificationMasterApproval(String session);
+
+	String approveStratificationMasterData(String session, Integer id);
+
+	String getInvestigationMasterApproval(String session);
+
+	String approveInvestigationMasterData(String attribute, Integer id);
+
+}

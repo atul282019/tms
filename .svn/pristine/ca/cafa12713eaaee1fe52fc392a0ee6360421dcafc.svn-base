@@ -1,0 +1,45 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class Diagnosis {
+	private String txnid;
+	private String icdCode;
+	private String primaryDiagnosis;
+	private String secondaryDiagnosis;
+	
+	private String tempId;
+	
+	
+	
+	public String getTempId() {
+		return tempId;
+	}
+	public void setTempId(String tempId) {
+		this.tempId = tempId;
+	}
+	public String getIcdCode() {
+		return icdCode;
+	}
+	public void setIcdCode(String icdCode) {
+		this.icdCode = icdCode;
+	}
+	
+	public String getTxnid() {
+		return txnid;
+	}
+	public void setTxnid(String txnid) {
+		this.txnid = txnid;
+	}
+	public String getPrimaryDiagnosis() {
+		return primaryDiagnosis;
+	}
+	public void setPrimaryDiagnosis(String primaryDiagnosis) {
+		this.primaryDiagnosis = primaryDiagnosis;
+	}
+	public String getSecondaryDiagnosis() {
+		return secondaryDiagnosis;
+	}
+	public void setSecondaryDiagnosis(String secondaryDiagnosis) {
+		this.secondaryDiagnosis = secondaryDiagnosis;
+	}
+	
+}

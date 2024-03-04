@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+ 
+
+<body class="home-bg hold-transition sidebar-mini layout-fixed" onload="getStateDataMaster(),getPriceMasterData()">
+  <div class="wrapper">
+      <!-- Navbar -->
+
+		<header th:insert="fragments/header.html :: header"> </header>
+   
+    <!-- /.navbar -->
+
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a th:href="@{/registration}" class="brand-link">
+        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+      </a>
+
+       <!-- Sidebar -->
+     
+      <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+     
+      <!-- /.sidebar -->
+    </aside>
+
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Add Price</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Add Price</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+
+      <section class="content">
+     
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Add Price</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <form class="quickForm">
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                  
+                    <!--<div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for=""> Status</label>
+                        <select class="form-control" id="status" name="status">
+                          <option value="" >-- Select Status--</option>       
+                           <option value="1" >YES</option>       
+                            <option value="2" >NO</option>                                  
+                        </select>
+                      </div>
+                    </div>-->
+                    
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Scheme</label>
+                         <select class="form-control masterbox" id="scheme" name="scheme">
+                          <option value="" >-- Select Scheme--</option>       
+                           <option value="1" >AB-PMJAY</option>       
+                            <option value="2" >NON-PMJAY</option>                                  
+                        </select>
+                        <div class="error" id="schemeError"></div> 
+                      </div>
+                    </div>
+                    
+                     <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for=""> State Code</label>
+                        <select class="form-control masterbox" id="statecode" name="statecode">
+                          <option value="" >-- Select State--</option>       
+                           <option value="1" >State 1</option>       
+                            <option value="2" >State 2</option>                                  
+                        </select>
+                        <div class="error" id="stateError" ></div> 
+                      </div>
+                    </div>
+                 
+                  <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Price </label>
+                        	<input type="text" class="form-control" id="price" name="price" placeholder="Price">
+                        	<div class="error" id="priceError"></div> 
+                      </div>
+                    </div>
+                    
+                   <!-- success error div -->
+		             <div id="succmsgdiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-success text-center">
+			        	<span id="succmsg"></span>   
+			        </div>
+			        
+			        <div id="failmsgDiv" style="display:none" class="col-12 col-sm-8 col-md-6 mx-auto py-2 mb-4 alert alert-danger text-center">
+			        	<span id="failmsg"></span>
+			        </div>
+                      
+                      <!-- success error div -->
+                      
+                    <div class="col-12 text-center my-2"> 
+                      <button type="button" class="btn btn-primary custom-btn" onclick="savePriceMasterData()">Submit</button>
+                    </div>
+                  </div>     
+                  
+                </div>
+                </form>
+              </div>
+
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Price Details</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12">
+                      <table id="priceTable" class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th style="width: 50px;">Sr. No.</th>
+                          <th>Price</th>
+                          <th>Scheme</th>
+                          <th>State Code</th>
+                        <!--  <th>Stauts</th>     -->
+                                           
+                        </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="register" class="overlay_full" onclick="offRegister()">
+	                      <div class="fancy-spinner">
+				                <div class="ring"></div>
+				                <div class="ring"></div>
+				                <div class="dot"></div>
+				                <span></span>
+				                </div>
+                        
+                      </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+  </div>
+
+ <!-- <div th:replace="fragments/footer.html :: footer"></div>-->
+    
+     <div th:replace="fragments/footerlibs.html :: footerlibs"> </div>
+    <script src="tms-js/save-master-data.js" ></script>   
+	<script>
+   	function onRegister() {
+		  document.getElementById("register").style.display = "flex";
+		}
+		
+		function offRegister() {
+		  document.getElementById("register").style.display = "none";
+		}
+	</script>
+</body>
+
+</html>

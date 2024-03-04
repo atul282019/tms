@@ -1,0 +1,95 @@
+
+<div th:fragment="footerlibs">
+	
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="js/adminlte.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="js/datatable/jquery.dataTables.min.js"></script>
+  <script src="js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.responsive.min.js"></script>
+  <script src="js/datatable/responsive.bootstrap4.min.js"></script>
+  <script src="js/datatable/dataTables.buttons.min.js"></script>
+  <script src="js/datatable/buttons.bootstrap4.min.js"></script>
+  <script src="js/datatable/jszip.min.js"></script>
+  <script src="js/datatable/pdfmake.min.js"></script>
+  <script src="js/datatable/vfs_fonts.js"></script>
+  <script src="js/datatable/buttons.html5.min.js"></script>
+  <script src="js/datatable/buttons.print.min.js"></script>
+  <script src="js/datatable/buttons.colVis.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/custom.js"></script>
+   
+   <script src="js/select2.min.js"></script>
+   
+  <script>
+    $(function () {
+      $.validator.setDefaults({
+        submitHandler: function () {
+          alert("Form successful submitted!");
+        }
+      });
+      $('#quickForm').validate({
+        rules: {
+          email: {
+            required: true,
+            email: true,
+          },
+          password: {
+            required: true,
+            minlength: 5
+          },
+          text: {
+            required: true,
+            text: true,
+          },
+          terms: {
+            required: true
+          },
+        },
+        messages: {
+          email: {
+            required: "Please enter a email address",
+            email: "Please enter a valid email address"
+          },
+          password: {
+            required: "Please provide a password",
+            minlength: "Your password must be at least 5 characters long"
+          },
+          text: {
+            required: "Please enter a captcha",
+            text: "Please enter a valid captcha"
+          },
+          terms: "Please accept our terms"
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+
+    });
+  </script>
+  
+  <script>
+     $('.btnNext').click(function(){
+  $('.nav > .active').next('li').find('a').trigger('click');
+});
+
+  $('.btnPrevious').click(function(){
+  $('.nav > .active').prev('li').find('a').trigger('click');
+});
+  </script>
+    
+
+</div>	

@@ -1,0 +1,26 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class ProcedureLabelMasterRequest {
+	
+
+	private String procedure_label_name;
+
+	private Integer reimbursementpercentage;
+
+	public String getProcedure_label_name() {
+		return procedure_label_name;
+	}
+
+	public void setProcedure_label_name(String procedure_label_name) {
+		this.procedure_label_name = procedure_label_name;
+	}
+
+	public Integer getReimbursementpercentage() {
+		return reimbursementpercentage;
+	}
+
+	public void setReimbursementpercentage(Integer reimbursementpercentage) {
+		this.reimbursementpercentage = reimbursementpercentage;
+	}
+
+}

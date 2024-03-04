@@ -1,0 +1,22 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class PackageTotalCostResp {
+	
+	private String nabhPrice;
+	private String nonNabhPrice;
+	public String getNabhPrice() {
+		return nabhPrice;
+	}
+	public void setNabhPrice(String nabhPrice) {
+		this.nabhPrice = nabhPrice;
+	}
+	public String getNonNabhPrice() {
+		return nonNabhPrice;
+	}
+	public void setNonNabhPrice(String nonNabhPrice) {
+		this.nonNabhPrice = nonNabhPrice;
+	}
+	
+	
+	
+}

@@ -1,0 +1,46 @@
+package com.gov.nha.bis.server.rest.service.Impl;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.gov.nha.bis.server.preauth_requestResponse.PrimaryDiagnosis;
+import com.gov.nha.bis.server.preauth_requestResponse.SavePreauthorizationMasterRequest;
+import com.gov.nha.bis.server.properties.ApplicationConstantConfig;
+import com.gov.nha.bis.server.rest.service.PreAuthDataService;
+import com.gov.nha.bis.server.util.CommonUtility;
+import com.gov.nha.bis.server.util.LogCustomGenerator;
+
+@Service
+public class PreAuthDataServiceImpl implements PreAuthDataService{
+
+	@Autowired
+	public ApplicationConstantConfig applicationConstantConfig; 
+	
+	@Autowired
+	LogCustomGenerator custumLog;
+	
+	private static final Logger logger = LogManager.getLogger(PreAuthDataServiceImpl.class);
+	
+	
+	@Override
+	public String getPatientDataById(String txnid) {
+		return CommonUtility.userRequest(null,null, applicationConstantConfig.GET_PATIENT_DATA_BY_ID+"?txnid="+txnid);
+	}
+	
+	@Override
+	public String savePrimaryDaignosis(PrimaryDiagnosis diagnosis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String savePreAuth(SavePreauthorizationMasterRequest savePreauthorizationMasterRequest) {
+		Gson gson = new Gson();
+		String request = gson.toJson(savePreauthorizationMasterRequest);
+		custumLog.generateLogFile(request, savePreauthorizationMasterRequest.getRequestId(), "PRE_AUTH");
+		return CommonUtility.userRequest(null,request, applicationConstantConfig.SAVE_PREAUTHORIZATION_REQUEST);
+	}
+}

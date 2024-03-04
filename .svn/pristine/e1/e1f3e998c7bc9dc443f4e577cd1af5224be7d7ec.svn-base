@@ -1,0 +1,16 @@
+package com.gov.nha.bis.server.rest.service.Impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gov.nha.bis.server.properties.ApplicationConstantConfig;
+
+@Service
+public class MasterDataServiceImpl {
+	@Autowired
+	public ApplicationConstantConfig applicationConstantConfig;
+
+	
+	// TMS Master Service IMPL
+
+}

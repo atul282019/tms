@@ -1,0 +1,499 @@
+package com.gov.nha.bis.server.rest.service.Impl;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.gov.nha.bis.server.properties.ApplicationConstantConfig;
+import com.gov.nha.bis.server.requestResponse.DocumentMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ImplantIDMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ImplantProcedureMappingRequest;
+import com.gov.nha.bis.server.requestResponse.InvestigationMasterRequest;
+import com.gov.nha.bis.server.requestResponse.InvestigationProcedureMappingRequest;
+import com.gov.nha.bis.server.requestResponse.PackageCategoryMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PackageMasterRequest;
+import com.gov.nha.bis.server.requestResponse.PriceMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ProcedureLabelMasterRequest;
+import com.gov.nha.bis.server.requestResponse.ProcedureMasterRequest;
+import com.gov.nha.bis.server.requestResponse.SpecialityMasterRequest;
+import com.gov.nha.bis.server.requestResponse.StratificationMasterRequest;
+import com.gov.nha.bis.server.requestResponse.StratificationProcedureMappingRequest;
+import com.gov.nha.bis.server.requestResponse.VitalStatsProcedureMappingRequest;
+import com.gov.nha.bis.server.requestResponse.VitalTestMasterRequest;
+import com.gov.nha.bis.server.rest.service.TmsMasterService;
+import com.gov.nha.bis.server.util.CommonUtility;
+
+@Service
+public class TmsMasterServiceImpl implements TmsMasterService{
+
+	
+	@Autowired
+	ApplicationConstantConfig applicationConstantConfig;
+	
+	
+	@Override
+	public String getStateMaster() {
+		return CommonUtility.userRequest(null,null, applicationConstantConfig.STATE_MASTER);
+	}
+	
+	@Override
+	public String savePriceMaster(PriceMasterRequest priceMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(priceMasterRequest), applicationConstantConfig.SAVE_PRICE_MASTER_DATA);
+	}
+
+	@Override
+	public String saveDocumentMaster(DocumentMasterRequest documentMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(documentMasterRequest), applicationConstantConfig.SAVE_DUCUMENT_MASTER_DATA);
+	}
+
+	@Override
+	public String saveImplantIDMasterRequestData(ImplantIDMasterRequest implantIDMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(implantIDMasterRequest), applicationConstantConfig.SAVE_IMPLANT_MASTER_DATA);
+	}
+
+	@Override
+	public String savePackageCategoryMaster(PackageCategoryMasterRequest packageCategoryMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(packageCategoryMasterRequest), applicationConstantConfig.SAVE_CATEGORY_MASTER_DATA);
+	}
+
+	@Override
+	public String savePackageMasterData(PackageMasterRequest packageMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(packageMasterRequest), applicationConstantConfig.SAVE_PACKAGE_MASTER_DATA);
+	}
+
+	@Override
+	public String saveProcedureLabelMaster(ProcedureLabelMasterRequest procedureLabelMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(procedureLabelMasterRequest), applicationConstantConfig.SAVE_LBL_PROCEDURE_MASTER_DATA);
+	}
+
+	@Override
+	public String saveProcedureMasterData(ProcedureMasterRequest procedureMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(procedureMasterRequest), applicationConstantConfig.SAVE_PROCEDURE_MASTER_DATA);
+	}
+
+	@Override
+	public String saveSpecialityMasterData(SpecialityMasterRequest specialityMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(specialityMasterRequest), applicationConstantConfig.SAVE_SPACILITY_MASTER_DATA);
+	}
+
+	@Override
+	public String saveStratificationMasterData(StratificationMasterRequest stratificationMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(stratificationMasterRequest), applicationConstantConfig.SAVE_STRATIFICATION_MASTER_DATA);
+	}	
+	
+	@Override
+	public String getPriceMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PRICE_MASTER_DATA);
+	}
+	
+	@Override
+	public String getSpecialityMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_SPACILITY_MASTER_DATA);
+	}
+	
+	@Override
+	public String getPackageMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PACKAGE_MASTER_DATA);
+	}
+	
+	@Override
+	public String getPackageCategoryMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_CATEGORY_MASTER_DATA);
+	}
+	
+	@Override
+	public String getProcedureMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PROCEDURE_MASTER_DATA);
+	}
+	
+	@Override
+	public String getProcedureLabelMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_LBL_PROCEDURE_MASTER_DATA);
+	}
+	
+	@Override
+	public String getDocumentMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_DOCUMENT_MASTER_DATA);
+	}
+	
+	@Override
+	public String getImplantIDMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_IMPLANT_MASTER_DATA);
+	}
+	
+	@Override
+	public String getStratificationMasterRequestData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_STRATIFICATION_MASTER_DATA);
+	}
+	
+	@Override
+	public String getProcedureBySpecilityId(String specilitycode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_TEST_MASTER_DATA_BY_SPECILITY_ID+"?specilitycode="+specilitycode);
+	}
+	
+	@Override
+	public String getProcedureByprocedureId(String procedureid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PROCEDURE_BY_PROCEDURE_ID+"?procedureid="+procedureid);
+	}
+	
+	@Override
+	public String getSchemeRequestData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_SCHEME_MASTER_DATA);
+	}
+	
+	@Override
+	public String getIdMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_ID_MASTER_DATA);
+	}
+	
+	@Override
+	public String getPackageMasterBySpecilityCode(String specilitycode,String session, String stateCode,Integer scheme) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PACKAGE_MASTER_BY_SPECILITY_CODE+"?specilitycode="+specilitycode+"&statecode="+stateCode+"&scheme="+scheme);
+	}
+	
+	@Override
+	public String getprocedureMasterBySpecilityCodeAndPackageCodeByState(String specilitycode, String packagecode, String stateCode,String session,Integer scheme) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PROCEDURE_MASTER_BY_SPECILITY_CODE_PACKAGE_CODE+"?specilitycode="+specilitycode+"&packagecode="+packagecode+"&statecode="+stateCode+"&scheme="+scheme);
+	}
+	
+	@Override
+	public String getInvestigationMasterBydPackageAndProcedureCode(String statecode, String procedurecode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_INVESTIGATION_MASTER_BY_PACKAGE_CODE_AND_PROCEDURE_CODE+"?&statecode="+statecode+"&procedurecode="+procedurecode);
+	}
+	
+	@Override
+	public String getStratificationMasterDataPreAuth(String statecode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_STRATIFICATION_MASTER_BY_STATE_CODE+"?statecode="+statecode);
+	}
+	
+	@Override
+	public String getImplantMasterDataPreAuthByState(String statecode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_IMPLANT_MASTER_BY_STATE_CODE+"?statecode="+statecode);
+	}
+	
+	@Override
+	public String getDocumentPreAuthBySpecPackProcState(String specilitycode, String packagecode, String procedurecode,	String statecode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_DOCUMENT_PRE_AUTH_DATA_BY_SPEC_PACK_PROC_CODE+"?specilitycode="+specilitycode+"&packagecode="+packagecode+"&procedurecode="+procedurecode+"&statecode="+statecode);
+	}
+	
+	@Override
+	public String getCostByPackage(String packagecode, String procedurecode, String statecode,String specialityCode,String procedureLbl, String priceCategory,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PACKAGE_COST+"?packagecode="+packagecode+"&procedurecode="+procedurecode+"&statecode="+statecode+"&specilitycode="+specialityCode+"&procedureLbl="+procedureLbl+"&priceCategory="+priceCategory);
+	}
+	
+	@Override
+	public String getStratificationDetailByStatificationCode(String stratificationcode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_STRATIFICATION_DETAIL_STRATIFICATION_CODE+"?stratificationcode="+stratificationcode);
+	}
+	
+	@Override
+	public String getImplantDetailByImplantId(String implantid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_IMPLANT_DETAIL_BY_ID+"?implantid="+implantid);
+	}
+
+	@Override
+	public String saveInvestigationMaster(InvestigationMasterRequest investigationMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(investigationMasterRequest), applicationConstantConfig.SAVE_INVESTIGATION_MASTER_DATA);
+	}
+
+	@Override
+	public String getInvestigationMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_INVESTIGATION_MASTER_DATA);
+	}
+
+	@Override
+	public String saveVitalTestMasterData(VitalTestMasterRequest vitalTestMasterRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(vitalTestMasterRequest), applicationConstantConfig.SAVE_VITAL_TEST_MASTER_DATA);
+
+	}
+
+	@Override
+	public String getVitalTestMasterData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_VITALTEST_MASTER_DATA);
+	}
+
+	@Override
+	public String getInvestigationDocumentForProcedures(String procedureid,String stateCode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_INVESTIGATION_BY_PROCEDURE_ID+"?procedureid="+procedureid+"&stateCode="+stateCode);
+	}
+
+	@Override
+	public String getInvestigationByInvestigationId(String investigationId,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_INVESTIGATION_BY_INVESTIGATION_ID+"?investigationId="+investigationId);
+	}
+
+	@Override
+	public String saveInvestigationProcedureMapping(InvestigationProcedureMappingRequest investigationProcedureMappingRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(investigationProcedureMappingRequest), applicationConstantConfig.SAVE_INVESTIGATION_PROCEDURE_MAPPING_DATA);
+	
+	}
+
+	@Override
+	public String getInvestigationProcedureMappingData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_INVESTIGATION_PROCEDURE_MAPPING_DATA);
+	}
+
+	@Override
+	public String saveVitaltestProcedureMapping(VitalStatsProcedureMappingRequest vitalTestProcedureMappingRequest,String session) {
+		Gson gson = new Gson();
+		System.out.println(gson.toJson(vitalTestProcedureMappingRequest));
+		return CommonUtility.userRequest(session,gson.toJson(vitalTestProcedureMappingRequest), applicationConstantConfig.SAVE_VITALTEST_PROCEDURE_MAPPING_DATA);
+	}
+
+	@Override
+	public String getVitaltestProcedureMappingData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_VITALTEST_PROCEDURE_MAPPING_DATA);
+	}
+
+	@Override
+	public String getImplantForProcedureMapByState(String schemeid, String statecode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_IMPLANT_FOR_PROCEDURE_MAPP+"?schemeid="+schemeid+"&statecode="+statecode);
+	}
+
+	@Override
+	public String saveImpProcMapping(ImplantProcedureMappingRequest implantProcedureMappingRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(implantProcedureMappingRequest), applicationConstantConfig.SAVE_IMPLANT_PROC_MAPPING_DATA);
+	}
+
+	@Override
+	public String getImpProcMapppingTableData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_IMPLANT_MAPPING_PROCEDURE_DATA);
+	}
+
+	@Override
+	public String getStratificationForProcedureMapByState(String schemeid, String statecode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_STRATIFICATION_FOR_PROCEDURE_MAPP+"?schemeid="+schemeid+"&statecode="+statecode);
+	}
+
+	@Override
+	public String saveStratProcMapping(StratificationProcedureMappingRequest stratificationProcedureMappingRequest,String session) {
+		Gson gson = new Gson();
+		return CommonUtility.userRequest(session,gson.toJson(stratificationProcedureMappingRequest), applicationConstantConfig.SAVE_STRATIFICATION_PROC_MAPPING_DATA);
+
+	}
+
+	@Override
+	public String getStratProcMapppingTableData(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_STRSTIFICATION_MAPPING_PROCEDURE_DATA);
+	}
+
+	@Override
+	public String getInvestigationMasterForProcMappingData(String schemeid, String statecode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_INVESTIGATION_BY_SCHEME_STATE_FOR_PROCEDURE_MAPP+"?schemeid="+schemeid+"&statecode="+statecode);
+	}
+
+	@Override
+	public String getSpecialityBySchemeCoceAndStateCode(Integer schemeid, String statecode,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_SPECIALITY_BY_SCHEME_STATE_FOR_PROCEDURE_MAPP+"?schemeid="+schemeid+"&statecode="+statecode);
+	}
+
+	@Override
+	public String getprocedureList(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PROCEDURE_LIST_DISTINCT);
+	}
+
+	@Override
+	public String getSpecialityDetailBySpecialityId(Integer specilityid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_SPECIALITY_DETAIL_BY_ID+"?specialityid="+specilityid);
+	}
+
+	@Override
+	public String deleteSpecialityDetailBySpecialityId(Integer specilityid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.DELETE_SPECIALITY__BY_SPECIALITY_ID+"?specialityid="+specilityid);
+	}
+
+	@Override
+	public String getPackageDetailByPackageId(Long packageid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PACKAGE_DETAIL_BY_PACKAGE_ID+"?packageid="+packageid);
+	}
+
+	@Override
+	public String deletePackageDetailByPackageId(Long packageid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.DELETE_PACKAGE__BY_PACKAGE_ID+"?packageid="+packageid);
+
+	}
+
+	@Override
+	public String getPackCategoryDetailByCategoryId(Integer packagecatid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PACKAGE_CATEGORY_DETAIL_BY_CATEGORY_ID+"?packagecatid="+packagecatid);
+	}
+
+	@Override
+	public String deletePackCategoryDetailByCategoryId(Integer packagecatid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.DELETE_PACKAGE_CATEGORY__BY_CATEGORY_ID+"?packagecatid="+packagecatid);
+	}
+
+	@Override
+	public String getProcedureLabelDetailByProcedureLabelId(Integer procedurelblid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PROCEDURE_LABEL_DETAIL_BY_PROCEDURE_LABEL_ID+"?procedurelblid="+procedurelblid);
+	}
+
+	@Override
+	public String deleteProcedureLabelDetailByProcedureLabelId(Integer procedurelblid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.DELETE_PROCEDURE_LABEL_BY_PROCEDURE_LABEL_ID+"?procedurelblid="+procedurelblid);
+	}
+
+	@Override
+	public String getProcMasterForEditByProcId(Long procedureid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PROC__DETAIL_FOR_EDIT_BY_PROCEDURE_ID+"?procedureid="+procedureid);
+	}
+
+	@Override
+	public String deleteProcMasterByProcId(Long procedureid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.DELETE_PROC_MASTER_FOR_EDIT_BY_PROCEDURE_ID+"?procedureid="+procedureid);
+	}
+
+	@Override
+	public String getPriceMasterDetailForEditByPriceId(Integer priceid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PRICE__DETAIL_FOR_EDIT_BY_PRICE_ID+"?priceid="+priceid);
+	}
+
+	@Override
+	public String deletePriceDetailMasterByPriceId(Integer priceid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.DELETE_PRICE_DETAIL_MASTER__BY_PRICE_ID+"?priceid="+priceid);
+	}
+
+	@Override
+	public String getDocumetMasterDetailForEditByDocumentId(Long documentid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_DOCUMENT_DETAIL_FOR_EDIT_BY_DOCUMENT_ID+"?documentid="+documentid);
+	}
+
+	@Override
+	public String deleteDocumentMasterByDocumentId(Long documentid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.DELETE_DOCUMENT_MASTER_DETAIL_DOCUMENT_ID+"?documentid="+documentid);
+	}
+
+	@Override
+	public String getImplantMasterDetailForEditByImplantId(Integer implantid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_IIMPLANT_DETAIL_FOR_EDIT_BY_IMPLANT_ID+"?implantid="+implantid);
+	}
+
+	@Override
+	public String deleteImplantMasterByImplantId(Integer implantid,String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.DELETE_IMPLANT_MASTER_DETAIL_IMPLANT_ID+"?implantid="+implantid);
+	}
+
+	@Override
+	public String getStratificationMasterDetailByStratificationId(Long stratificationid) {
+		return CommonUtility.userRequest(null,null, applicationConstantConfig.GET_STRATIFICATION_MASTER_DETAIL_BY_STRATIFICATION_ID+"?stratificationid="+stratificationid);
+	}
+
+	@Override
+	public String deleteStratificationMasterByStratificationId(Long stratificationid) {
+		return CommonUtility.userRequest(null,null, applicationConstantConfig.DELETE_STRATIFICATION_MASTER_DETAIL_STRATIFICATION_ID+"?stratificationid="+stratificationid);
+	}
+
+	@Override
+	public String getInvestigationMasterDetailByInvestigationId(Long investigationid) {
+		return CommonUtility.userRequest(null,null, applicationConstantConfig.GET_INVESTIGATION_MASTER_DETAIL_BY_INVESTIGATION_ID+"?investigationid="+investigationid);
+	}
+
+	@Override
+	public String deleteInvestigationMasterByInvestigationId(Integer investigationid) {
+		return CommonUtility.userRequest(null,null, applicationConstantConfig.DELETE_INVESTIGATION_MASTER_DETAIL_INVESTIGATION_ID+"?investigationid="+investigationid);
+	}
+
+	@Override
+	public String getSpecialityMasterApproval(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_SPECIALITY_MASTER_APPROVAL);
+	}
+
+	@Override
+	public String approveSpecialityMasterData(String session, Integer id) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.APPROVE_SPECIALITY_MASTER+"?id="+id);
+	}
+
+	@Override
+	public String getPackageMasterApproval(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PACKAGE_MASTER_APPROVAL);
+	}
+
+	@Override
+	public String approvePackageMasterData(String session, Long packageid) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.APPROVE_PACKAGE_MASTER+"?packageid="+packageid);
+	}
+
+	@Override
+	public String getHospitalSpecialityMapping(String session,String hospitalid) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_HEM_DATA+"?hospitalid="+hospitalid);
+	}
+
+	@Override
+	public String getspecialityByHospitalState(String session, String hid) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_SPECIALITY_BY_HOSPITAL_STATE+"?hospitalid="+hid);
+	}
+
+	@Override
+	public String getProcedureMasterApproval(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PROCEDURE_MASTER_APPROVAL);
+	}
+
+	@Override
+	public String approveProcedureMasterData(String session, Integer id) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.APPROVE_PROCEDURE_MASTER+"?id="+id);
+	}
+
+	@Override
+	public String getPriceMasterApproval(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_PRICE_MASTER_APPROVAL);
+	}
+
+	@Override
+	public String approvePriceMasterData(String session, Integer id) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.APPROVE_RICE_MASTER+"?id="+id);
+	}
+
+	@Override
+	public String getDocumentMasterApproval(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_DOCUMENT_MASTER_APPROVAL);
+	}
+
+	@Override
+	public String approveDocumentMasterData(String session, Integer id) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.APPROVE_DOCUMENT_MASTER+"?id="+id);
+	}
+
+	@Override
+	public String getImplantMasterApproval(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_IMPLANT_MASTER_APPROVAL);
+	}
+
+	@Override
+	public String approveImplantMasterData(String session, Integer id) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.APPROVE_IMPLANT_MASTER+"?id="+id);
+	}
+
+	@Override
+	public String getStratificationMasterApproval(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_STRATIFICATION_MASTER_APPROVAL);
+	}
+
+	@Override
+	public String approveStratificationMasterData(String session, Integer id) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.APPROVE_STRATIFICATION_MASTER+"?id="+id);
+	}
+
+	@Override
+	public String getInvestigationMasterApproval(String session) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.GET_INVESTIGATION_MASTER_APPROVAL);
+	}
+
+	@Override
+	public String approveInvestigationMasterData(String session, Integer id) {
+		return CommonUtility.userRequest(session,null, applicationConstantConfig.APPROVE_INVESTIGATION_MASTER+"?id="+id);
+	}
+}

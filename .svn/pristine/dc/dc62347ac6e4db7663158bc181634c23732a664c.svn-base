@@ -1,0 +1,40 @@
+package com.gov.nha.bis.server.requestResponse;
+
+public class ImplantProcedureMappingRequest {
+
+	 
+    private String implantcode;
+    private String procedurecode;
+    private String schemecode;
+    private String statecode;
+
+    
+    public String getImplantcode() {
+		return implantcode;
+	}
+	public void setImplantcode(String implantcode) {
+		this.implantcode = implantcode;
+	}
+	public String getProcedurecode() {
+		return procedurecode;
+	}
+	public void setProcedurecode(String procedurecode) {
+		this.procedurecode = procedurecode;
+	}
+	public String getSchemecode() {
+		return schemecode;
+	}
+	public void setSchemecode(String schemecode) {
+		this.schemecode = schemecode;
+	}
+	public String getStatecode() {
+		return statecode;
+	}
+	public void setStatecode(String statecode) {
+		this.statecode = statecode;
+	}
+    
+	
+
+
+}

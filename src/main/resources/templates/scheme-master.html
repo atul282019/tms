@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+ 
+
+<body class="home-bg hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+      <!-- Navbar -->
+
+		<header th:insert="fragments/header.html :: header"> </header>
+   
+    <!-- /.navbar -->
+
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a th:href="@{/registration}" class="brand-link">
+        <img class="img-fluid" src="images/national-health-authority-logo.png" alt="" style="width: 100px;">
+      </a>
+
+       <!-- Sidebar -->
+     
+      <header th:insert="fragments/sidenav.html :: sidevav"> </header>
+     
+      <!-- /.sidebar -->
+    </aside>
+
+
+    <div class="content-wrapper">
+      <section class="content pt-3">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Add Scheme</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <form class="quickForm">
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Scheme Name</label>
+                        <input type="text" class="form-control" id="categoryName" name="schemeName" placeholder="Scheme Name">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for="">Version</label>
+                        <input type="text" class="form-control" placeholder="Version" id="version" name="version">
+                      </div>
+                    </div>
+                  
+                  
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for=""> State</label>
+                        <select class="form-control masterbox" id="state" name="state">
+                          <option value="" >-- Select State--</option>       
+                           <option value="1" >State 1</option>       
+                            <option value="2" >State 2</option>                                  
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="form-group custom-form">
+                        <label for=""> Status</label>
+                        <select class="form-control masterbox" id="status" name="status">
+                          <option value="" >-- Select Status--</option>       
+                           <option value="1" >YES</option>       
+                            <option value="2" >NO</option>                                  
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="col-12 text-center my-2"> 
+                      <button type="submit" class="btn btn-primary custom-btn">Submit</button>
+                    </div>
+                  </div>     
+                  
+                </div>
+                </form>
+              </div>
+
+              <div class="card card-info direct-chat">
+                <div class="card-header py-1 px-3">
+                  <h3 class="card-title">Package Category Details</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-body" style="display: block;">
+                  <div class="row pt-2 pb-1 px-2">
+                    <div class="col-12">
+                      <table id="example1" class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th style="width: 50px;">Sr. No.</th>
+                          <th>Package Category Name</th>
+                          <th>Version</th>
+                          <th>Status</th>
+                                          
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>PMJAY </td>
+                            <td>2.O</td>
+                            <td>Active</td>
+                           
+                          </tr>  
+                            <tr>
+                            <td>1</td>
+                            <td>PMJAY </td>
+                            <td>2.O</td>
+                            <td>Active</td>
+                           
+                          </tr>  
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+  </div>
+
+ <!-- <div th:replace="fragments/footer.html :: footer"></div>-->
+    
+     <div th:replace="fragments/footerlibs.html :: footerlibs"> </div>
+   
+   <script>
+   
+   </script>
+   
+</body>
+
+</html>

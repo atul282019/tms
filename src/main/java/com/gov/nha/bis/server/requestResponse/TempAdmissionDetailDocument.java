@@ -1,0 +1,66 @@
+package com.gov.nha.bis.server.requestResponse;
+
+import java.io.Serializable;
+
+public class TempAdmissionDetailDocument implements Serializable{
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5145118965670277166L;
+
+	
+	private String documentid;
+	private String documenttxt;
+	private String documentname;
+	private String txnId;
+	private String tempId;
+	
+
+	public String getDocumentid() {
+		return documentid;
+	}
+
+	public void setDocumentid(String documentid) {
+		this.documentid = documentid;
+	}
+
+	public String getDocumenttxt() {
+		return documenttxt;
+	}
+
+	public void setDocumenttxt(String documenttxt) {
+		this.documenttxt = documenttxt;
+	}
+
+	public String getDocumentname() {
+		return documentname;
+	}
+
+	public void setDocumentname(String documentname) {
+		this.documentname = documentname;
+	}
+
+	public String getTxnId() {
+		return txnId;
+	}
+
+	public void setTxnId(String txnId) {
+		this.txnId = txnId;
+	}
+
+	public String getTempId() {
+		return tempId;
+	}
+
+	public void setTempId(String tempId) {
+		this.tempId = tempId;
+	}
+
+	@Override
+	public String toString() {
+		return "TempAdmissionDetailDocument [documentid=" + documentid + ", documenttxt=" + documenttxt
+				+ ", documentname=" + documentname + ", txnId=" + txnId + ", tempId=" + tempId + "]";
+	}
+}
